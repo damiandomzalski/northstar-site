@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>NORTHSTAR — TACTICAL LOGISTICS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1e24;--bg2:#151920;--bg3:#12151b;
+  --panel:#1e2330;--panel2:#232a38;
+  --border:#2d3545;--border2:#38445a;
+  --gold:#c8a84b;--gold2:#dfc060;
+  --dim:#4a5568;--mid:#6b7a90;
+  --light:#8fa0b8;--white:#c8d8e8;--bright:#e0ecf8;
+  --green:#4fc870;--red:#cf5050;--blue:#4a8ab8;
+  --nav-h:54px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Barlow Condensed',sans-serif;background:var(--bg3);color:var(--light);display:flex;flex-direction:column;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--border2);}
+body::after{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.03) 3px,rgba(0,0,0,0.03) 4px);}
+
+/* NAV */
+nav{height:var(--nav-h);flex-shrink:0;background:rgba(18,21,27,0.98);border-bottom:1px solid var(--border);display:flex;align-items:stretch;position:relative;z-index:500;}
+.nav-logo{display:flex;align-items:center;gap:10px;padding:0 16px;border-right:1px solid var(--border);flex-shrink:0;}
+.logo-text b{display:block;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:4px;color:var(--bright);line-height:1;}
+.logo-text small{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.nav-tabs{display:flex;flex:1;overflow-x:auto;}.nav-tabs::-webkit-scrollbar{height:0;}
+.ntab{display:flex;align-items:center;gap:5px;padding:0 13px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);background:none;border:none;cursor:pointer;border-right:1px solid var(--border);border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
+.ntab .nn{font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--dim);opacity:0.5;}
+.ntab:hover{color:var(--light);background:rgba(255,255,255,0.02);}
+.ntab.on{color:var(--bright);border-bottom:2px solid var(--gold);background:rgba(200,168,75,0.04);}
+.ntab.on .nn{color:var(--gold);opacity:0.6;}
+.nav-right{display:flex;align-items:center;gap:10px;padding:0 14px;border-left:1px solid var(--border);flex-shrink:0;}
+.sys-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.sys-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1.5px;color:var(--mid);}
+.nav-clk{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--mid);}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;padding:0 16px;background:none;border:none;cursor:pointer;flex-shrink:0;border-left:1px solid var(--border);}
+.nav-burger span{display:block;width:20px;height:1px;background:var(--light);transition:all 0.25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(12,15,20,0.98);border-bottom:1px solid var(--border);z-index:499;flex-direction:column;backdrop-filter:blur(12px);}
+.mobile-menu.open{display:flex;}
+.mmtab{display:flex;align-items:center;gap:10px;padding:14px 20px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);background:none;border:none;cursor:pointer;border-bottom:1px solid var(--border);text-align:left;transition:all 0.15s;}
+.mmtab .mn{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);opacity:0.5;}
+.mmtab:hover{color:var(--light);background:rgba(255,255,255,0.03);}
+.mmtab.on{color:var(--gold);background:rgba(200,168,75,0.04);}
+
+/* MAIN */
+main{flex:1;overflow:hidden;position:relative;}
+.page{position:absolute;inset:0;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.page.on{display:block;}
+.gbg{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(74,138,184,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(74,138,184,0.04) 1px,transparent 1px);background-size:50px 50px;}
+
+/* HOME */
+#pg-home{background:var(--bg3);}
+.hero{position:relative;height:calc(100vh - var(--nav-h) - 26px);min-height:500px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+
+/* HERO BG — generated dark military scene */
+.hero-photo{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(100deg,rgba(10,12,18,0.88) 0%,rgba(10,12,18,0.55) 50%,rgba(10,12,18,0.2) 100%),
+    linear-gradient(to top,rgba(10,12,18,0.98) 0%,rgba(10,12,18,0.05) 55%,transparent 75%),
+    url('https://images.unsplash.com/photo-1584441405886-bc91be61e56a?w=1920&q=85') center 40%/cover no-repeat;
+  filter:saturate(0.22) contrast(1.15);
+}
+/* silhouette ground elements */
+.hero-scene{position:absolute;inset:0;overflow:hidden;}
+.hero-scene svg{position:absolute;bottom:90px;left:0;right:0;width:100%;}
+
+.hero-map{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding-top:28px;pointer-events:none;}
+.hero-map svg{width:70%;max-width:900px;opacity:0.09;fill:rgba(180,210,240,0.9);}
+.hud{position:absolute;inset:0;pointer-events:none;}
+.hud-block{position:absolute;font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1px;color:rgba(74,138,184,0.5);line-height:1.9;}
+.hud-tl{top:44px;left:14px;}.hud-tr{top:44px;right:14px;text-align:right;}
+.hud-bl{bottom:112px;left:14px;}.hud-br{bottom:112px;right:14px;text-align:right;}
+.hbox{border:1px solid rgba(74,138,184,0.12);background:rgba(12,15,20,0.55);padding:6px 10px;margin-bottom:3px;backdrop-filter:blur(2px);}
+.cb{position:absolute;width:14px;height:14px;z-index:2;}
+.cb.tl{top:8px;left:8px;border-top:1px solid rgba(74,138,184,0.3);border-left:1px solid rgba(74,138,184,0.3);}
+.cb.tr{top:8px;right:8px;border-top:1px solid rgba(74,138,184,0.3);border-right:1px solid rgba(74,138,184,0.3);}
+.cb.bl{bottom:106px;left:8px;border-bottom:1px solid rgba(74,138,184,0.3);border-left:1px solid rgba(74,138,184,0.3);}
+.cb.br{bottom:106px;right:8px;border-bottom:1px solid rgba(74,138,184,0.3);border-right:1px solid rgba(74,138,184,0.3);}
+.scanline{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(74,138,184,0.15),transparent);animation:scanmove 10s linear infinite;pointer-events:none;}
+@keyframes scanmove{0%{top:0;}100%{top:100%;}}
+.group-strip{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;background:rgba(12,15,20,0.88);border-bottom:1px solid rgba(74,138,184,0.12);backdrop-filter:blur(6px);overflow:hidden;}
+.gs-label{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:rgba(74,138,184,0.5);text-transform:uppercase;padding:7px 12px;border-right:1px solid rgba(74,138,184,0.12);flex-shrink:0;}
+.gs-companies{display:flex;flex:1;overflow:hidden;}
+.gs-co{padding:7px 14px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1.5px;color:rgba(180,196,210,0.3);text-transform:uppercase;border-right:1px solid rgba(74,138,184,0.08);white-space:nowrap;transition:color 0.2s;cursor:default;}
+.gs-co:hover{color:rgba(180,196,210,0.65);}
+.gs-co.hl{color:rgba(200,168,75,0.65);}
+.hero-content{position:relative;z-index:5;padding:0 48px 20px;}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;animation:fu 0.7s 0.2s both;}
+.eyebrow-line{width:22px;height:1px;background:var(--gold);}
+.eyebrow-text{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--gold);}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7.5vw,112px);line-height:0.9;letter-spacing:2px;color:var(--bright);margin-bottom:14px;animation:fu 0.7s 0.35s both;text-shadow:0 2px 40px rgba(0,0,0,0.9);}
+.hero-sub-desc{font-size:13px;letter-spacing:0.5px;font-weight:400;color:var(--mid);line-height:1.6;max-width:440px;margin-bottom:22px;animation:fu 0.7s 0.5s both;}
+.hero-flags{display:flex;align-items:center;gap:8px;margin-bottom:22px;animation:fu 0.7s 0.6s both;flex-wrap:wrap;}
+.flag-chip{display:flex;align-items:center;gap:7px;border:1px solid var(--border);padding:5px 14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);}
+.flag-svg{width:22px;height:15px;display:inline-block;}
+.hero-btns{display:flex;gap:10px;animation:fu 0.7s 0.7s both;flex-wrap:wrap;}
+.btn-pri{background:var(--gold);color:#12151b;padding:10px 22px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;transition:background 0.2s;}
+.btn-pri:hover{background:var(--gold2);}
+.btn-sec{background:transparent;color:var(--light);padding:10px 22px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;border:1px solid var(--border2);cursor:pointer;transition:all 0.2s;}
+.btn-sec:hover{border-color:var(--gold);color:var(--gold);}
+.statsbar{position:absolute;bottom:0;left:0;right:0;z-index:6;background:rgba(14,17,23,0.96);border-top:1px solid var(--border);display:flex;overflow-x:auto;}.statsbar::-webkit-scrollbar{height:0;}
+.sbc{flex:1;min-width:80px;padding:12px 16px;text-align:center;border-right:1px solid var(--border);position:relative;overflow:hidden;}
+.sbc:last-child{border-right:none;}
+.sbc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.sbc:hover::after{transform:scaleX(1);}
+.sbn{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1;}
+.sbl{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px;}
+@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* INNER */
+.inner{max-width:1280px;margin:0 auto;padding:32px 32px 56px;position:relative;z-index:1;}
+.ph{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:18px;margin-bottom:28px;border-bottom:1px solid var(--border);position:relative;gap:12px;flex-wrap:wrap;}
+.ph::after{content:'';position:absolute;bottom:-1px;left:0;width:55px;height:1px;background:var(--gold);}
+.ph-tag{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:6px;}
+.ph-tag::before{content:'';display:inline-block;width:14px;height:1px;background:var(--gold);}
+.ph-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,3vw,44px);letter-spacing:3px;color:var(--bright);line-height:1;}
+.ph-h1 .ga{color:var(--gold);}
+.ph-meta{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:var(--dim);text-align:right;line-height:2;}
+.wdot{width:4px;height:4px;border-radius:50%;background:var(--green);animation:blink 2.5s infinite;flex-shrink:0;}
+
+/* section image areas */
+.sec-img-wrap{position:relative;width:100%;overflow:hidden;}
+.sec-img-svg{width:100%;display:block;}
+
+/* ABOUT */
+#pg-about{background:var(--bg3);}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;}
+.aimg-wrap{position:relative;}
+.aimg-badge{position:absolute;bottom:18px;right:-18px;background:var(--gold);color:#12151b;padding:12px 16px;text-align:center;z-index:2;}
+.aib-n{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;}
+.aib-l{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;font-weight:700;text-transform:uppercase;}
+.aimg-frame{position:absolute;top:10px;left:10px;right:-10px;bottom:-10px;border:1px solid rgba(200,168,75,0.25);pointer-events:none;}
+.adesc{font-size:13px;line-height:1.7;color:var(--mid);margin-bottom:12px;font-weight:400;}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:18px;}
+.vcard{border:1px solid var(--border);padding:13px;background:var(--panel);transition:border-color 0.2s;cursor:default;}
+.vcard:hover{border-color:rgba(200,168,75,0.4);}
+.vicon{color:var(--gold);margin-bottom:6px;}
+.vtit{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:3px;}
+.vtxt{font-size:11px;color:var(--dim);line-height:1.5;font-weight:400;}
+.group-table{margin-top:18px;border:1px solid var(--border);background:var(--bg2);}
+.group-table-head{background:var(--panel);border-bottom:1px solid var(--border);padding:8px 12px;font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;color:var(--mid);text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+.group-table-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.gc{background:var(--bg2);padding:10px 12px;}
+.gc-name{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);margin-bottom:2px;}
+.gc-desc{font-size:10px;color:var(--dim);font-weight:400;}
+
+/* CAPABILITIES */
+#pg-cap{background:var(--bg3);}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.ccard{background:var(--bg2);padding:24px 20px;position:relative;overflow:hidden;transition:background 0.25s;cursor:default;}
+.ccard:hover{background:var(--panel);}
+.ccard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.ccard:hover::before{transform:scaleX(1);}
+.cc-code{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;color:var(--dim);margin-bottom:12px;}
+.cc-icon{width:32px;height:32px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:12px;transition:border-color 0.25s;}
+.ccard:hover .cc-icon{border-color:rgba(200,168,75,0.5);}
+.cc-tit{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:7px;line-height:1.2;}
+.cc-desc{font-size:11px;line-height:1.7;color:var(--dim);margin-bottom:10px;font-weight:400;}
+.cc-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.cctag{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,168,75,0.2);padding:1px 6px;}
+.cc-num{position:absolute;top:6px;right:10px;font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--border);pointer-events:none;line-height:1;transition:color 0.25s;}
+.ccard:hover .cc-num{color:rgba(200,168,75,0.06);}
+
+/* POSSIBILITIES */
+#pg-poss{background:var(--bg3);}
+.poss-layout{display:grid;grid-template-columns:1fr 280px;gap:20px;}
+.psteps{display:flex;flex-direction:column;gap:2px;}
+.pstep{display:flex;gap:16px;align-items:flex-start;padding:16px 18px;border:1px solid var(--border);background:var(--bg2);transition:border-color 0.2s,background 0.2s;cursor:default;}
+.pstep:hover{border-color:rgba(200,168,75,0.35);background:var(--panel);}
+.psnum{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);opacity:0.35;line-height:1;flex-shrink:0;width:28px;}
+.pstit{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+.pstxt{font-size:11px;color:var(--dim);line-height:1.6;font-weight:400;}
+.widgets{display:flex;flex-direction:column;gap:10px;}
+.wg{background:var(--bg2);border:1px solid var(--border);}
+.wg-h{background:var(--panel);border-bottom:1px solid var(--border);padding:8px 12px;font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;color:var(--mid);text-transform:uppercase;display:flex;align-items:center;gap:5px;}
+.wg-b{padding:12px;}
+.tmodes{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.tmode{border:1px solid var(--border);padding:10px 6px;text-align:center;transition:border-color 0.2s;cursor:default;}
+.tmode:hover{border-color:rgba(200,168,75,0.35);}
+.tmode svg{color:var(--gold);display:block;margin:0 auto 4px;}
+.tml{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.rbars{display:flex;flex-direction:column;gap:7px;}
+.rbar{display:flex;align-items:center;gap:7px;}
+.rlbl{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--dim);width:64px;flex-shrink:0;}
+.rtrack{flex:1;height:2px;background:var(--border2);}
+.rfill{height:100%;background:var(--gold);}
+.rval{font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--gold);width:26px;text-align:right;flex-shrink:0;}
+.regrows{display:flex;flex-direction:column;}
+.regrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:8px;}
+.regrow:last-child{border-bottom:none;}
+.rname{color:var(--mid);}.rstatus{color:var(--gold);}.rstatus.av{color:var(--dim);}
+
+/* DEFENSE */
+#pg-def{background:var(--bg3);}
+.def-layout{display:grid;grid-template-columns:1fr 250px;gap:20px;}
+.def-img-wrap{width:100%;}
+.def-cap{background:var(--panel);border:1px solid var(--border);border-top:none;padding:9px 13px;display:flex;align-items:center;gap:7px;}
+.def-cap span{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:var(--mid);}
+.def-areas{display:flex;flex-direction:column;gap:2px;margin-top:14px;}
+.darea{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--border);background:var(--bg2);transition:border-color 0.2s;cursor:default;}
+.darea:hover{border-color:rgba(200,168,75,0.35);}
+.dacode{font-family:'Share Tech Mono',monospace;font-size:7.5px;color:var(--dim);}
+.daname{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
+.dastatus{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1px;}
+.st-a{color:var(--green);}.st-s{color:var(--gold);}
+.def-side{display:flex;flex-direction:column;gap:10px;}
+.iblock{background:var(--bg2);border:1px solid var(--border);}
+.ihead{background:var(--panel);border-bottom:1px solid var(--border);padding:8px 12px;font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;color:var(--mid);text-transform:uppercase;}
+.ibody{padding:12px;}
+.kvrow{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);}
+.kvrow:last-child{border-bottom:none;}
+.kvk{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--dim);}
+.kvv{font-size:12px;letter-spacing:1px;color:var(--light);font-weight:600;}
+
+/* FUEL */
+#pg-fuel{background:var(--bg3);}
+.fuel-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.fdesc{font-size:13px;line-height:1.7;color:var(--mid);margin-bottom:12px;font-weight:400;}
+.fprods{display:flex;flex-direction:column;gap:2px;margin-top:14px;}
+.fprod{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--border);background:var(--bg2);transition:border-color 0.2s;cursor:default;}
+.fprod:hover{border-color:rgba(200,168,75,0.35);}
+.fprod-icon{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+.fprod:hover .fprod-icon{border-color:rgba(200,168,75,0.5);}
+.fprod-name{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
+.fprod-sub{font-size:10px;color:var(--dim);margin-top:2px;font-weight:400;}
+.fprod-st{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--green);}
+.fprod-st.rq{color:var(--gold);}
+.fuel-side{display:flex;flex-direction:column;gap:10px;}
+.fblock{background:var(--bg2);border:1px solid var(--border);}
+.fblock-h{background:var(--panel);border-bottom:1px solid var(--border);padding:8px 12px;font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;color:var(--mid);text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+.fblock-b{padding:12px;}
+.fkv{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);}
+.fkv:last-child{border-bottom:none;}
+.fk{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--dim);}
+.fv{font-size:12px;letter-spacing:1px;color:var(--light);font-weight:600;}
+.fuel-note{background:var(--bg2);border:1px solid var(--border);padding:14px;margin-top:10px;}
+.fuel-note-h{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.fuel-note-h::before{content:'';display:inline-block;width:14px;height:1px;background:var(--gold);}
+.fuel-note p{font-size:11px;color:var(--dim);line-height:1.7;font-weight:400;margin-bottom:8px;}
+
+/* GOVERNANCE */
+#pg-gov{background:var(--bg3);}
+.gov-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.tl-card{background:var(--bg2);border:1px solid var(--border);}
+.tl-head{background:var(--panel);border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.tl-icon-box{width:34px;height:34px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tl-icon-box svg{color:#12151b;}
+.tlname{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;color:var(--bright);}
+.tlsub{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--mid);text-transform:uppercase;margin-top:1px;}
+.tl-body{padding:18px;}
+.tldesc{font-size:12px;line-height:1.7;color:var(--dim);margin-bottom:12px;font-weight:400;}
+.rtab{width:100%;border-collapse:collapse;}
+.rtab th{text-align:left;font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;padding:5px 0;border-bottom:1px solid var(--border);}
+.rtab td{padding:7px 0;border-bottom:1px solid rgba(45,53,69,0.6);font-size:11px;color:var(--mid);letter-spacing:1px;font-weight:400;}
+.rtab td:last-child{text-align:right;}
+.chip{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;}
+.c-ok{background:rgba(79,200,112,0.07);color:var(--green);border:1px solid rgba(79,200,112,0.18);}
+.c-wn{background:rgba(200,168,75,0.07);color:var(--gold);border:1px solid rgba(200,168,75,0.18);}
+.c-cr{background:rgba(207,80,80,0.07);color:var(--red);border:1px solid rgba(207,80,80,0.18);}
+.demo-btn{display:block;width:100%;background:var(--gold);color:#12151b;text-align:center;padding:11px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;transition:background 0.2s;margin-top:14px;}
+.demo-btn:hover{background:var(--gold2);}
+.gov-feats{display:flex;flex-direction:column;gap:2px;}
+.gfeat{display:flex;gap:12px;align-items:flex-start;padding:13px;border:1px solid var(--border);background:var(--bg2);transition:border-color 0.2s;cursor:default;}
+.gfeat:hover{border-color:rgba(200,168,75,0.35);}
+.gficon{width:26px;height:26px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+.gfeat:hover .gficon{border-color:rgba(200,168,75,0.5);}
+.gftit{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:2px;}
+.gftxt{font-size:11px;color:var(--dim);line-height:1.5;font-weight:400;}
+
+/* CONTACT */
+#pg-contact{background:var(--bg3);}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.cinfo{display:flex;flex-direction:column;gap:2px;}
+.citem{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--border);background:var(--bg2);transition:border-color 0.2s;cursor:default;}
+.citem:hover{border-color:rgba(200,168,75,0.35);}
+.cicon{width:30px;height:30px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+.citem:hover .cicon{border-color:rgba(200,168,75,0.5);}
+.clbl{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:3px;}
+.cval{font-size:14px;letter-spacing:1px;color:var(--white);font-weight:600;}
+.cnote{margin-top:6px;background:var(--bg2);border:1px solid var(--border);padding:14px;}
+.cnote-h{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.cnote-h::before{content:'';display:inline-block;width:14px;height:1px;background:var(--gold);}
+.cnote p{font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:6px;font-weight:400;}
+.cnote-lnk{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--gold);}
+.cform{display:flex;flex-direction:column;gap:9px;}
+.form2{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.fg{display:flex;flex-direction:column;gap:3px;}
+.fl{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.fi,.fta{background:var(--panel);border:1px solid var(--border2);color:var(--light);padding:9px 12px;font-family:'Barlow Condensed',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;width:100%;letter-spacing:0.5px;}
+.fi:focus,.fta:focus{border-color:rgba(200,168,75,0.5);}
+.fi::placeholder,.fta::placeholder{color:var(--dim);}
+.fta{resize:none;height:88px;}
+.fsub{background:var(--gold);color:#12151b;border:none;padding:11px 22px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.2s;width:100%;}
+.fsub:hover{background:var(--gold2);}
+
+/* STATUS BAR */
+.statusbar{height:26px;flex-shrink:0;background:rgba(12,15,20,0.98);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:200;overflow:hidden;}
+.sb-l,.sb-r{display:flex;align-items:center;gap:12px;}
+.sbi{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1.5px;color:var(--dim);display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.sbi .sd{width:4px;height:4px;border-radius:50%;background:var(--green);}
+.clk{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mid);}
+
+
+/* NATO PAGE */
+#pg-nato{background:var(--bg3);}
+.nato-page-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.nato-specs{display:flex;flex-direction:column;gap:2px;}
+.nato-spec{display:flex;gap:16px;align-items:flex-start;padding:16px 18px;border:1px solid rgba(74,138,184,0.2);background:rgba(20,28,45,0.5);transition:border-color 0.2s;cursor:default;}
+.nato-spec:hover{border-color:rgba(74,138,184,0.45);}
+.nato-spec-icon{width:32px;height:32px;border:1px solid rgba(74,138,184,0.3);display:flex;align-items:center;justify-content:center;color:rgba(74,138,184,0.7);flex-shrink:0;}
+.nato-spec-title{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+.nato-spec-text{font-size:11px;color:var(--dim);line-height:1.6;font-weight:400;}
+.nato-right{}
+.nato-img-box{position:relative;margin-bottom:20px;}
+.nato-img-box img{width:100%;height:260px;object-fit:cover;display:block;filter:saturate(0.2) brightness(0.65) contrast(1.1);}
+.nato-img-box::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,12,18,0.8) 0%,transparent 60%);}
+.nato-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(74,138,184,0.2);border:1px solid rgba(74,138,184,0.2);margin-bottom:16px;}
+.nato-stat{background:rgba(15,22,38,0.8);padding:18px;text-align:center;}
+.nato-stat-n{font-family:'Bebas Neue',sans-serif;font-size:34px;color:rgba(74,138,184,0.85);line-height:1;}
+.nato-stat-l{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px;}
+.nato-certs{display:flex;flex-direction:column;gap:2px;}
+.nato-cert{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border:1px solid var(--border);background:var(--bg2);}
+.nato-cert-name{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);}
+.nato-cert-status{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--green);}
+.nato-banner-about{margin-top:20px;border:1px solid rgba(74,138,184,0.3);background:rgba(15,22,45,0.6);padding:18px 22px;display:flex;align-items:center;gap:18px;position:relative;overflow:hidden;}
+.nato-banner-about::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(74,138,184,0.5),transparent);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about-layout,.def-layout,.fuel-layout,.gov-layout,.contact-layout{grid-template-columns:1fr;}
+  .cap-grid{grid-template-columns:1fr 1fr;}
+  .poss-layout{grid-template-columns:1fr;}
+  .hud-tl,.hud-tr,.hud-bl,.hud-br,.cb{display:none;}
+  .gs-companies{overflow-x:auto;}
+  .inner{padding:24px 20px 48px;}
+  .aimg-frame{right:0;bottom:0;}
+  .aimg-badge{right:0;}
+}
+@media(max-width:600px){
+  :root{--nav-h:52px;}
+  .nav-tabs,.nav-right{display:none;}
+  .nav-burger{display:flex;}
+  .hero-content{padding:0 20px 14px;}
+  .hero-h1{font-size:clamp(44px,12vw,70px);}
+  .hero-sub-desc{font-size:12px;max-width:100%;}
+  .hero-btns{flex-direction:column;gap:8px;}
+  .btn-pri,.btn-sec{width:100%;text-align:center;padding:12px;}
+  .group-strip{overflow-x:auto;}
+  .hero-map{display:none;}
+  .statsbar{flex-wrap:wrap;}
+  .sbc{min-width:50%;border-bottom:1px solid var(--border);}
+  .inner{padding:20px 16px 40px;}
+  .ph{flex-direction:column;align-items:flex-start;}
+  .ph-meta{text-align:left;}
+  .cap-grid{grid-template-columns:1fr;}
+  .vals,.group-table-grid,.form2{grid-template-columns:1fr;}
+  .sb-r{display:none;}
+  .statusbar{justify-content:flex-start;}
+  .sbi:not(:first-child){display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <!-- 8-pointed star SVG logo — metallic silver style -->
+    <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="sg" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#e8eef4"/>
+          <stop offset="35%" stop-color="#b8c8d8"/>
+          <stop offset="70%" stop-color="#6a7e90"/>
+          <stop offset="100%" stop-color="#2a3540"/>
+        </radialGradient>
+        <radialGradient id="sg2" cx="60%" cy="65%" r="55%">
+          <stop offset="0%" stop-color="#3a4a58"/>
+          <stop offset="100%" stop-color="#1a2530"/>
+        </radialGradient>
+        <filter id="sf"><feGaussianBlur stdDeviation="0.5"/></filter>
+      </defs>
+      <!-- shadow -->
+      <ellipse cx="51" cy="52" rx="28" ry="28" fill="rgba(0,0,0,0.3)" filter="url(#sf)"/>
+      <!-- main 4-point large star -->
+      <path d="M50,3 L54,46 L97,50 L54,54 L50,97 L46,54 L3,50 L46,46 Z" fill="url(#sg)"/>
+      <!-- 4 diagonal shorter points -->
+      <path d="M50,3 L54,46 L97,50 L54,54 L50,97 L46,54 L3,50 L46,46 Z" fill="url(#sg)"/>
+      <!-- diagonal points -->
+      <path d="M50,16 L55,44 L79,21 L55,45 L84,50 L55,55 L79,79 L55,56 L50,84 L45,56 L21,79 L45,55 L16,50 L45,45 L21,21 L45,44 Z" fill="url(#sg2)" opacity="0.8"/>
+      <!-- center bright spot -->
+      <circle cx="50" cy="50" r="4" fill="white" opacity="0.9"/>
+      <circle cx="50" cy="50" r="2" fill="white"/>
+    </svg>
+    <div class="logo-text"><b>NORTHSTAR</b><small>Tactical Logistics</small></div>
+  </div>
+  <div class="nav-tabs">
+    <button class="ntab on"  onclick="go('home')"><span class="nn">00</span>HOME</button>
+    <button class="ntab" onclick="go('about')"><span class="nn">01</span>ABOUT</button>
+    <button class="ntab" onclick="go('cap')"><span class="nn">02</span>CAPABILITIES</button>
+    <button class="ntab" onclick="go('poss')"><span class="nn">03</span>POSSIBILITIES</button>
+    <button class="ntab" onclick="go('nato')"><span class="nn">04</span>NATO</button>
+    <button class="ntab" onclick="go('def')"><span class="nn">05</span>DEFENSE</button>
+    <button class="ntab" onclick="go('fuel')"><span class="nn">06</span>FUEL</button>
+    <button class="ntab" onclick="go('gov')"><span class="nn">07</span>GOVERNANCE</button>
+    <button class="ntab" onclick="go('contact')"><span class="nn">08</span>CONTACT</button>
+  </div>
+  <div class="nav-right">
+    <div class="sys-dot"></div>
+    <div class="sys-lbl">OPERATIONAL</div>
+    <!-- PL flag SVG -->
+    <svg width="24" height="16" viewBox="0 0 24 16"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#dc143c"/></svg>
+    <!-- US flag SVG -->
+    <svg width="24" height="16" viewBox="0 0 24 16">
+      <rect width="24" height="16" fill="#b22234"/>
+      <rect y="1.23" width="24" height="1.23" fill="white"/><rect y="3.69" width="24" height="1.23" fill="white"/><rect y="6.15" width="24" height="1.23" fill="white"/><rect y="8.62" width="24" height="1.23" fill="white"/><rect y="11.08" width="24" height="1.23" fill="white"/><rect y="13.54" width="24" height="1.23" fill="white"/>
+      <rect width="10" height="8.62" fill="#3c3b6e"/>
+    </svg>
+    <div class="nav-clk" id="nc">00:00 UTC</div>
+  </div>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mmenu">
+  <button class="mmtab on"  onclick="go('home');closeMenu()"><span class="mn">00</span>HOME</button>
+  <button class="mmtab" onclick="go('about');closeMenu()"><span class="mn">01</span>ABOUT</button>
+  <button class="mmtab" onclick="go('cap');closeMenu()"><span class="mn">02</span>CAPABILITIES</button>
+  <button class="mmtab" onclick="go('poss');closeMenu()"><span class="mn">03</span>POSSIBILITIES</button>
+  <button class="mmtab" onclick="go('nato');closeMenu()"><span class="mn">04</span>NATO</button>
+  <button class="mmtab" onclick="go('def');closeMenu()"><span class="mn">05</span>DEFENSE</button>
+  <button class="mmtab" onclick="go('fuel');closeMenu()"><span class="mn">06</span>FUEL</button>
+  <button class="mmtab" onclick="go('gov');closeMenu()"><span class="mn">07</span>GOVERNANCE</button>
+  <button class="mmtab" onclick="go('contact');closeMenu()"><span class="mn">08</span>CONTACT</button>
+</div>
+
+<main>
+<div class="gbg"></div>
+
+<!-- HOME -->
+<div id="pg-home" class="page on">
+<div class="hero">
+  <div class="hero-photo"></div>
+
+  <!-- MILITARY SCENE SVG — generated silhouettes -->
+  <!-- world map -->
+  <div class="hero-map">
+    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+      <path d="M60,80 L90,70 L130,65 L160,75 L180,90 L175,110 L165,130 L155,145 L140,160 L120,170 L100,175 L85,185 L80,200 L90,210 L85,230 L70,225 L60,210 L50,195 L45,175 L50,150 L55,130 L50,110 L55,95 Z M130,65 L170,55 L200,50 L220,55 L230,70 L225,85 L210,90 L195,85 L180,90 Z" opacity="0.6"/>
+      <path d="M210,20 L240,15 L265,20 L275,35 L270,50 L255,55 L235,52 L218,45 L210,35 Z" opacity="0.5"/>
+      <path d="M155,230 L175,220 L195,225 L210,240 L215,260 L210,285 L205,310 L195,330 L185,350 L170,365 L158,360 L150,340 L148,315 L150,290 L148,265 L150,245 Z" opacity="0.6"/>
+      <path d="M430,55 L460,50 L480,55 L490,65 L485,80 L475,90 L460,95 L445,90 L435,80 Z M460,95 L475,90 L490,100 L495,115 L485,125 L470,128 L458,120 L455,108 Z M445,90 L460,95 L458,108 L445,115 L435,110 L432,98 Z" opacity="0.65"/>
+      <path d="M445,115 L470,110 L495,115 L510,130 L515,155 L512,180 L505,205 L495,230 L480,250 L462,260 L445,255 L432,240 L425,215 L425,190 L428,165 L432,140 Z" opacity="0.65"/>
+      <path d="M510,60 L560,50 L620,45 L680,48 L730,55 L770,60 L800,70 L810,85 L795,100 L770,110 L740,115 L700,120 L660,125 L620,130 L590,128 L560,120 L535,115 L515,105 L505,90 Z" opacity="0.6"/>
+      <path d="M620,130 L645,128 L660,140 L655,165 L645,185 L630,195 L618,185 L612,165 L615,145 Z" opacity="0.6"/>
+      <path d="M730,230 L770,220 L810,225 L835,240 L840,265 L830,285 L810,295 L780,298 L755,290 L735,275 L725,255 L725,240 Z" opacity="0.6"/>
+      <path d="M455,35 L470,28 L485,32 L488,48 L475,52 L460,50 Z" opacity="0.55"/>
+    </svg>
+  </div>
+
+  <!-- NTL group strip -->
+  <div class="group-strip">
+    <div class="gs-label">NTL GROUP</div>
+    <div class="gs-companies">
+      <div class="gs-co hl">NORTHSTAR TL</div>
+      <div class="gs-co">DelMarSolutions</div>
+      <div class="gs-co">OilGaz</div>
+      <div class="gs-co">Trustlayer365</div>
+      <div class="gs-co">SecurityLegal</div>
+      <div class="gs-co">JJB &amp; JPP Marine</div>
+      <div class="gs-co">BetonNowak</div>
+    </div>
+  </div>
+
+  <div class="hud">
+    <div class="cb tl"></div><div class="cb tr"></div>
+    <div class="cb bl"></div><div class="cb br"></div>
+    <div class="scanline"></div>
+    <div class="hud-block hud-tl">
+      <div class="hbox">LAT: 52.4064° N<br>LON: 16.9252° E<br>HQ: POZNAŃ, PL</div>
+      <div class="hbox">ASSETS: 47 DEPLOYED<br>ROUTES: 23 ACTIVE<br>STATUS: OPERATIONAL</div>
+    </div>
+    <div class="hud-block hud-tr">
+      <div class="hbox">UPTIME: 99.8%<br>ENCRYPT: AES-256<br>COMMS: SECURE</div>
+      <div class="hbox">NODES: 350+<br>COVERAGE: 120+ CTR<br>LINK: ONLINE</div>
+    </div>
+    <div class="hud-block hud-bl">
+      <div>SYS: NORTHSTAR TL v4.2.1 — NTL GROUP</div>
+      <div>CERT: ISO 9001 · PL-US ALLIANCE · NATO PARTNER</div>
+      <div>CONTACT: contact@ntl-g.com</div>
+    </div>
+    <div class="hud-block hud-br">
+      <div>COVERAGE: 120+ COUNTRIES</div>
+      <div>EXPERIENCE: 20+ YEARS OPS</div>
+      <div>MISSIONS: 1000+ SUPPORTED</div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="eyebrow-line"></div><div class="eyebrow-text">Mission Ready — 24/7 — NATO Certified Partner — Poznań</div></div>
+    <h1 class="hero-h1">MISSION READY.<br>ANYWHERE. ANYTIME.</h1>
+    <p class="hero-sub-desc">We provide our services based on the strategic Polish-American partnership. Secure, reliable and mission-ready transportation solutions across Europe and allied territories.</p>
+    <div class="hero-flags">
+      <!-- Poland flag SVG -->
+      <div class="flag-chip">
+        <svg class="flag-svg" viewBox="0 0 22 15"><rect width="22" height="7.5" fill="#fff"/><rect y="7.5" width="22" height="7.5" fill="#dc143c"/></svg>
+        Polska
+      </div>
+      <!-- US flag SVG -->
+      <div class="flag-chip">
+        <svg class="flag-svg" viewBox="0 0 22 15">
+          <rect width="22" height="15" fill="#b22234"/>
+          <rect y="1.15" width="22" height="1.15" fill="white"/><rect y="3.46" width="22" height="1.15" fill="white"/><rect y="5.77" width="22" height="1.15" fill="white"/><rect y="8.08" width="22" height="1.15" fill="white"/><rect y="10.38" width="22" height="1.15" fill="white"/><rect y="12.69" width="22" height="1.15" fill="white"/>
+          <rect width="9" height="8.08" fill="#3c3b6e"/>
+        </svg>
+        United States
+      </div>
+          <div class="flag-chip" style="border-color:rgba(74,138,184,0.4);color:rgba(74,138,184,0.8);">
+        <svg width="18" height="18" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="none" stroke="rgba(74,138,184,0.7)" stroke-width="5"/><circle cx="50" cy="50" r="30" fill="none" stroke="rgba(74,138,184,0.7)" stroke-width="4"/><line x1="50" y1="3" x2="50" y2="97" stroke="rgba(74,138,184,0.7)" stroke-width="4"/><line x1="3" y1="50" x2="97" y2="50" stroke="rgba(74,138,184,0.7)" stroke-width="4"/><line x1="16" y1="16" x2="84" y2="84" stroke="rgba(74,138,184,0.5)" stroke-width="2.5"/><line x1="84" y1="16" x2="16" y2="84" stroke="rgba(74,138,184,0.5)" stroke-width="2.5"/></svg>
+        NATO Partner
+      </div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-pri" onclick="go('cap')">Explore Solutions →</button>
+      <button class="btn-sec" onclick="go('nato')">NATO Cooperation</button>
+    </div>
+  </div>
+
+  <div class="statsbar">
+    <div class="sbc"><div class="sbn">120+</div><div class="sbl">Countries</div></div>
+    <div class="sbc"><div class="sbn">350+</div><div class="sbl">Locations</div></div>
+    <div class="sbc"><div class="sbn">24/7</div><div class="sbl">Readiness</div></div>
+    <div class="sbc"><div class="sbn">20+</div><div class="sbl">Years Exp.</div></div>
+    <div class="sbc"><div class="sbn">1000+</div><div class="sbl">Missions</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div id="pg-about" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">01 — Kim jesteśmy</div><div class="ph-h1">WHO WE <span class="ga">ARE</span></div></div>
+    <div class="ph-meta">NORTHSTAR / NTL GROUP<br>HQ: POZNAŃ, POLAND<br>EST: 2004</div>
+  </div>
+  <div class="about-layout">
+    <div class="aimg-wrap" style="position:relative;">
+      <div class="aimg-frame"></div>
+      <!-- FLAGS SVG — 7 company flags on poles -->
+      <img src="https://images.unsplash.com/photo-1580001611081-5e2d3cb0b37b?w=900&q=80" alt="NTL Group" style="width:100%;height:380px;object-fit:cover;display:block;filter:saturate(0.2) brightness(0.7) contrast(1.1);">
+      <div class="aimg-badge"><div class="aib-n">20+</div><div class="aib-l">Years Ops</div></div>
+    </div>
+    <div>
+      <div class="ph-tag" style="margin-bottom:10px;">Supporting Operational Readiness</div>
+      <div class="ph-h1" style="font-size:clamp(22px,3vw,30px);margin-bottom:14px;">MISSION.<br><span class="ga">READINESS.</span></div>
+      <p class="adesc">Northstar Tactical Logistics is a specialized defense logistics and strategic mobility company focused on delivering secure, reliable and mission-ready transportation solutions.</p>
+      <p class="adesc">We support military units, government agencies, defense contractors and multinational operations across Europe and allied territories. Based in Poznań, Poland, we leverage the strategic Polish-American partnership.</p>
+      <p class="adesc">Northstar is the flagship brand of the NTL Group — a multi-sector holding operating across logistics, energy, maritime, legal and technology industries.</p>
+      <div class="group-table">
+        <div class="group-table-head"><div class="wdot"></div>NTL GROUP — PORTFOLIO</div>
+        <div class="group-table-grid">
+          <div class="gc"><div class="gc-name">Northstar TL</div><div class="gc-desc">Tactical Logistics &amp; Defense Transport</div></div>
+          <div class="gc"><div class="gc-name">DelMarSolutions</div><div class="gc-desc">Maritime &amp; Coastal Solutions</div></div>
+          <div class="gc"><div class="gc-name">OilGaz</div><div class="gc-desc">Fuel &amp; Energy Supply</div></div>
+          <div class="gc"><div class="gc-name">Trustlayer365</div><div class="gc-desc">Microsoft 365 Governance &amp; Risk</div></div>
+          <div class="gc"><div class="gc-name">SecurityLegal</div><div class="gc-desc">Legal &amp; Security Consulting</div></div>
+          <div class="gc"><div class="gc-name">JJB &amp; JPP Marine</div><div class="gc-desc">Marine Engineering &amp; Operations</div></div>
+          <div class="gc"><div class="gc-name">BetonNowak</div><div class="gc-desc">Construction &amp; Infrastructure</div></div>
+        </div>
+      </div>
+      <div class="vals">
+        <div class="vcard"><div class="vicon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><div class="vtit">Security</div><div class="vtxt">Highest standards on every operation</div></div>
+        <div class="vcard"><div class="vicon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div class="vtit">Precision</div><div class="vtxt">Accuracy at every stage of supply chain</div></div>
+        <div class="vcard"><div class="vicon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064"/></svg></div><div class="vtit">Global Reach</div><div class="vtxt">Network spanning 120+ countries</div></div>
+        <div class="vcard"><div class="vicon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div class="vtit">24/7 Readiness</div><div class="vtxt">Constant readiness — anywhere, anytime</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CAPABILITIES -->
+<div id="pg-cap" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">02 — Zakres działalności</div><div class="ph-h1">CAPABILITIES &amp; <span class="ga">SERVICES</span></div></div>
+    <div class="ph-meta">NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: CAPABILITIES</div>
+  </div>
+  <div class="cap-grid">
+    <div class="ccard"><div class="cc-num">01</div><div class="cc-code">CAP-001 / TRANSPORT</div><div class="cc-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg></div><div class="cc-tit">Military Transportation</div><div class="cc-desc">Armored vehicles, tactical equipment, oversized cargo and mission-critical assets across all terrains and borders.</div><div class="cc-tags"><span class="cctag">Road</span><span class="cctag">Air</span><span class="cctag">Sea</span><span class="cctag">Rail</span></div></div>
+    <div class="ccard"><div class="cc-num">02</div><div class="cc-code">CAP-002 / WAREHOUSING</div><div class="cc-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"/></svg></div><div class="cc-tit">Strategic Warehousing</div><div class="cc-desc">Secure storage adapted for military equipment with controlled access and environmental monitoring.</div><div class="cc-tags"><span class="cctag">Climate-Ctrl</span><span class="cctag">Secured</span><span class="cctag">Certified</span></div></div>
+    <div class="ccard"><div class="cc-num">03</div><div class="cc-code">CAP-003 / SUPPLY CHAIN</div><div class="cc-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945"/></svg></div><div class="cc-tit">Supply Chain Mgmt</div><div class="cc-desc">End-to-end supply chain coordination with real-time tracking and analytics at every stage.</div><div class="cc-tags"><span class="cctag">Tracking</span><span class="cctag">Analytics</span></div></div>
+    <div class="ccard"><div class="cc-num">04</div><div class="cc-code">CAP-004 / OPSEC</div><div class="cc-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><div class="cc-tit">Operational Security</div><div class="cc-desc">Convoy protection and risk management for operations in high-threat environments.</div><div class="cc-tags"><span class="cctag">Convoy Sec</span><span class="cctag">Risk Mgmt</span></div></div>
+    <div class="ccard"><div class="cc-num">05</div><div class="cc-code">CAP-005 / CUSTOMS</div><div class="cc-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2"/></svg></div><div class="cc-tit">Cross-Border Logistics</div><div class="cc-desc">Customs clearance and border coordination ensuring compliance and uninterrupted mission continuity.</div><div class="cc-tags"><span class="cctag">Clearance</span><span class="cctag">Compliance</span></div></div>
+    <div class="ccard"><div class="cc-num">06</div><div class="cc-code">CAP-006 / INTEL</div><div class="cc-icon"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div><div class="cc-tit">Strategic Planning</div><div class="cc-desc">Operational intelligence and mission planning for decision-making at all command levels.</div><div class="cc-tags"><span class="cctag">Intelligence</span><span class="cctag">Analysis</span></div></div>
+  </div>
+</div>
+</div>
+
+<!-- POSSIBILITIES -->
+<div id="pg-poss" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">03 — Operacje i procesy</div><div class="ph-h1">OPERATIONAL <span class="ga">POSSIBILITIES</span></div></div>
+    <div class="ph-meta">NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: POSSIBILITIES</div>
+  </div>
+  <div class="poss-layout">
+    <div class="psteps">
+      <div class="pstep"><div class="psnum">01</div><div><div class="pstit">Mission Analysis &amp; Planning</div><div class="pstxt">Detailed assessment of requirements, risks and resources. Every mission begins with comprehensive intelligence gathering and route planning from our Poznań HQ.</div></div></div>
+      <div class="pstep"><div class="psnum">02</div><div><div class="pstit">Resource Coordination</div><div class="pstxt">Fleet, personnel and equipment allocation tailored to the operation. Only mission-rated assets with verified chain of custody are deployed.</div></div></div>
+      <div class="pstep"><div class="psnum">03</div><div><div class="pstit">Execution &amp; Real-Time Monitoring</div><div class="pstxt">24/7 supervision of every transport stage with immediate situational response. Encrypted communications and live asset tracking throughout.</div></div></div>
+      <div class="pstep"><div class="psnum">04</div><div><div class="pstit">After-Action Reporting</div><div class="pstxt">Detailed post-mission reports and operational data analysis for continuous improvement and compliance documentation.</div></div></div>
+      <div class="pstep"><div class="psnum">05</div><div><div class="pstit">Strategic Mobility Assets</div><div class="pstxt">Modern fleet for defense operations in complex environments — armored, oversized and specialized transport included.</div></div></div>
+    </div>
+    <div class="widgets">
+      <div class="wg"><div class="wg-h"><div class="wdot"></div>TRANSPORT MODES</div><div class="wg-b"><div class="tmodes"><div class="tmode"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg><div class="tml">Road</div></div><div class="tmode"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg><div class="tml">Air</div></div><div class="tmode"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 12h18M3 8h18M3 16h18"/></svg><div class="tml">Sea</div></div><div class="tmode"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg><div class="tml">Rail</div></div></div></div></div>
+      <div class="wg"><div class="wg-h"><div class="wdot"></div>READINESS INDEX</div><div class="wg-b"><div class="rbars"><div class="rbar"><div class="rlbl">GROUND</div><div class="rtrack"><div class="rfill" style="width:94%"></div></div><div class="rval">94%</div></div><div class="rbar"><div class="rlbl">AIR</div><div class="rtrack"><div class="rfill" style="width:88%"></div></div><div class="rval">88%</div></div><div class="rbar"><div class="rlbl">SEA</div><div class="rtrack"><div class="rfill" style="width:76%"></div></div><div class="rval">76%</div></div><div class="rbar"><div class="rlbl">CROSS-BDR</div><div class="rtrack"><div class="rfill" style="width:98%"></div></div><div class="rval">98%</div></div><div class="rbar"><div class="rlbl">OPSEC</div><div class="rtrack"><div class="rfill" style="width:100%"></div></div><div class="rval">100%</div></div></div></div></div>
+      <div class="wg"><div class="wg-h"><div class="wdot"></div>GLOBAL REACH</div><div class="wg-b"><div class="regrows"><div class="regrow"><span class="rname">EUROPE</span><span class="rstatus">● OPERATIONAL</span></div><div class="regrow"><span class="rname">N. AMERICA</span><span class="rstatus">● OPERATIONAL</span></div><div class="regrow"><span class="rname">MIDDLE EAST</span><span class="rstatus av">● AVAILABLE</span></div><div class="regrow"><span class="rname">ASIA-PACIFIC</span><span class="rstatus av">● AVAILABLE</span></div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- DEFENSE -->
+<div id="pg-def" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">04 — Wsparcie obronne</div><div class="ph-h1">DEFENSE <span class="ga">SUPPORT</span></div></div>
+    <div class="ph-meta">NORTHSTAR / TACTICAL LOGISTICS<br>BASE: POZNAŃ</div>
+  </div>
+  <div class="def-layout">
+    <div>
+      <!-- Defense scene SVG — military base with aircraft -->
+      <img src="https://images.unsplash.com/photo-1563242796-09d9c0e47226?w=900&q=80" alt="Defense operations" style="width:100%;height:280px;object-fit:cover;display:block;filter:saturate(0.2) brightness(0.65) contrast(1.1);">
+      <div class="def-cap"><div class="wdot"></div><span>STRATEGIC DEFENSE LOGISTICS — ALLIED OPERATIONS — POZNAŃ, POLAND</span></div>
+      <div class="def-areas">
+        <div class="darea"><div class="dacode">DEF-001</div><div class="daname">Heavy Equipment Transport</div><div class="dastatus st-a">● ACTIVE</div></div>
+        <div class="darea"><div class="dacode">DEF-002</div><div class="daname">Tactical Vehicle Mobility</div><div class="dastatus st-a">● ACTIVE</div></div>
+        <div class="darea"><div class="dacode">DEF-003</div><div class="daname">Personnel Mobility Services</div><div class="dastatus st-a">● ACTIVE</div></div>
+        <div class="darea"><div class="dacode">DEF-004</div><div class="daname">Fleet Coordination &amp; Staging</div><div class="dastatus st-s">● STANDBY</div></div>
+        <div class="darea"><div class="dacode">DEF-005</div><div class="daname">Technology-Driven Defense Support</div><div class="dastatus st-a">● ACTIVE</div></div>
+        <div class="darea"><div class="dacode">DEF-006</div><div class="daname">Trusted Allied Logistics Partner</div><div class="dastatus st-a">● ACTIVE</div></div>
+      </div>
+    </div>
+    <div class="def-side">
+      <div class="iblock"><div class="ihead">OPERATIONAL PROFILE</div><div class="ibody"><div class="kvrow"><span class="kvk">BASE</span><span class="kvv">Poznań, PL</span></div><div class="kvrow"><span class="kvk">COVERAGE</span><span class="kvv">120+ Countries</span></div><div class="kvrow"><span class="kvk">RESPONSE</span><span class="kvv">&lt; 15 min</span></div><div class="kvrow"><span class="kvk">UPTIME</span><span class="kvv">99.8%</span></div><div class="kvrow"><span class="kvk">CERT</span><span class="kvv">ISO 9001</span></div><div class="kvrow"><span class="kvk">PARTNERSHIP</span><span class="kvv">PL-US Alliance</span></div></div></div>
+      <div class="iblock"><div class="ihead">TECHNOLOGY</div><div class="ibody"><div class="kvrow"><span class="kvk">COMMS</span><span class="kvv">AES-256</span></div><div class="kvrow"><span class="kvk">TRACKING</span><span class="kvv">Real-Time GPS</span></div><div class="kvrow"><span class="kvk">SURVEILLANCE</span><span class="kvv">UAV Capable</span></div><div class="kvrow"><span class="kvk">C2</span><span class="kvv">Battlefield Tech</span></div></div></div>
+      <div class="iblock"><div class="ihead">PARTNER NATIONS</div><div class="ibody">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;padding:4px 0;">
+          <svg width="30" height="20" viewBox="0 0 30 20"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#dc143c"/></svg>
+          <svg width="30" height="20" viewBox="0 0 30 20"><rect width="30" height="20" fill="#b22234"/><rect y="1.5" width="30" height="1.5" fill="white"/><rect y="4.6" width="30" height="1.5" fill="white"/><rect y="7.7" width="30" height="1.5" fill="white"/><rect y="10.8" width="30" height="1.5" fill="white"/><rect y="13.8" width="30" height="1.5" fill="white"/><rect y="16.9" width="30" height="1.5" fill="white"/><rect width="12" height="10.8" fill="#3c3b6e"/></svg>
+          <svg width="30" height="20" viewBox="0 0 30 20"><rect width="10" height="20" fill="#000"/><rect x="10" width="10" height="20" fill="#dd0000"/><rect x="20" width="10" height="20" fill="#ffce00"/></svg>
+          <svg width="30" height="20" viewBox="0 0 30 20"><rect width="30" height="20" fill="#012169"/><line x1="0" y1="0" x2="30" y2="20" stroke="white" stroke-width="4"/><line x1="30" y1="0" x2="0" y2="20" stroke="white" stroke-width="4"/><line x1="0" y1="0" x2="30" y2="20" stroke="#C8102E" stroke-width="2"/><line x1="30" y1="0" x2="0" y2="20" stroke="#C8102E" stroke-width="2"/><rect x="12" y="0" width="6" height="20" fill="white"/><rect y="7" width="30" height="6" fill="white"/><rect x="13" y="0" width="4" height="20" fill="#C8102E"/><rect y="8" width="30" height="4" fill="#C8102E"/></svg>
+          <svg width="30" height="20" viewBox="0 0 30 20"><rect width="10" height="20" fill="#002395"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ED2939"/></svg>
+          <svg width="30" height="20" viewBox="0 0 30 20"><rect width="30" height="7" fill="#002B7F"/><rect y="7" width="30" height="6" fill="#FCD116"/><rect y="13" width="30" height="7" fill="#CE1126"/></svg>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FUEL -->
+<div id="pg-fuel" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">05 — OilGaz / NTL Group</div><div class="ph-h1">FUEL &amp; <span class="ga">ENERGY SUPPLY</span></div></div>
+    <div class="ph-meta">NTL GROUP / OILGAZ<br>BASE: POZNAŃ</div>
+  </div>
+  <div class="fuel-layout">
+    <div>
+      <!-- Fuel/industrial SVG scene -->
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Fuel operations" style="width:100%;height:220px;object-fit:cover;display:block;filter:saturate(0.2) brightness(0.65) contrast(1.1);">
+      <div style="background:var(--panel);border:1px solid var(--border);border-top:none;padding:9px 13px;display:flex;align-items:center;gap:7px;">
+        <div class="wdot"></div>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:var(--mid);">OILGAZ — TACTICAL FUEL &amp; ENERGY SUPPLY — NTL GROUP — POZNAŃ</span>
+      </div>
+      <p class="fdesc" style="margin-top:14px;">OilGaz is the energy supply arm of the NTL Group, specializing in procurement, logistics and delivery of fuel and energy resources for military, maritime and industrial operations across Poland and the Baltic region.</p>
+      <p class="fdesc">Providing seamless integration with Northstar Tactical Logistics — ensuring fuel supply chains are secure, reliable and mission-ready at all times.</p>
+      <div class="fprods">
+        <div class="fprod"><div class="fprod-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div><div><div class="fprod-name">Diesel / ON</div><div class="fprod-sub">Road transport, generators, heavy machinery</div></div><div class="fprod-st">● AVAILABLE</div></div>
+        <div class="fprod"><div class="fprod-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg></div><div><div class="fprod-name">Jet Fuel / JP-8</div><div class="fprod-sub">Military aviation, tactical aircraft operations</div></div><div class="fprod-st">● AVAILABLE</div></div>
+        <div class="fprod"><div class="fprod-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 12h18M3 8h18M3 16h18"/></svg></div><div><div class="fprod-name">Marine Fuel / MDO</div><div class="fprod-sub">Naval vessels, port operations, offshore</div></div><div class="fprod-st">● AVAILABLE</div></div>
+        <div class="fprod"><div class="fprod-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div><div class="fprod-name">LNG / CNG</div><div class="fprod-sub">Alternative fuel, fleet modernization</div></div><div class="fprod-st rq">● ON REQUEST</div></div>
+      </div>
+    </div>
+    <div class="fuel-side">
+      <div class="fblock"><div class="fblock-h"><div class="wdot"></div>SUPPLY PARAMETERS</div><div class="fblock-b"><div class="fkv"><span class="fk">COVERAGE</span><span class="fv">Baltic Region + EU</span></div><div class="fkv"><span class="fk">DELIVERY</span><span class="fv">24–72h lead time</span></div><div class="fkv"><span class="fk">MIN ORDER</span><span class="fv">500 liters</span></div><div class="fkv"><span class="fk">TRANSPORT</span><span class="fv">Tanker / IBC / Drum</span></div><div class="fkv"><span class="fk">CERT</span><span class="fv">EN 590 / DEF STAN</span></div></div></div>
+      <div class="fblock"><div class="fblock-h"><div class="wdot"></div>STRATEGIC HUBS</div><div class="fblock-b"><div class="fkv"><span class="fk">HUB 01</span><span class="fv">Poznań Hub</span></div><div class="fkv"><span class="fk">HUB 02</span><span class="fv">Wrocław Terminal</span></div><div class="fkv"><span class="fk">HUB 03</span><span class="fv">Poznań Depot</span></div><div class="fkv"><span class="fk">REACH</span><span class="fv">PL · DE · LT · LV</span></div></div></div>
+      <div class="fblock"><div class="fblock-h"><div class="wdot"></div>GROUP INTEGRATION</div><div class="fblock-b"><div class="fkv"><span class="fk">NORTHSTAR TL</span><span class="fv">Full Integration</span></div><div class="fkv"><span class="fk">JJB MARINE</span><span class="fv">Bunkering Ready</span></div><div class="fkv"><span class="fk">MILITARY</span><span class="fv">Allied Standards</span></div></div></div>
+      <div class="fuel-note"><div class="fuel-note-h">OilGaz — NTL Group</div><p>OilGaz operates under the NTL Group umbrella, providing seamless fuel supply integration with Northstar Tactical Logistics and JJB&amp;JPP Marine.</p><div style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--gold);">→ contact@ntl-g.com</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- GOVERNANCE -->
+<div id="pg-gov" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">06 — Platforma technologiczna</div><div class="ph-h1">GOVERNANCE &amp; <span class="ga">TRUSTLAYER365</span></div></div>
+    <div class="ph-meta">NTL GROUP / DIGITAL PLATFORM<br>POWERED BY: M365</div>
+  </div>
+  <div class="gov-layout">
+    <div>
+      <div class="tl-card">
+        <div class="tl-head"><div class="tl-icon-box"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><div><div class="tlname">TRUSTLAYER365</div><div class="tlsub">Microsoft 365 Governance &amp; Risk Intelligence</div></div></div>
+        <div class="tl-body">
+          <p class="tldesc">Microsoft 365 Governance Intelligence for regulated organizations. Detect identity, guest access, sharing, privileged access and mailbox delegation risks before they become audit findings.</p>
+          <p class="tldesc">Supporting risk management, compliance and governance in M365 for banks, insurance companies and IT service providers.</p>
+          <table class="rtab">
+            <tr><th>Risk Area</th><th>Module</th><th>Status</th></tr>
+            <tr><td>Identity Access</td><td>IAM</td><td><span class="chip c-ok">● SECURE</span></td></tr>
+            <tr><td>Guest Access</td><td>GAM</td><td><span class="chip c-wn">● REVIEW</span></td></tr>
+            <tr><td>External Sharing</td><td>DLP</td><td><span class="chip c-ok">● SECURE</span></td></tr>
+            <tr><td>Privileged Access</td><td>PAM</td><td><span class="chip c-cr">● ALERT</span></td></tr>
+            <tr><td>Mailbox Delegation</td><td>EXO</td><td><span class="chip c-ok">● SECURE</span></td></tr>
+          </table>
+          <button class="demo-btn" onclick="go('contact')">Request Demo →</button>
+        </div>
+      </div>
+    </div>
+    <div class="gov-feats">
+      <div class="gfeat"><div class="gficon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div><div><div class="gftit">Identity &amp; Access Governance</div><div class="gftxt">Detect and remediate identity risks, guest overprovisioning and access anomalies across M365 before auditors do.</div></div></div>
+      <div class="gfeat"><div class="gficon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><div><div class="gftit">Compliance &amp; Audit Readiness</div><div class="gftxt">Automated compliance checks aligned with regulatory frameworks for financial institutions.</div></div></div>
+      <div class="gfeat"><div class="gficon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><div><div class="gftit">Risk Intelligence Reporting</div><div class="gftxt">Executive-ready risk dashboards and technical reports for security teams and compliance officers.</div></div></div>
+      <div class="gfeat"><div class="gficon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div><div><div class="gftit">Privileged Access Monitoring</div><div class="gftxt">Continuous monitoring of privileged roles and admin accounts with real-time alerting.</div></div></div>
+      <div class="gfeat"><div class="gficon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><div class="gftit">Mailbox Delegation Control</div><div class="gftxt">Identify unauthorized mailbox delegations, shared mailbox sprawl and SendAs anomalies.</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="pg-contact" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">07 — Skontaktuj się</div><div class="ph-h1">CONTACT <span class="ga">US</span></div></div>
+    <div class="ph-meta">READY. ANYWHERE. ANYTIME.<br>RESPONSE: &lt; 15 MIN<br>STATUS: ● ONLINE</div>
+  </div>
+  <div class="contact-layout">
+    <div>
+      <div class="cinfo">
+        <div class="citem"><div class="cicon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><div><div class="clbl">HQ Location</div><div class="cval">Poznań, Poland</div></div></div>
+        <div class="citem"><div class="cicon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><div><div class="clbl">Operational Email</div><div class="cval">contact@ntl-g.com</div></div></div>
+        <div class="citem"><div class="cicon"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><div class="clbl">Availability</div><div class="cval">24 / 7 / 365</div></div></div>
+      </div>
+      <div class="cnote">
+        <div class="cnote-h">Trustlayer365 — Demo Request</div>
+        <p>Interested in our Microsoft 365 Governance &amp; Risk Intelligence platform? Request a personalized demonstration for your organization.</p>
+        <div class="cnote-lnk">→ contact@ntl-g.com</div>
+      </div>
+    </div>
+    <div class="cform">
+      <div class="form2"><div class="fg"><label class="fl">First &amp; Last Name</label><input class="fi" type="text" placeholder="Jan Kowalski"></div><div class="fg"><label class="fl">Organization</label><input class="fi" type="text" placeholder="Organization name"></div></div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jan@organization.com"></div>
+      <div class="fg"><label class="fl">Subject / Module</label><input class="fi" type="text" placeholder="Transport, Fuel, Defense, Trustlayer365 Demo..."></div>
+      <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Describe your operational requirements..."></textarea></div>
+      <button class="fsub">Send Message →</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- NATO PAGE -->
+<div id="pg-nato" class="page">
+<div class="inner">
+  <div class="ph">
+    <div><div class="ph-tag">NATO — Współpraca Sojusznicza</div><div class="ph-h1">NATO <span class="ga">COOPERATION</span></div></div>
+    <div class="ph-meta">NORTHSTAR / ALLIED PARTNER<br>STANAG COMPLIANT<br>CLEARANCE: ALLIED</div>
+  </div>
+  <div class="nato-page-layout">
+    <div>
+      <p style="font-size:13px;line-height:1.7;color:var(--mid);margin-bottom:20px;font-weight:400;">Northstar Tactical Logistics operates as a certified NATO logistics partner, providing verified and trusted support for allied operations across European and international theaters. Our operations comply fully with NATO Standardization Agreements (STANAG) and Host Nation Support frameworks.</p>
+      <div class="nato-specs">
+        <div class="nato-spec">
+          <div class="nato-spec-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+          <div><div class="nato-spec-title">STANAG Compliance</div><div class="nato-spec-text">Full operational compliance with NATO Standardization Agreements (STANAG) governing logistics, transport and supply chain procedures for allied forces across all theaters.</div></div>
+        </div>
+        <div class="nato-spec">
+          <div class="nato-spec-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg></div>
+          <div><div class="nato-spec-title">Allied Transport Network</div><div class="nato-spec-text">Integrated transport solutions supporting NATO movements across Eastern Europe, Baltic states and allied territories with verified chain of custody and real-time tracking.</div></div>
+        </div>
+        <div class="nato-spec">
+          <div class="nato-spec-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064"/></svg></div>
+          <div><div class="nato-spec-title">Host Nation Support (HNS)</div><div class="nato-spec-text">Providing HNS services in Poland for allied forces including fuel, logistics, maintenance, warehousing and administrative support aligned with bilateral HNS agreements.</div></div>
+        </div>
+        <div class="nato-spec">
+          <div class="nato-spec-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+          <div><div class="nato-spec-title">Secure Communications</div><div class="nato-spec-text">AES-256 encrypted communications, classified logistics coordination and secure document handling aligned with NATO information security standards.</div></div>
+        </div>
+        <div class="nato-spec">
+          <div class="nato-spec-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg></div>
+          <div><div class="nato-spec-title">Multinational Operations Support</div><div class="nato-spec-text">Experienced in supporting multinational NATO exercises, joint operations and rapid deployment missions requiring seamless cross-border logistics coordination.</div></div>
+        </div>
+        <div class="nato-spec">
+          <div class="nato-spec-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+          <div><div class="nato-spec-title">Rapid Deployment — 72h</div><div class="nato-spec-text">72-hour rapid deployment capability for emergency logistics operations, supporting NATO VJTF readiness requirements and crisis response scenarios.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="nato-right">
+      <div class="nato-img-box">
+        <img src="https://images.unsplash.com/photo-1609619385002-f40f1df9b7eb?w=700&q=80" alt="NATO allied forces operations">
+      </div>
+      <div class="nato-stats">
+        <div class="nato-stat"><div class="nato-stat-n">32</div><div class="nato-stat-l">NATO Members Served</div></div>
+        <div class="nato-stat"><div class="nato-stat-n">15+</div><div class="nato-stat-l">Allied Exercises</div></div>
+        <div class="nato-stat"><div class="nato-stat-n">72h</div><div class="nato-stat-l">Rapid Deployment</div></div>
+        <div class="nato-stat"><div class="nato-stat-n">100%</div><div class="nato-stat-l">STANAG Compliant</div></div>
+      </div>
+      <div class="nato-certs">
+        <div class="nato-cert"><span class="nato-cert-name">STANAG 2154 — Transport</span><span class="nato-cert-status">● CERTIFIED</span></div>
+        <div class="nato-cert"><span class="nato-cert-name">STANAG 4107 — Fuel Supply</span><span class="nato-cert-status">● CERTIFIED</span></div>
+        <div class="nato-cert"><span class="nato-cert-name">Host Nation Support (HNS)</span><span class="nato-cert-status">● ACTIVE</span></div>
+        <div class="nato-cert"><span class="nato-cert-name">ISO 9001:2015</span><span class="nato-cert-status">● CERTIFIED</span></div>
+        <div class="nato-cert"><span class="nato-cert-name">Allied Movement Coordination</span><span class="nato-cert-status">● ACTIVE</span></div>
+        <div class="nato-cert"><span class="nato-cert-name">PL-US Strategic Partnership</span><span class="nato-cert-status">● ACTIVE</span></div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn-pri" onclick="go('contact')" style="width:100%;padding:12px;">Contact for NATO Inquiries →</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</main>
+
+<div class="statusbar">
+  <div class="sb-l">
+    <div class="sbi"><div class="sd"></div>SYSTEM ONLINE</div>
+    <div class="sbi">NORTHSTAR — NTL GROUP — POZNAŃ</div>
+    <div class="sbi">contact@ntl-g.com</div>
+  </div>
+  <div class="sb-r">
+    <div class="sbi">PL-US PARTNERSHIP · NATO CERTIFIED</div>
+    <div class="sbi">HQ: POZNAŃ, POLAND</div>
+    <div class="clk" id="clk">00:00:00 UTC</div>
+  </div>
+</div>
+
+<script>
+const PAGES=['home','about','cap','poss','nato','def','fuel','gov','contact'];
+function go(id){
+  PAGES.forEach(p=>{document.getElementById('pg-'+p).classList.toggle('on',p===id);});
+  document.querySelectorAll('.ntab').forEach((t,i)=>{t.classList.toggle('on',PAGES[i]===id);});
+  document.querySelectorAll('.mmtab').forEach((t,i)=>{t.classList.toggle('on',PAGES[i]===id);});
+}
+function toggleMenu(){
+  const m=document.getElementById('mmenu'),b=document.getElementById('burger');
+  const o=m.classList.toggle('open');b.classList.toggle('open',o);
+}
+function closeMenu(){
+  document.getElementById('mmenu').classList.remove('open');
+  document.getElementById('burger').classList.remove('open');
+}
+function tick(){
+  const n=new Date();
+  const s=[n.getUTCHours(),n.getUTCMinutes(),n.getUTCSeconds()].map(x=>String(x).padStart(2,'0')).join(':');
+  document.getElementById('clk').textContent=s+' UTC';
+  const nc=document.getElementById('nc');if(nc)nc.textContent=s.slice(0,5)+' UTC';
+}
+setInterval(tick,1000);tick();
+</script>
+</body>
+</html>

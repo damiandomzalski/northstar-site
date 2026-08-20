@@ -1,0 +1,5 @@
+# OMC session state — local tooling, not part of the site
+.omc/
+
+# macOS
+.DS_Store
