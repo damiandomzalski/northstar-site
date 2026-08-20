@@ -3,7 +3,14 @@
 Strona wizytówka Northstar Tactical Logistics (NTL Group) — logistyka obronna
 i mobilność strategiczna, HQ Poznań.
 
-**Podgląd na żywo:** https://damiandomzalski.github.io/northstar-site/
+**Podgląd na żywo:** https://damiandomzalski.com/northstar-site/
+
+> Adres `damiandomzalski.github.io/northstar-site/` przekierowuje w to samo
+> miejsce — Pages dziedziczy domenę własną skonfigurowaną na koncie.
+> Znacznik `<link rel="canonical">` w `index.html` wskazuje na docelową
+> domenę klienta (`ntl-g.com`), więc podgląd nie konkuruje z nią w wynikach
+> wyszukiwania. Przy wdrożeniu produkcyjnym nic nie trzeba w tym miejscu
+> zmieniać.
 
 ## Uruchomienie
 
