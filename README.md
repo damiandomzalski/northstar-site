@@ -74,6 +74,37 @@ zegar, formularz, ekran startowy).
   wiadomość w kliencie pocztowym użytkownika. Nie ma backendu i nic nie jest
   wysyłane do zewnętrznego serwisu.
 
+## Źródło treści
+
+Treść merytoryczna pochodzi z dokumentu kierowniczego Northstar Tactical
+Logistics (propozycja współpracy strategicznej). Stamtąd pochodzą kompetencje,
+obszary współpracy, porty, technologie dronowe, skład zespołu oraz dane
+kontaktowe. Poświadczenia podane na stronie to **NCAGE 9CZ9H** i
+**UEI S9EYKVSLRSQ5** wraz z formułą „Registered for U.S. and E.U. Government
+Contracting" — użytą dokładnie w brzmieniu z dokumentu.
+
+NCAGE i UEI to identyfikatory dostawcy odpowiednio w systemie kodyfikacyjnym
+NATO i w amerykańskim SAM.gov. Identyfikują zarejestrowany podmiot i nie są
+certyfikacją ani potwierdzeniem członkostwa — strona nazywa je wprost
+rejestracjami i nie używa godła NATO.
+
+## Do uzupełnienia
+
+Flagi w pierścieniu NTL Group są przygotowane pod linkowanie, ale nie mają
+jeszcze adresów. Aby włączyć odnośnik, wystarczy dodać `href` do kotwicy danej
+spółki w sekcji ABOUT:
+
+```html
+<a class="ring-flag" data-company="OilGaz" href="https://przyklad.pl">
+```
+
+Bez atrybutu `href` flaga renderuje się jako zwykły tekst, więc nigdzie nie
+powstaje martwy odnośnik. Dotyczy: DelMarSolutions, OilGaz, Trustlayer365,
+SecurityLegal, JJB&JPP Marine, BetonNowak.
+
+Dane w sekcji FUEL (parametry dostaw OilGaz, huby) pochodzą z pierwotnej wersji
+strony i nie były weryfikowane wobec dokumentu kierowniczego.
+
 ## Historia
 
 Pierwszy commit zawiera wersję oryginalną. Drugi to przebudowa — pełny zakres
