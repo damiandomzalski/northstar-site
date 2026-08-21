@@ -88,6 +88,29 @@ NATO i w amerykańskim SAM.gov. Identyfikują zarejestrowany podmiot i nie są
 certyfikacją ani potwierdzeniem członkostwa — strona nazywa je wprost
 rejestracjami i nie używa godła NATO.
 
+## Wersje językowa
+
+Strona jest dwujęzyczna (angielski / polski). Przełącznik to dwie flagi w prawym
+górnym rogu paska nawigacji; jest widoczny na każdej szerokości ekranu.
+
+Kolejność ustalania języka: parametr `?lang=pl` lub `?lang=en` w adresie →
+wybór zapamiętany w `localStorage` → język przeglądarki → angielski. Wybór
+zapisuje się w adresie, więc `…/?lang=pl#nato` można wysłać komuś linkiem.
+
+Treść tłumaczona jest w miejscu. Każdy element podlegający tłumaczeniu ma
+atrybut `data-i18n`, jego angielska zawartość jest zapamiętywana przy
+wczytaniu strony, a tabela `PL` w skrypcie podaje polskie odpowiedniki.
+Kluczem jest **angielski tekst źródłowy**, a nie pozycja w dokumencie — dzięki
+temu edycja strony nie może po cichu przesunąć tłumaczeń na inne napisy.
+
+Aby poprawić polski tekst, wystarczy odnaleźć angielski oryginał w tabeli `PL`
+i zmienić wartość. Brak wpisu oznacza, że element zostaje po angielsku — tak
+jest celowo dla nazw własnych, kodów (NCAGE, UEI) i skrótów.
+
+Terminologia branżowa pochodzi z dokumentu kierowniczego klienta. Pisownia
+została sprawdzona słownikiem `hunspell -d pl_PL`; jedyne zgłoszenia to nazwy
+własne i akronimy.
+
 ## Do uzupełnienia
 
 Flagi w pierścieniu NTL Group są przygotowane pod linkowanie, ale nie mają

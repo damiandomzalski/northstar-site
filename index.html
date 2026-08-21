@@ -12,6 +12,9 @@
 <!-- Marks scripting as available; progressive-enhancement styles hang off this. -->
 <script>document.documentElement.className = 'js';</script>
 <link rel="canonical" href="https://www.northstartacticallogistics.com/">
+<link rel="alternate" hreflang="en" href="https://www.northstartacticallogistics.com/?lang=en">
+<link rel="alternate" hreflang="pl" href="https://www.northstartacticallogistics.com/?lang=pl">
+<link rel="alternate" hreflang="x-default" href="https://www.northstartacticallogistics.com/">
 
 <!-- Social preview -->
 <meta property="og:type" content="website">
@@ -277,6 +280,26 @@ a:hover{ color:var(--gold-bright); }
 @keyframes pulse-dot{ 0%,100%{ opacity:1 } 50%{ opacity:.25 } }
 .topbar-status{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:1.6px; color:var(--text-muted); }
 .topbar-clock{ font-family:var(--font-mono); font-size:11px; letter-spacing:2px; color:var(--text); font-variant-numeric:tabular-nums; }
+
+
+/* Language switch ----------------------------------------------------------
+   Stays visible at every width, unlike the rest of the top-bar metadata. */
+.lang-switch{
+  display:flex; align-items:center; gap:4px;
+  padding:0 12px;
+  border-left:1px solid var(--line);
+  flex-shrink:0;
+}
+.lang-btn{
+  display:flex; align-items:center;
+  padding:5px;
+  border:1px solid transparent;
+  opacity:.4;
+  transition:opacity var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+.lang-btn svg{ display:block; }
+.lang-btn:hover{ opacity:.85; }
+.lang-btn[aria-pressed="true"]{ opacity:1; border-color:var(--gold); }
 
 .burger{
   display:none;
@@ -1199,7 +1222,7 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 
 <body>
 
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content" data-i18n>Skip to content</a>
 
 <!-- ============================ BOOT SEQUENCE ============================ -->
 <div id="boot" role="status" aria-live="polite" aria-label="Loading">
@@ -1207,7 +1230,7 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
     <path d="M50 6 L55 45 L94 50 L55 55 L50 94 L45 55 L6 50 L45 45 Z" fill="#d4b45c"/>
     <path d="M50 22 L54 46 L78 22 L54 46 L78 78 L54 54 L50 78 L46 54 L22 78 L46 46 L22 22 L46 46 Z" fill="#d4b45c" opacity=".4"/>
   </svg>
-  <div class="boot-name">NORTHSTAR</div>
+  <div class="boot-name" data-i18n>NORTHSTAR</div>
   <div class="boot-track"><div class="boot-fill"></div></div>
   <div class="boot-log" id="boot-log">Initialising secure link</div>
 </div>
@@ -1234,8 +1257,8 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
       <circle cx="50" cy="50" r="3.4" fill="#fff" opacity=".95"/>
     </svg>
     <span>
-      <b class="brand-name">NORTHSTAR</b>
-      <small class="brand-tag">Tactical Logistics</small>
+      <b class="brand-name" data-i18n>NORTHSTAR</b>
+      <small class="brand-tag" data-i18n>Tactical Logistics</small>
     </span>
   </div>
 
@@ -1246,14 +1269,24 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 
   <div class="topbar-meta">
     <span class="live-dot" aria-hidden="true"></span>
-    <span class="topbar-status">OPERATIONAL</span>
-    <svg width="24" height="16" viewBox="0 0 24 16" role="img" aria-label="Poland"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#dc143c"/></svg>
-    <svg width="24" height="16" viewBox="0 0 24 16" role="img" aria-label="United States">
-      <rect width="24" height="16" fill="#b22234"/>
-      <g fill="#fff"><rect y="1.23" width="24" height="1.23"/><rect y="3.69" width="24" height="1.23"/><rect y="6.15" width="24" height="1.23"/><rect y="8.62" width="24" height="1.23"/><rect y="11.08" width="24" height="1.23"/><rect y="13.54" width="24" height="1.23"/></g>
-      <rect width="10" height="8.62" fill="#3c3b6e"/>
-    </svg>
+    <span class="topbar-status" data-i18n>OPERATIONAL</span>
+    
     <time class="topbar-clock" id="clock-short">--:-- UTC</time>
+  </div>
+
+  <div class="lang-switch" role="group" aria-label="Language / Język">
+    <button type="button" class="lang-btn" data-lang="pl" aria-pressed="false" title="Polski" lang="pl">
+      <svg width="26" height="17" viewBox="0 0 26 17" aria-hidden="true"><rect width="26" height="8.5" fill="#fff"/><rect y="8.5" width="26" height="8.5" fill="#dc143c"/></svg>
+      <span class="visually-hidden">Polski</span>
+    </button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="true" title="English" lang="en">
+      <svg width="26" height="17" viewBox="0 0 26 17" aria-hidden="true">
+        <rect width="26" height="17" fill="#b22234"/>
+        <g fill="#fff"><rect y="1.3" width="26" height="1.3"/><rect y="3.9" width="26" height="1.3"/><rect y="6.5" width="26" height="1.3"/><rect y="9.1" width="26" height="1.3"/><rect y="11.7" width="26" height="1.3"/><rect y="14.3" width="26" height="1.3"/></g>
+        <rect width="11" height="9.1" fill="#3c3b6e"/>
+      </svg>
+      <span class="visually-hidden">English</span>
+    </button>
   </div>
 
   <button class="burger" id="burger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">
@@ -1350,38 +1383,38 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
     </div>
 
     <div class="group-strip">
-      <span class="group-strip-label">NTL Group</span>
+      <span class="group-strip-label" data-i18n>NTL Group</span>
       <div class="group-strip-list">
-        <span class="group-co is-current">Northstar TL</span>
-        <span class="group-co">DelMarSolutions</span>
-        <span class="group-co">OilGaz</span>
-        <span class="group-co">Trustlayer365</span>
-        <span class="group-co">SecurityLegal</span>
-        <span class="group-co">JJB &amp; JPP Marine</span>
-        <span class="group-co">BetonNowak</span>
+        <span class="group-co is-current" data-i18n>Northstar TL</span>
+        <span class="group-co" data-i18n>DelMarSolutions</span>
+        <span class="group-co" data-i18n>OilGaz</span>
+        <span class="group-co" data-i18n>Trustlayer365</span>
+        <span class="group-co" data-i18n>SecurityLegal</span>
+        <span class="group-co" data-i18n>JJB &amp; JPP Marine</span>
+        <span class="group-co" data-i18n>BetonNowak</span>
       </div>
     </div>
 
     <div class="hud" aria-hidden="true">
       <span class="scanline"></span>
       <div class="hud-block hud-tl">
-        <div class="hud-box">LAT <b>52.4064° N</b><br>LON <b>16.9252° E</b><br>HQ &nbsp;POZNAŃ, PL</div>
-        <div class="hud-box">NCAGE &nbsp;<b>9CZ9H</b><br>UEI &nbsp;<b>S9EYKVSLRSQ5</b><br>STATUS &nbsp;REGISTERED</div>
+        <div class="hud-box" data-i18n>LAT <b>52.4064° N</b><br>LON <b>16.9252° E</b><br>HQ &nbsp;POZNAŃ, PL</div>
+        <div class="hud-box" data-i18n>NCAGE &nbsp;<b>9CZ9H</b><br>UEI &nbsp;<b>S9EYKVSLRSQ5</b><br>STATUS &nbsp;REGISTERED</div>
       </div>
       <div class="hud-block hud-tr">
-        <div class="hud-box">CONTRACTING<br>U.S. &nbsp;<b>REGISTERED</b><br>E.U. &nbsp;<b>REGISTERED</b></div>
-        <div class="hud-box">PORTS<br>GDAŃSK · SZCZECIN<br>ŚWINOUJŚCIE</div>
+        <div class="hud-box" data-i18n>CONTRACTING<br>U.S. &nbsp;<b>REGISTERED</b><br>E.U. &nbsp;<b>REGISTERED</b></div>
+        <div class="hud-box" data-i18n>PORTS<br>GDAŃSK · SZCZECIN<br>ŚWINOUJŚCIE</div>
       </div>
     </div>
 
     <div class="hero-content">
-      <p class="hero-eyebrow">Poznań, Poland · NCAGE 9CZ9H · Registered for U.S. and E.U. Government Contracting</p>
-      <h1 class="hero-title">Mission Ready.<br><span class="accent">Anywhere. Anytime.</span></h1>
-      <p class="hero-sub">Defence logistics and strategic mobility from Poznań — port operations, heavy and specialised transport, fuel supply and unmanned systems for allied and government programmes.</p>
+      <p class="hero-eyebrow" data-i18n>Poznań, Poland · NCAGE 9CZ9H · Registered for U.S. and E.U. Government Contracting</p>
+      <h1 class="hero-title" data-i18n>Mission Ready.<br><span class="accent">Anywhere. Anytime.</span></h1>
+      <p class="hero-sub" data-i18n>Defence logistics and strategic mobility from Poznań — port operations, heavy and specialised transport, fuel supply and unmanned systems for allied and government programmes.</p>
       <div class="hero-flags">
         <span class="flag-chip">
           <svg width="22" height="15" viewBox="0 0 22 15" aria-hidden="true"><rect width="22" height="7.5" fill="#fff"/><rect y="7.5" width="22" height="7.5" fill="#dc143c"/></svg>
-          Poland
+          <span data-i18n>Poland</span>
         </span>
         <span class="flag-chip">
           <svg width="22" height="15" viewBox="0 0 22 15" aria-hidden="true">
@@ -1389,44 +1422,44 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
             <g fill="#fff"><rect y="1.15" width="22" height="1.15"/><rect y="3.46" width="22" height="1.15"/><rect y="5.77" width="22" height="1.15"/><rect y="8.08" width="22" height="1.15"/><rect y="10.38" width="22" height="1.15"/><rect y="12.69" width="22" height="1.15"/></g>
             <rect width="9" height="8.08" fill="#3c3b6e"/>
           </svg>
-          United States
+          <span data-i18n>United States</span>
         </span>
         <span class="flag-chip nato">
           <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
             <path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3z"/>
           </svg>
-          NCAGE 9CZ9H
+          <span>NCAGE 9CZ9H</span>
         </span>
       </div>
       <div class="hero-actions">
-        <button class="btn btn-primary" data-goto="capabilities">Explore Solutions <span class="btn-arrow">→</span></button>
-        <button class="btn btn-ghost" data-goto="nato">NATO Cooperation</button>
+        <button class="btn btn-primary" data-goto="capabilities" data-i18n>Explore Solutions <span class="btn-arrow">→</span></button>
+        <button class="btn btn-ghost" data-goto="nato" data-i18n>NATO Cooperation</button>
       </div>
     </div>
 
     <div class="hero-ticker" aria-hidden="true">
       <span>NCAGE <b>9CZ9H</b></span>
       <span>UEI <b>S9EYKVSLRSQ5</b></span>
-      <span>REGISTERED FOR U.S. AND E.U. GOVERNMENT CONTRACTING</span>
-      <span>PORTS GDAŃSK · SZCZECIN · ŚWINOUJŚCIE</span>
-      <span>HQ POZNAŃ, POLAND</span>
-      <span>CONTACT contact@ntl-g.com</span>
+      <span data-i18n>REGISTERED FOR U.S. AND E.U. GOVERNMENT CONTRACTING</span>
+      <span data-i18n>PORTS GDAŃSK · SZCZECIN · ŚWINOUJŚCIE</span>
+      <span data-i18n>HQ POZNAŃ, POLAND</span>
+      <span data-i18n>CONTACT contact@ntl-g.com</span>
     </div>
 
     <div class="statsbar">
-      <div class="stat"><div class="stat-code">9CZ9H</div><div class="stat-label">NCAGE Code</div></div>
-      <div class="stat"><div class="stat-code">S9EYKVSLRSQ5</div><div class="stat-label">UEI (SAM.gov)</div></div>
-      <div class="stat"><div class="stat-code">U.S. &amp; E.U.</div><div class="stat-label">Contracting Registered</div></div>
-      <div class="stat"><div class="stat-num" data-count="3">3</div><div class="stat-label">Baltic Ports</div></div>
-      <div class="stat"><div class="stat-code">Poznań</div><div class="stat-label">Headquarters</div></div>
+      <div class="stat"><div class="stat-code">9CZ9H</div><div class="stat-label" data-i18n>NCAGE Code</div></div>
+      <div class="stat"><div class="stat-code">S9EYKVSLRSQ5</div><div class="stat-label" data-i18n>UEI (SAM.gov)</div></div>
+      <div class="stat"><div class="stat-code" data-i18n>U.S. &amp; E.U.</div><div class="stat-label" data-i18n>Contracting Registered</div></div>
+      <div class="stat"><div class="stat-num" data-count="3">3</div><div class="stat-label" data-i18n>Baltic Ports</div></div>
+      <div class="stat"><div class="stat-code" data-i18n>Poznań</div><div class="stat-label" data-i18n>Headquarters</div></div>
     </div>
   </div>
 
   <section class="reach" aria-labelledby="reach-heading">
     <div class="reach-inner">
       <div data-reveal>
-        <h2 class="reach-title" id="reach-heading">GLOBAL REACH.<br><span class="accent">LOCAL PRECISION.</span></h2>
-        <p class="reach-text">Headquartered in Poznań and operating through Polish seaports, with contracting registrations in place for the United States and the European Union.</p>
+        <h2 class="reach-title" id="reach-heading" data-i18n>GLOBAL REACH.<br><span class="accent">LOCAL PRECISION.</span></h2>
+        <p class="reach-text" data-i18n>Headquartered in Poznań and operating through Polish seaports, with contracting registrations in place for the United States and the European Union.</p>
       </div>
       <div class="reach-map" data-reveal>
         <svg viewBox="0 0 948 402" role="img" aria-label="World map showing Northstar's Poznań headquarters linked to North America, the Middle East, Asia-Pacific and Australia">
@@ -1451,10 +1484,10 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">01 — Who we are</p>
-      <h1 class="page-title">WHO WE <span class="accent">ARE</span></h1>
+      <p class="eyebrow" data-i18n>01 — Who we are</p>
+      <h1 class="page-title" data-i18n>WHO WE <span class="accent">ARE</span></h1>
     </div>
-    <p class="page-meta">NORTHSTAR / NTL GROUP<br>HQ: POZNAŃ, POLAND<br>NCAGE: 9CZ9H</p>
+    <p class="page-meta" data-i18n>NORTHSTAR / NTL GROUP<br>HQ: POZNAŃ, POLAND<br>NCAGE: 9CZ9H</p>
   </div>
 
   <div class="split">
@@ -1466,8 +1499,8 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
             <path d="M50 6 L55 45 L94 50 L55 55 L50 94 L45 55 L6 50 L45 45 Z" fill="#d4b45c"/>
             <path d="M50 22 L54 46 L78 22 L54 46 L78 78 L54 54 L50 78 L46 54 L22 78 L46 46 L22 22 L46 46 Z" fill="#d4b45c" opacity=".4"/>
           </svg>
-          <b>NTL GROUP</b>
-          <small>Seven companies</small>
+          <b data-i18n>NTL GROUP</b>
+          <small data-i18n>Seven companies</small>
         </div>
       <a class="ring-flag" style="left:50.0%;top:11.0%;" data-company="NORTHSTAR">
         <svg viewBox="0 0 154 96" role="img" aria-label="NORTHSTAR — Tactical Logistics">
@@ -1568,63 +1601,63 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
         </svg>
       </a>
       </div>
-      <p class="flag-caption">NTL GROUP — SEVEN COMPANIES, ONE OPERATIONAL BACKBONE</p>
+      <p class="flag-caption" data-i18n>NTL GROUP — SEVEN COMPANIES, ONE OPERATIONAL BACKBONE</p>
     </div>
 
     <div data-reveal>
-      <p class="eyebrow">Supporting operational readiness</p>
-      <h2 class="page-title" style="font-size:clamp(24px,3vw,32px);margin-bottom:18px;">MISSION.<br><span class="accent">READINESS.</span></h2>
-      <p class="lead">Northstar Tactical Logistics is a newly established company formed specifically to support the armed forces, whose management and key personnel bring extensive combined experience in the defence logistics sector.</p>
-      <p class="lead">That experience spans maritime port security management, strategic transport, government contracting, port operations, unmanned systems integration and critical infrastructure support. The company is registered under NCAGE 9CZ9H and UEI S9EYKVSLRSQ5 for U.S. and E.U. government contracting.</p>
-      <p class="lead">Northstar is the flagship brand of the NTL Group — a multi-sector holding spanning logistics, energy, maritime, legal and technology, based in Poznań, Poland.</p>
+      <p class="eyebrow" data-i18n>Supporting operational readiness</p>
+      <h2 class="page-title" style="font-size:clamp(24px,3vw,32px);margin-bottom:18px;" data-i18n>MISSION.<br><span class="accent">READINESS.</span></h2>
+      <p class="lead" data-i18n>Northstar Tactical Logistics is a newly established company formed specifically to support the armed forces, whose management and key personnel bring extensive combined experience in the defence logistics sector.</p>
+      <p class="lead" data-i18n>That experience spans maritime port security management, strategic transport, government contracting, port operations, unmanned systems integration and critical infrastructure support. The company is registered under NCAGE 9CZ9H and UEI S9EYKVSLRSQ5 for U.S. and E.U. government contracting.</p>
+      <p class="lead" data-i18n>Northstar is the flagship brand of the NTL Group — a multi-sector holding spanning logistics, energy, maritime, legal and technology, based in Poznań, Poland.</p>
 
       <div class="panel" style="margin-top:22px;">
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>NTL GROUP — PORTFOLIO</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>NTL GROUP — PORTFOLIO</span></div>
         <div class="portfolio">
-          <div class="portfolio-item"><div class="portfolio-name">Northstar TL</div><div class="portfolio-desc">Tactical logistics &amp; defense transport</div></div>
-          <div class="portfolio-item"><div class="portfolio-name">DelMarSolutions</div><div class="portfolio-desc">Maritime &amp; coastal solutions</div></div>
-          <div class="portfolio-item"><div class="portfolio-name">OilGaz</div><div class="portfolio-desc">Fuel &amp; energy supply</div></div>
-          <div class="portfolio-item"><div class="portfolio-name">Trustlayer365</div><div class="portfolio-desc">Microsoft 365 governance &amp; risk</div></div>
-          <div class="portfolio-item"><div class="portfolio-name">SecurityLegal</div><div class="portfolio-desc">Legal &amp; security consulting</div></div>
-          <div class="portfolio-item"><div class="portfolio-name">JJB &amp; JPP Marine</div><div class="portfolio-desc">Marine engineering &amp; operations</div></div>
-          <div class="portfolio-item" style="grid-column:1/-1;"><div class="portfolio-name">BetonNowak</div><div class="portfolio-desc">Construction &amp; infrastructure</div></div>
+          <div class="portfolio-item"><div class="portfolio-name" data-i18n>Northstar TL</div><div class="portfolio-desc" data-i18n>Tactical logistics &amp; defense transport</div></div>
+          <div class="portfolio-item"><div class="portfolio-name" data-i18n>DelMarSolutions</div><div class="portfolio-desc" data-i18n>Maritime &amp; coastal solutions</div></div>
+          <div class="portfolio-item"><div class="portfolio-name" data-i18n>OilGaz</div><div class="portfolio-desc" data-i18n>Fuel &amp; energy supply</div></div>
+          <div class="portfolio-item"><div class="portfolio-name" data-i18n>Trustlayer365</div><div class="portfolio-desc" data-i18n>Microsoft 365 governance &amp; risk</div></div>
+          <div class="portfolio-item"><div class="portfolio-name" data-i18n>SecurityLegal</div><div class="portfolio-desc" data-i18n>Legal &amp; security consulting</div></div>
+          <div class="portfolio-item"><div class="portfolio-name" data-i18n>JJB &amp; JPP Marine</div><div class="portfolio-desc" data-i18n>Marine engineering &amp; operations</div></div>
+          <div class="portfolio-item" style="grid-column:1/-1;"><div class="portfolio-name" data-i18n>BetonNowak</div><div class="portfolio-desc" data-i18n>Construction &amp; infrastructure</div></div>
         </div>
       </div>
 
       <div class="panel" style="margin-top:22px;">
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>LEADERSHIP</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>LEADERSHIP</span></div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">PRESIDENT OF THE BOARD</span><span class="kv-val">Mariusz Kołtoniak</span></div>
-          <div class="kv"><span class="kv-key">PARTNER</span><span class="kv-val">Wioletta Zofia Perz</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PRESIDENT OF THE BOARD</span><span class="kv-val" data-i18n>Mariusz Kołtoniak</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PARTNER</span><span class="kv-val" data-i18n>Wioletta Zofia Perz</span></div>
         </div>
       </div>
 
       <div class="panel" style="margin-top:12px;">
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>DEFENCE ADVISORY BOARD</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>DEFENCE ADVISORY BOARD</span></div>
         <div class="panel-body">
-          <p class="body-note">An interdisciplinary team of retired officers with long-standing experience in defence, maritime security and military logistics.</p>
-          <div class="kv"><span class="kv-key">MARITIME SECURITY &amp; PORT PROTECTION</span><span class="kv-val">Cdr (ret.) Dr Eng. Rajmund Smolarczyk</span></div>
-          <div class="kv"><span class="kv-key">MILITARY LOGISTICS &amp; OPERATIONAL PLANNING</span><span class="kv-val">Lt Col (ret.) Zbigniew Szałaciński</span></div>
-          <div class="kv"><span class="kv-key">MARITIME OPERATIONS &amp; SECURITY</span><span class="kv-val">Lt Cdr (ret.) Artur Kukiełko</span></div>
+          <p class="body-note" data-i18n>An interdisciplinary team of retired officers with long-standing experience in defence, maritime security and military logistics.</p>
+          <div class="kv"><span class="kv-key" data-i18n>MARITIME SECURITY &amp; PORT PROTECTION</span><span class="kv-val" data-i18n>Cdr (ret.) Dr Eng. Rajmund Smolarczyk</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>MILITARY LOGISTICS &amp; OPERATIONAL PLANNING</span><span class="kv-val" data-i18n>Lt Col (ret.) Zbigniew Szałaciński</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>MARITIME OPERATIONS &amp; SECURITY</span><span class="kv-val" data-i18n>Lt Cdr (ret.) Artur Kukiełko</span></div>
         </div>
       </div>
 
       <div class="split" style="gap:4px;margin-top:22px;">
         <div class="feature">
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>
-          <div><div class="feature-title">Maritime Security</div><div class="feature-text">Port protection and security systems</div></div>
+          <div><div class="feature-title" data-i18n>Maritime Security</div><div class="feature-text" data-i18n>Port protection and security systems</div></div>
         </div>
         <div class="feature">
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
-          <div><div class="feature-title">Government Contracting</div><div class="feature-text">Registered in the U.S. and the E.U.</div></div>
+          <div><div class="feature-title" data-i18n>Government Contracting</div><div class="feature-text" data-i18n>Registered in the U.S. and the E.U.</div></div>
         </div>
         <div class="feature">
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064"/></svg></span>
-          <div><div class="feature-title">Port Access</div><div class="feature-text">Gdańsk, Szczecin and Świnoujście</div></div>
+          <div><div class="feature-title" data-i18n>Port Access</div><div class="feature-text" data-i18n>Gdańsk, Szczecin and Świnoujście</div></div>
         </div>
         <div class="feature">
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
-          <div><div class="feature-title">Unmanned Systems</div><div class="feature-text">Integration, training and sustainment</div></div>
+          <div><div class="feature-title" data-i18n>Unmanned Systems</div><div class="feature-text" data-i18n>Integration, training and sustainment</div></div>
         </div>
       </div>
     </div>
@@ -1637,78 +1670,78 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">02 — Scope of operations</p>
-      <h1 class="page-title">CAPABILITIES &amp; <span class="accent">SERVICES</span></h1>
+      <p class="eyebrow" data-i18n>02 — Scope of operations</p>
+      <h1 class="page-title" data-i18n>CAPABILITIES &amp; <span class="accent">SERVICES</span></h1>
     </div>
-    <p class="page-meta">NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: CAPABILITIES</p>
+    <p class="page-meta" data-i18n>NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: CAPABILITIES</p>
   </div>
 
-  <p class="lead" style="margin-bottom:26px;" data-reveal>Eight strategic competencies, delivered under a single chain of command with one point of contact from tasking through to completion.</p>
+  <p class="lead" style="margin-bottom:26px;" data-reveal data-i18n>Eight strategic competencies, delivered under a single chain of command with one point of contact from tasking through to completion.</p>
 
   <div class="card-grid">
     <article class="card" data-reveal>
       <span class="card-index">01</span>
-      <p class="card-code">CAP-001 / LOGISTICS</p>
+      <p class="card-code" data-i18n>CAP-001 / LOGISTICS</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>
-      <h2 class="card-title">Defence Logistics</h2>
-      <p class="card-text">End-to-end logistics support for military units, government agencies and allied programmes, coordinated from Poznań.</p>
-      <div class="tags"><span class="tag">Planning</span><span class="tag">Coordination</span><span class="tag">Sustainment</span></div>
+      <h2 class="card-title" data-i18n>Defence Logistics</h2>
+      <p class="card-text" data-i18n>End-to-end logistics support for military units, government agencies and allied programmes, coordinated from Poznań.</p>
+      <div class="tags"><span class="tag" data-i18n>Planning</span><span class="tag" data-i18n>Coordination</span><span class="tag" data-i18n>Sustainment</span></div>
     </article>
     <article class="card" data-reveal>
       <span class="card-index">02</span>
-      <p class="card-code">CAP-002 / TRANSPORT</p>
+      <p class="card-code" data-i18n>CAP-002 / TRANSPORT</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg></span>
-      <h2 class="card-title">Strategic Transport</h2>
-      <p class="card-text">Specialised and heavy haulage, military transport, personnel movement and troop relocation across Poland and allied territories.</p>
-      <div class="tags"><span class="tag">Heavy</span><span class="tag">Oversized</span><span class="tag">Personnel</span></div>
+      <h2 class="card-title" data-i18n>Strategic Transport</h2>
+      <p class="card-text" data-i18n>Specialised and heavy haulage, military transport, personnel movement and troop relocation across Poland and allied territories.</p>
+      <div class="tags"><span class="tag" data-i18n>Heavy</span><span class="tag" data-i18n>Oversized</span><span class="tag" data-i18n>Personnel</span></div>
     </article>
     <article class="card" data-reveal>
       <span class="card-index">03</span>
-      <p class="card-code">CAP-003 / PORTS</p>
+      <p class="card-code" data-i18n>CAP-003 / PORTS</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v13M8 21h8M12 3a2 2 0 100 4 2 2 0 000-4zM5 13a7 7 0 0014 0"/></svg></span>
-      <h2 class="card-title">Port Operations</h2>
-      <p class="card-text">Port logistics and maritime security expertise, with cooperation developed at Gdańsk, Szczecin and Świnoujście.</p>
-      <div class="tags"><span class="tag">Gdańsk</span><span class="tag">Szczecin</span><span class="tag">Świnoujście</span></div>
+      <h2 class="card-title" data-i18n>Port Operations</h2>
+      <p class="card-text" data-i18n>Port logistics and maritime security expertise, with cooperation developed at Gdańsk, Szczecin and Świnoujście.</p>
+      <div class="tags"><span class="tag" data-i18n>Gdańsk</span><span class="tag" data-i18n>Szczecin</span><span class="tag" data-i18n>Świnoujście</span></div>
     </article>
     <article class="card" data-reveal>
       <span class="card-index">04</span>
-      <p class="card-code">CAP-004 / INFRASTRUCTURE</p>
+      <p class="card-code" data-i18n>CAP-004 / INFRASTRUCTURE</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>
-      <h2 class="card-title">Critical Infrastructure Support</h2>
-      <p class="card-text">Protection and servicing of critical infrastructure, including construction of service and maintenance facilities.</p>
-      <div class="tags"><span class="tag">Facilities</span><span class="tag">Servicing</span></div>
+      <h2 class="card-title" data-i18n>Critical Infrastructure Support</h2>
+      <p class="card-text" data-i18n>Protection and servicing of critical infrastructure, including construction of service and maintenance facilities.</p>
+      <div class="tags"><span class="tag" data-i18n>Facilities</span><span class="tag" data-i18n>Servicing</span></div>
     </article>
     <article class="card" data-reveal>
       <span class="card-index">05</span>
-      <p class="card-code">CAP-005 / UNMANNED</p>
+      <p class="card-code" data-i18n>CAP-005 / UNMANNED</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h4M6 4v4M16 6h4M18 4v4M4 18h4M6 16v4M16 18h4M18 16v4M9 9h6v6H9z"/></svg></span>
-      <h2 class="card-title">Unmanned Systems &amp; Training</h2>
-      <p class="card-text">Drone ecosystem integration and operator training, delivered with an experienced European manufacturer — hybrid UAV, Counter-UAS and autonomous platforms.</p>
-      <div class="tags"><span class="tag">UAV</span><span class="tag">Counter-UAS</span><span class="tag">Training</span></div>
+      <h2 class="card-title" data-i18n>Unmanned Systems &amp; Training</h2>
+      <p class="card-text" data-i18n>Drone ecosystem integration and operator training, delivered with an experienced European manufacturer — hybrid UAV, Counter-UAS and autonomous platforms.</p>
+      <div class="tags"><span class="tag" data-i18n>UAV</span><span class="tag" data-i18n>Counter-UAS</span><span class="tag" data-i18n>Training</span></div>
     </article>
     <article class="card" data-reveal>
       <span class="card-index">06</span>
-      <p class="card-code">CAP-006 / EQUIPMENT</p>
+      <p class="card-code" data-i18n>CAP-006 / EQUIPMENT</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3zM7 7v10M11 7v10M15 7v10"/></svg></span>
-      <h2 class="card-title">Military Containers &amp; Tents</h2>
-      <p class="card-text">Containerised mobile command centres, military tents and associated field equipment.</p>
-      <div class="tags"><span class="tag">Command</span><span class="tag">Shelter</span><span class="tag">Field</span></div>
+      <h2 class="card-title" data-i18n>Military Containers &amp; Tents</h2>
+      <p class="card-text" data-i18n>Containerised mobile command centres, military tents and associated field equipment.</p>
+      <div class="tags"><span class="tag" data-i18n>Command</span><span class="tag" data-i18n>Shelter</span><span class="tag" data-i18n>Field</span></div>
     </article>
     <article class="card" data-reveal>
       <span class="card-index">07</span>
-      <p class="card-code">CAP-007 / FUEL</p>
+      <p class="card-code" data-i18n>CAP-007 / FUEL</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4H6v16h8V4zM14 9h3a2 2 0 012 2v6a1.5 1.5 0 01-3 0v-4"/></svg></span>
-      <h2 class="card-title">Fuel Supply &amp; Mobile Stations</h2>
-      <p class="card-text">Own fuel security arrangements and mobile fuelling stations supporting deployed and static operations.</p>
-      <div class="tags"><span class="tag">Diesel</span><span class="tag">Jet</span><span class="tag">Mobile</span></div>
+      <h2 class="card-title" data-i18n>Fuel Supply &amp; Mobile Stations</h2>
+      <p class="card-text" data-i18n>Own fuel security arrangements and mobile fuelling stations supporting deployed and static operations.</p>
+      <div class="tags"><span class="tag" data-i18n>Diesel</span><span class="tag" data-i18n>Jet</span><span class="tag" data-i18n>Mobile</span></div>
     </article>
     <article class="card" data-reveal>
       <span class="card-index">08</span>
-      <p class="card-code">CAP-008 / RO-RO</p>
+      <p class="card-code" data-i18n>CAP-008 / RO-RO</p>
       <span class="icon-frame"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M3 17l6-6h9M9 11V7h6"/></svg></span>
-      <h2 class="card-title">Ro/Ro Ramps &amp; Heavy Cargo</h2>
-      <p class="card-text">Roll-on/roll-off ramps and handling solutions for vehicles, tracked equipment and outsized cargo.</p>
-      <div class="tags"><span class="tag">Ro/Ro</span><span class="tag">Handling</span></div>
+      <h2 class="card-title" data-i18n>Ro/Ro Ramps &amp; Heavy Cargo</h2>
+      <p class="card-text" data-i18n>Roll-on/roll-off ramps and handling solutions for vehicles, tracked equipment and outsized cargo.</p>
+      <div class="tags"><span class="tag" data-i18n>Ro/Ro</span><span class="tag" data-i18n>Handling</span></div>
     </article>
   </div>
 </div>
@@ -1719,79 +1752,79 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">03 — Operations &amp; process</p>
-      <h1 class="page-title">OPERATIONAL <span class="accent">POSSIBILITIES</span></h1>
+      <p class="eyebrow" data-i18n>03 — Operations &amp; process</p>
+      <h1 class="page-title" data-i18n>OPERATIONAL <span class="accent">POSSIBILITIES</span></h1>
     </div>
-    <p class="page-meta">NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: POSSIBILITIES</p>
+    <p class="page-meta" data-i18n>NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: POSSIBILITIES</p>
   </div>
 
   <div class="split-aside">
     <div class="stack-tight">
       <div class="step" data-reveal>
         <span class="step-num">01</span>
-        <div><h2 class="step-title">Logistics Integration</h2><p class="step-text">Integrated logistics support with an emphasis on specialised and heavy transport, coordinated end to end from a single point of contact.</p></div>
+        <div><h2 class="step-title" data-i18n>Logistics Integration</h2><p class="step-text" data-i18n>Integrated logistics support with an emphasis on specialised and heavy transport, coordinated end to end from a single point of contact.</p></div>
       </div>
       <div class="step" data-reveal>
         <span class="step-num">02</span>
-        <div><h2 class="step-title">Military Transport &amp; Troop Relocation</h2><p class="step-text">Movement of military cargo and personnel, including relocation of units within Poland and to allied territories.</p></div>
+        <div><h2 class="step-title" data-i18n>Military Transport &amp; Troop Relocation</h2><p class="step-text" data-i18n>Movement of military cargo and personnel, including relocation of units within Poland and to allied territories.</p></div>
       </div>
       <div class="step" data-reveal>
         <span class="step-num">03</span>
-        <div><h2 class="step-title">Port Logistics</h2><p class="step-text">Handling and coordination through Polish seaports, drawing on maritime security and port operations expertise within the advisory team.</p></div>
+        <div><h2 class="step-title" data-i18n>Port Logistics</h2><p class="step-text" data-i18n>Handling and coordination through Polish seaports, drawing on maritime security and port operations expertise within the advisory team.</p></div>
       </div>
       <div class="step" data-reveal>
         <span class="step-num">04</span>
-        <div><h2 class="step-title">Fuel Supply &amp; Mobile Stations</h2><p class="step-text">Fuel security arrangements and mobile fuelling stations for deployed operations, delivered with OilGaz within the NTL Group.</p></div>
+        <div><h2 class="step-title" data-i18n>Fuel Supply &amp; Mobile Stations</h2><p class="step-text" data-i18n>Fuel security arrangements and mobile fuelling stations for deployed operations, delivered with OilGaz within the NTL Group.</p></div>
       </div>
       <div class="step" data-reveal>
         <span class="step-num">05</span>
-        <div><h2 class="step-title">Service Infrastructure</h2><p class="step-text">Construction of servicing and maintenance infrastructure supporting sustained operations.</p></div>
+        <div><h2 class="step-title" data-i18n>Service Infrastructure</h2><p class="step-text" data-i18n>Construction of servicing and maintenance infrastructure supporting sustained operations.</p></div>
       </div>
       <div class="step" data-reveal>
         <span class="step-num">06</span>
-        <div><h2 class="step-title">Unmanned Systems &amp; Training</h2><p class="step-text">Deployment of drone systems together with operator and maintenance training programmes.</p></div>
+        <div><h2 class="step-title" data-i18n>Unmanned Systems &amp; Training</h2><p class="step-text" data-i18n>Deployment of drone systems together with operator and maintenance training programmes.</p></div>
       </div>
       <div class="step" data-reveal>
         <span class="step-num">07</span>
-        <div><h2 class="step-title">Military Equipment Supply</h2><p class="step-text">Containerised mobile command centres, military tents and related field equipment.</p></div>
+        <div><h2 class="step-title" data-i18n>Military Equipment Supply</h2><p class="step-text" data-i18n>Containerised mobile command centres, military tents and related field equipment.</p></div>
       </div>
       <div class="step" data-reveal>
         <span class="step-num">08</span>
-        <div><h2 class="step-title">Ro/Ro Ramps</h2><p class="step-text">Roll-on/roll-off ramp solutions for vehicle and heavy equipment movement.</p></div>
+        <div><h2 class="step-title" data-i18n>Ro/Ro Ramps</h2><p class="step-text" data-i18n>Roll-on/roll-off ramp solutions for vehicle and heavy equipment movement.</p></div>
       </div>
     </div>
     <aside class="stack" aria-label="Operational readouts">
       <div class="panel" data-reveal>
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>TRANSPORT MODES</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>TRANSPORT MODES</span></div>
         <div class="panel-body">
           <div class="mode-grid">
-            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg><div class="mode-label">Road</div></div>
-            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg><div class="mode-label">Air</div></div>
-            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18M4 14l8-8 8 8M12 6V3"/></svg><div class="mode-label">Sea</div></div>
-            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v11H7zM7 15l-2 5m14-5l2 5M4 20h16M9 8h6"/></svg><div class="mode-label">Rail</div></div>
+            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg><div class="mode-label" data-i18n>Road</div></div>
+            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg><div class="mode-label" data-i18n>Air</div></div>
+            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18M4 14l8-8 8 8M12 6V3"/></svg><div class="mode-label" data-i18n>Sea</div></div>
+            <div class="mode"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v11H7zM7 15l-2 5m14-5l2 5M4 20h16M9 8h6"/></svg><div class="mode-label" data-i18n>Rail</div></div>
           </div>
         </div>
       </div>
 
       <div class="panel" data-reveal>
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>UNMANNED SYSTEMS</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>UNMANNED SYSTEMS</span></div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">PLATFORMS</span><span class="kv-val">Hybrid UAV</span></div>
-          <div class="kv"><span class="kv-key">DEFENSIVE</span><span class="kv-val">Counter-UAS</span></div>
-          <div class="kv"><span class="kv-key">AUTONOMY</span><span class="kv-val">Autonomous platforms</span></div>
-          <div class="kv"><span class="kv-key">OBSERVATION</span><span class="kv-val">AI-assisted</span></div>
-          <div class="kv"><span class="kv-key">SUSTAINMENT</span><span class="kv-val">MRO</span></div>
-          <div class="kv"><span class="kv-key">TRANSFER</span><span class="kv-val">Technology programmes</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PLATFORMS</span><span class="kv-val" data-i18n>Hybrid UAV</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>DEFENSIVE</span><span class="kv-val" data-i18n>Counter-UAS</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>AUTONOMY</span><span class="kv-val" data-i18n>Autonomous platforms</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>OBSERVATION</span><span class="kv-val" data-i18n>AI-assisted</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>SUSTAINMENT</span><span class="kv-val" data-i18n>MRO</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>TRANSFER</span><span class="kv-val" data-i18n>Technology programmes</span></div>
         </div>
       </div>
 
       <div class="panel" data-reveal>
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>SEAPORT COOPERATION</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>SEAPORT COOPERATION</span></div>
         <div class="panel-body">
-          <div class="region"><span class="region-name">GDAŃSK</span><span class="chip chip-ok">Cooperation</span></div>
-          <div class="region"><span class="region-name">SZCZECIN</span><span class="chip chip-ok">Cooperation</span></div>
-          <div class="region"><span class="region-name">ŚWINOUJŚCIE</span><span class="chip chip-ok">Cooperation</span></div>
-          <div class="region"><span class="region-name">GDYNIA</span><span class="chip chip-warn">Proposed</span></div>
+          <div class="region"><span class="region-name" data-i18n>GDAŃSK</span><span class="chip chip-ok" data-i18n>Cooperation</span></div>
+          <div class="region"><span class="region-name" data-i18n>SZCZECIN</span><span class="chip chip-ok" data-i18n>Cooperation</span></div>
+          <div class="region"><span class="region-name" data-i18n>ŚWINOUJŚCIE</span><span class="chip chip-ok" data-i18n>Cooperation</span></div>
+          <div class="region"><span class="region-name" data-i18n>GDYNIA</span><span class="chip chip-warn" data-i18n>Proposed</span></div>
         </div>
       </div>
     </aside>
@@ -1804,40 +1837,40 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">04 — Allied cooperation</p>
-      <h1 class="page-title">NATO <span class="accent">COOPERATION</span></h1>
+      <p class="eyebrow" data-i18n>04 — Allied cooperation</p>
+      <h1 class="page-title" data-i18n>NATO <span class="accent">COOPERATION</span></h1>
     </div>
-    <p class="page-meta">NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5<br>U.S. &amp; E.U. REGISTERED</p>
+    <p class="page-meta" data-i18n>NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5<br>U.S. &amp; E.U. REGISTERED</p>
   </div>
 
   <div class="split">
     <div>
-      <p class="lead" data-reveal>Northstar Tactical Logistics is registered in the NATO codification system under <strong style="color:var(--gold);font-weight:600;">NCAGE 9CZ9H</strong> and in the U.S. System for Award Management under <strong style="color:var(--gold);font-weight:600;">UEI S9EYKVSLRSQ5</strong> — the identifiers required to contract with allied defence and government customers. Together with a strategic partner, Northstar prepared a proposal for the United States Transportation Command (USTRANSCOM) covering military logistics through the Port of Gdańsk, with further solutions proposed for the Port of Gdynia.</p>
+      <p class="lead" data-reveal data-i18n>Northstar Tactical Logistics is registered in the NATO codification system under <strong style="color:var(--gold);font-weight:600;">NCAGE 9CZ9H</strong> and in the U.S. System for Award Management under <strong style="color:var(--gold);font-weight:600;">UEI S9EYKVSLRSQ5</strong> — the identifiers required to contract with allied defence and government customers. Together with a strategic partner, Northstar prepared a proposal for the United States Transportation Command (USTRANSCOM) covering military logistics through the Port of Gdańsk, with further solutions proposed for the Port of Gdynia.</p>
 
       <div class="stack-tight" style="margin-top:22px;">
         <div class="feature nato-tint" data-reveal>
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>
-          <div><h2 class="feature-title">NATO Codification — NCAGE 9CZ9H</h2><p class="feature-text">Registered in the NATO codification system, the supplier identifier required to be recognised as a contracting entity by allied defence customers.</p></div>
+          <div><h2 class="feature-title" data-i18n>NATO Codification — NCAGE 9CZ9H</h2><p class="feature-text" data-i18n>Registered in the NATO codification system, the supplier identifier required to be recognised as a contracting entity by allied defence customers.</p></div>
         </div>
         <div class="feature nato-tint" data-reveal>
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg></span>
-          <div><h2 class="feature-title">Baltic Port Operations</h2><p class="feature-text">Operational cooperation is being developed with the ports of Gdańsk, Szczecin and Świnoujście, strengthening readiness for military transport, heavy cargo and supply chain coordination.</p></div>
+          <div><h2 class="feature-title" data-i18n>Baltic Port Operations</h2><p class="feature-text" data-i18n>Operational cooperation is being developed with the ports of Gdańsk, Szczecin and Świnoujście, strengthening readiness for military transport, heavy cargo and supply chain coordination.</p></div>
         </div>
         <div class="feature nato-tint" data-reveal>
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064"/></svg></span>
-          <div><h2 class="feature-title">Host Nation Support</h2><p class="feature-text">Support offered to allied forces in Poland — fuel, logistics, maintenance, warehousing and administrative services aligned with bilateral Host Nation Support frameworks.</p></div>
+          <div><h2 class="feature-title" data-i18n>Host Nation Support</h2><p class="feature-text" data-i18n>Support offered to allied forces in Poland — fuel, logistics, maintenance, warehousing and administrative services aligned with bilateral Host Nation Support frameworks.</p></div>
         </div>
         <div class="feature nato-tint" data-reveal>
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span>
-          <div><h2 class="feature-title">Unmanned Systems</h2><p class="feature-text">Hybrid UAV platforms, Counter-UAS technology, autonomous systems, AI-assisted observation, MRO and technology transfer, delivered with an experienced European manufacturer.</p></div>
+          <div><h2 class="feature-title" data-i18n>Unmanned Systems</h2><p class="feature-text" data-i18n>Hybrid UAV platforms, Counter-UAS technology, autonomous systems, AI-assisted observation, MRO and technology transfer, delivered with an experienced European manufacturer.</p></div>
         </div>
         <div class="feature nato-tint" data-reveal>
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg></span>
-          <div><h2 class="feature-title">USTRANSCOM Engagement</h2><p class="feature-text">With a strategic partner, Northstar coordinated and prepared a comprehensive proposal for the United States Transportation Command supporting military logistics through the Port of Gdańsk.</p></div>
+          <div><h2 class="feature-title" data-i18n>USTRANSCOM Engagement</h2><p class="feature-text" data-i18n>With a strategic partner, Northstar coordinated and prepared a comprehensive proposal for the United States Transportation Command supporting military logistics through the Port of Gdańsk.</p></div>
         </div>
         <div class="feature nato-tint" data-reveal>
           <span class="icon-frame"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
-          <div><h2 class="feature-title">Military Equipment Supply</h2><p class="feature-text">Containerised mobile command centres, military tents, Ro/Ro ramps and service infrastructure, sourced and delivered through the NTL Group and its manufacturing partners.</p></div>
+          <div><h2 class="feature-title" data-i18n>Military Equipment Supply</h2><p class="feature-text" data-i18n>Containerised mobile command centres, military tents, Ro/Ro ramps and service infrastructure, sourced and delivered through the NTL Group and its manufacturing partners.</p></div>
         </div>
       </div>
     </div>
@@ -1904,30 +1937,30 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
       </div>
 
       <div class="stat-quad">
-        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="3">3</div><div class="stat-quad-label">Baltic Ports Engaged</div></div>
-        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="2">2</div><div class="stat-quad-label">Contracting Registrations</div></div>
-        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="3">3</div><div class="stat-quad-label">Officers on Advisory Board</div></div>
-        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="7">7</div><div class="stat-quad-label">NTL Group Companies</div></div>
+        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="3">3</div><div class="stat-quad-label" data-i18n>Baltic Ports Engaged</div></div>
+        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="2">2</div><div class="stat-quad-label" data-i18n>Contracting Registrations</div></div>
+        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="3">3</div><div class="stat-quad-label" data-i18n>Officers on Advisory Board</div></div>
+        <div class="stat-quad-cell"><div class="stat-quad-num" data-count="7">7</div><div class="stat-quad-label" data-i18n>NTL Group Companies</div></div>
       </div>
 
       <div class="panel">
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>REGISTRATIONS &amp; ENGAGEMENTS</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>REGISTRATIONS &amp; ENGAGEMENTS</span></div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">NCAGE (NATO CODIFICATION)</span><span class="kv-val">9CZ9H</span></div>
-          <div class="kv"><span class="kv-key">UEI (SAM.GOV)</span><span class="kv-val">S9EYKVSLRSQ5</span></div>
-          <div class="kv"><span class="kv-key">U.S. GOVERNMENT CONTRACTING</span><span class="kv-val">Registered</span></div>
-          <div class="kv"><span class="kv-key">E.U. GOVERNMENT CONTRACTING</span><span class="kv-val">Registered</span></div>
-          <div class="kv"><span class="kv-key">USTRANSCOM</span><span class="kv-val">Proposal prepared</span></div>
-          <div class="kv"><span class="kv-key">PORT OF GDAŃSK</span><span class="kv-val">Cooperation</span></div>
-          <div class="kv"><span class="kv-key">PORT OF SZCZECIN</span><span class="kv-val">Cooperation</span></div>
-          <div class="kv"><span class="kv-key">PORT OF ŚWINOUJŚCIE</span><span class="kv-val">Cooperation</span></div>
-          <div class="kv"><span class="kv-key">PORT OF GDYNIA</span><span class="kv-val">Solutions proposed</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>NCAGE (NATO CODIFICATION)</span><span class="kv-val">9CZ9H</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>UEI (SAM.GOV)</span><span class="kv-val">S9EYKVSLRSQ5</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>U.S. GOVERNMENT CONTRACTING</span><span class="kv-val" data-i18n>Registered</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>E.U. GOVERNMENT CONTRACTING</span><span class="kv-val" data-i18n>Registered</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>USTRANSCOM</span><span class="kv-val" data-i18n>Proposal prepared</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PORT OF GDAŃSK</span><span class="kv-val" data-i18n>Cooperation</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PORT OF SZCZECIN</span><span class="kv-val" data-i18n>Cooperation</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PORT OF ŚWINOUJŚCIE</span><span class="kv-val" data-i18n>Cooperation</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PORT OF GDYNIA</span><span class="kv-val" data-i18n>Solutions proposed</span></div>
         </div>
       </div>
 
-      <p class="form-note">NCAGE and UEI are supplier identification codes in the NATO codification system and the U.S. System for Award Management. They identify a registered entity; they are not a certification, endorsement or membership.</p>
+      <p class="form-note" data-i18n>NCAGE and UEI are supplier identification codes in the NATO codification system and the U.S. System for Award Management. They identify a registered entity; they are not a certification, endorsement or membership.</p>
 
-      <button class="btn btn-primary btn-block" data-goto="contact">Contact for Government Enquiries <span class="btn-arrow">→</span></button>
+      <button class="btn btn-primary btn-block" data-goto="contact" data-i18n>Contact for Government Enquiries <span class="btn-arrow">→</span></button>
     </div>
   </div>
 </div>
@@ -1938,10 +1971,10 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">05 — Defense support</p>
-      <h1 class="page-title">DEFENSE <span class="accent">SUPPORT</span></h1>
+      <p class="eyebrow" data-i18n>05 — Defense support</p>
+      <h1 class="page-title" data-i18n>DEFENSE <span class="accent">SUPPORT</span></h1>
     </div>
-    <p class="page-meta">NORTHSTAR / TACTICAL LOGISTICS<br>BASE: POZNAŃ</p>
+    <p class="page-meta" data-i18n>NORTHSTAR / TACTICAL LOGISTICS<br>BASE: POZNAŃ</p>
   </div>
 
   <div class="split-aside">
@@ -2046,41 +2079,41 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
           </g>
         </svg>
       </div>
-      <p class="visual-caption"><span class="live-dot" aria-hidden="true"></span>STRATEGIC DEFENSE LOGISTICS — ALLIED OPERATIONS — POZNAŃ, POLAND</p>
+      <p class="visual-caption"><span class="live-dot" aria-hidden="true"></span><span data-i18n>STRATEGIC DEFENSE LOGISTICS — ALLIED OPERATIONS — POZNAŃ, POLAND</span></p>
 
       <div class="stack-tight" style="margin-top:18px;">
-        <div class="row row-pair" data-reveal><span class="row-code">DEF-001</span><span class="row-name">Heavy Equipment Transport</span></div>
-        <div class="row row-pair" data-reveal><span class="row-code">DEF-002</span><span class="row-name">Tactical Vehicle Mobility</span></div>
-        <div class="row row-pair" data-reveal><span class="row-code">DEF-003</span><span class="row-name">Personnel Mobility Services</span></div>
-        <div class="row row-pair" data-reveal><span class="row-code">DEF-004</span><span class="row-name">Fleet Coordination &amp; Staging</span></div>
-        <div class="row row-pair" data-reveal><span class="row-code">DEF-005</span><span class="row-name">Unmanned Systems Support</span></div>
-        <div class="row row-pair" data-reveal><span class="row-code">DEF-006</span><span class="row-name">Allied Logistics Partnering</span></div>
+        <div class="row row-pair" data-reveal><span class="row-code">DEF-001</span><span class="row-name" data-i18n>Heavy Equipment Transport</span></div>
+        <div class="row row-pair" data-reveal><span class="row-code">DEF-002</span><span class="row-name" data-i18n>Tactical Vehicle Mobility</span></div>
+        <div class="row row-pair" data-reveal><span class="row-code">DEF-003</span><span class="row-name" data-i18n>Personnel Mobility Services</span></div>
+        <div class="row row-pair" data-reveal><span class="row-code">DEF-004</span><span class="row-name" data-i18n>Fleet Coordination &amp; Staging</span></div>
+        <div class="row row-pair" data-reveal><span class="row-code">DEF-005</span><span class="row-name" data-i18n>Unmanned Systems Support</span></div>
+        <div class="row row-pair" data-reveal><span class="row-code">DEF-006</span><span class="row-name" data-i18n>Allied Logistics Partnering</span></div>
       </div>
     </div>
 
     <aside class="stack" aria-label="Operational profile">
       <div class="panel" data-reveal>
-        <div class="panel-head">OPERATIONAL PROFILE</div>
+        <div class="panel-head" data-i18n>OPERATIONAL PROFILE</div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">BASE</span><span class="kv-val">Poznań, PL</span></div>
-          <div class="kv"><span class="kv-key">NCAGE</span><span class="kv-val">9CZ9H</span></div>
-          <div class="kv"><span class="kv-key">PORTS</span><span class="kv-val">Gdańsk · Szczecin · Świnoujście</span></div>
-          <div class="kv"><span class="kv-key">UEI</span><span class="kv-val">S9EYKVSLRSQ5</span></div>
-          <div class="kv"><span class="kv-key">CONTRACTING</span><span class="kv-val">U.S. &amp; E.U. registered</span></div>
-          <div class="kv"><span class="kv-key">ENTITY</span><span class="kv-val">Newly established</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>BASE</span><span class="kv-val" data-i18n>Poznań, PL</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>NCAGE</span><span class="kv-val">9CZ9H</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>PORTS</span><span class="kv-val" data-i18n>Gdańsk · Szczecin · Świnoujście</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>UEI</span><span class="kv-val">S9EYKVSLRSQ5</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>CONTRACTING</span><span class="kv-val" data-i18n>U.S. &amp; E.U. registered</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>ENTITY</span><span class="kv-val" data-i18n>Newly established</span></div>
         </div>
       </div>
       <div class="panel" data-reveal>
-        <div class="panel-head">TECHNOLOGY</div>
+        <div class="panel-head" data-i18n>TECHNOLOGY</div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">UAV</span><span class="kv-val">Hybrid platforms</span></div>
-          <div class="kv"><span class="kv-key">C-UAS</span><span class="kv-val">Counter-UAS</span></div>
-          <div class="kv"><span class="kv-key">OBSERVATION</span><span class="kv-val">AI-assisted</span></div>
-          <div class="kv"><span class="kv-key">SUSTAINMENT</span><span class="kv-val">MRO · Tech transfer</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>UAV</span><span class="kv-val" data-i18n>Hybrid platforms</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>C-UAS</span><span class="kv-val" data-i18n>Counter-UAS</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>OBSERVATION</span><span class="kv-val" data-i18n>AI-assisted</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>SUSTAINMENT</span><span class="kv-val" data-i18n>MRO · Tech transfer</span></div>
         </div>
       </div>
       <div class="panel" data-reveal>
-        <div class="panel-head">PARTNER NATIONS</div>
+        <div class="panel-head" data-i18n>PARTNER NATIONS</div>
         <div class="panel-body">
           <div class="flag-row">
             <svg width="30" height="20" viewBox="0 0 30 20" role="img" aria-label="Poland"><rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#dc143c"/></svg>
@@ -2102,10 +2135,10 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">06 — OilGaz / NTL Group</p>
-      <h1 class="page-title">FUEL &amp; <span class="accent">ENERGY SUPPLY</span></h1>
+      <p class="eyebrow" data-i18n>06 — OilGaz / NTL Group</p>
+      <h1 class="page-title" data-i18n>FUEL &amp; <span class="accent">ENERGY SUPPLY</span></h1>
     </div>
-    <p class="page-meta">NTL GROUP / OILGAZ<br>BASE: POZNAŃ</p>
+    <p class="page-meta" data-i18n>NTL GROUP / OILGAZ<br>BASE: POZNAŃ</p>
   </div>
 
   <div class="split">
@@ -2195,67 +2228,67 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
           <text x="24" y="270" font-family="Share Tech Mono, monospace" font-size="9" fill="#7fa8cc" opacity=".8">OILGAZ / TERMINAL SCHEMATIC</text>
         </svg>
       </div>
-      <p class="visual-caption"><span class="live-dot" aria-hidden="true"></span>OILGAZ — TACTICAL FUEL &amp; ENERGY SUPPLY — NTL GROUP — POZNAŃ</p>
+      <p class="visual-caption"><span class="live-dot" aria-hidden="true"></span><span data-i18n>OILGAZ — TACTICAL FUEL &amp; ENERGY SUPPLY — NTL GROUP — POZNAŃ</span></p>
 
-      <p class="lead" style="margin-top:20px;" data-reveal>OilGaz is the energy supply arm of the NTL Group, specialising in procurement, logistics and delivery of fuel and energy resources for military, maritime and industrial operations across Poland and the Baltic region.</p>
-      <p class="lead" data-reveal>It integrates directly with Northstar Tactical Logistics, keeping fuel supply chains secure, reliable and mission-ready at all times.</p>
+      <p class="lead" style="margin-top:20px;" data-reveal data-i18n>OilGaz is the energy supply arm of the NTL Group, specialising in procurement, logistics and delivery of fuel and energy resources for military, maritime and industrial operations across Poland and the Baltic region.</p>
+      <p class="lead" data-reveal data-i18n>It integrates directly with Northstar Tactical Logistics, keeping fuel supply chains secure, reliable and mission-ready at all times.</p>
 
       <div class="stack-tight" style="margin-top:18px;">
         <div class="row" data-reveal>
           <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 17h8M5 9l2-4h10l2 4v8H5V9z"/></svg></span>
-          <div><div class="row-name">Diesel / ON</div><div class="row-sub">Road transport, generators, heavy machinery</div></div>
-          <span class="row-status status-active">● AVAILABLE</span>
+          <div><div class="row-name" data-i18n>Diesel / ON</div><div class="row-sub" data-i18n>Road transport, generators, heavy machinery</div></div>
+          <span class="row-status status-active" data-i18n>● AVAILABLE</span>
         </div>
         <div class="row" data-reveal>
           <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg></span>
-          <div><div class="row-name">Jet Fuel / JP-8</div><div class="row-sub">Military aviation, tactical aircraft operations</div></div>
-          <span class="row-status status-active">● AVAILABLE</span>
+          <div><div class="row-name" data-i18n>Jet Fuel / JP-8</div><div class="row-sub" data-i18n>Military aviation, tactical aircraft operations</div></div>
+          <span class="row-status status-active" data-i18n>● AVAILABLE</span>
         </div>
         <div class="row" data-reveal>
           <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18M4 14l8-8 8 8M12 6V3"/></svg></span>
-          <div><div class="row-name">Marine Fuel / MDO</div><div class="row-sub">Naval vessels, port operations, offshore</div></div>
-          <span class="row-status status-active">● AVAILABLE</span>
+          <div><div class="row-name" data-i18n>Marine Fuel / MDO</div><div class="row-sub" data-i18n>Naval vessels, port operations, offshore</div></div>
+          <span class="row-status status-active" data-i18n>● AVAILABLE</span>
         </div>
         <div class="row" data-reveal>
           <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
-          <div><div class="row-name">LNG / CNG</div><div class="row-sub">Alternative fuel, fleet modernisation</div></div>
-          <span class="row-status status-standby">● ON REQUEST</span>
+          <div><div class="row-name" data-i18n>LNG / CNG</div><div class="row-sub" data-i18n>Alternative fuel, fleet modernisation</div></div>
+          <span class="row-status status-standby" data-i18n>● ON REQUEST</span>
         </div>
       </div>
     </div>
 
     <aside class="stack" aria-label="Supply parameters">
       <div class="panel" data-reveal>
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>SUPPLY PARAMETERS</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>SUPPLY PARAMETERS</span></div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">COVERAGE</span><span class="kv-val">Baltic Region + EU</span></div>
-          <div class="kv"><span class="kv-key">DELIVERY</span><span class="kv-val">24–72h lead time</span></div>
-          <div class="kv"><span class="kv-key">MIN ORDER</span><span class="kv-val">500 litres</span></div>
-          <div class="kv"><span class="kv-key">TRANSPORT</span><span class="kv-val">Tanker / IBC / Drum</span></div>
-          <div class="kv"><span class="kv-key">CERT</span><span class="kv-val">EN 590 / DEF STAN</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>COVERAGE</span><span class="kv-val" data-i18n>Baltic Region + EU</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>DELIVERY</span><span class="kv-val" data-i18n>24–72h lead time</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>MIN ORDER</span><span class="kv-val" data-i18n>500 litres</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>TRANSPORT</span><span class="kv-val" data-i18n>Tanker / IBC / Drum</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>CERT</span><span class="kv-val">EN 590 / DEF STAN</span></div>
         </div>
       </div>
       <div class="panel" data-reveal>
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>STRATEGIC HUBS</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>STRATEGIC HUBS</span></div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">HUB 01</span><span class="kv-val">Poznań — Primary</span></div>
-          <div class="kv"><span class="kv-key">HUB 02</span><span class="kv-val">Wrocław Terminal</span></div>
-          <div class="kv"><span class="kv-key">HUB 03</span><span class="kv-val">Poznań — Reserve Depot</span></div>
-          <div class="kv"><span class="kv-key">REACH</span><span class="kv-val">PL · DE · LT · LV</span></div>
+          <div class="kv"><span class="kv-key">HUB 01</span><span class="kv-val" data-i18n>Poznań — Primary</span></div>
+          <div class="kv"><span class="kv-key">HUB 02</span><span class="kv-val" data-i18n>Wrocław Terminal</span></div>
+          <div class="kv"><span class="kv-key">HUB 03</span><span class="kv-val" data-i18n>Poznań — Reserve Depot</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>REACH</span><span class="kv-val" data-i18n>PL · DE · LT · LV</span></div>
         </div>
       </div>
       <div class="panel" data-reveal>
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>GROUP INTEGRATION</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>GROUP INTEGRATION</span></div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">NORTHSTAR TL</span><span class="kv-val">Full Integration</span></div>
-          <div class="kv"><span class="kv-key">JJB MARINE</span><span class="kv-val">Bunkering Ready</span></div>
-          <div class="kv"><span class="kv-key">MILITARY</span><span class="kv-val">Allied Standards</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>NORTHSTAR TL</span><span class="kv-val" data-i18n>Full Integration</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>JJB MARINE</span><span class="kv-val" data-i18n>Bunkering Ready</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>MILITARY</span><span class="kv-val" data-i18n>Allied Standards</span></div>
         </div>
       </div>
       <div class="note" data-reveal>
-        <p class="note-title">OilGaz — NTL Group</p>
-        <p>OilGaz operates under the NTL Group umbrella, providing seamless fuel supply integration with Northstar Tactical Logistics and JJB&amp;JPP Marine.</p>
-        <p><a href="mailto:contact@ntl-g.com?subject=OilGaz%20—%20fuel%20supply%20enquiry" style="font-family:var(--font-mono);font-size:11px;letter-spacing:1px;">→ contact@ntl-g.com</a></p>
+        <p class="note-title" data-i18n>OilGaz — NTL Group</p>
+        <p data-i18n>OilGaz operates under the NTL Group umbrella, providing seamless fuel supply integration with Northstar Tactical Logistics and JJB&amp;JPP Marine.</p>
+        <p><a href="mailto:contact@ntl-g.com?subject=OilGaz%20—%20fuel%20supply%20enquiry" style="font-family:var(--font-mono);font-size:11px;letter-spacing:1px;" data-i18n>→ contact@ntl-g.com</a></p>
       </div>
     </aside>
   </div>
@@ -2267,10 +2300,10 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">07 — Technology platform</p>
-      <h1 class="page-title">GOVERNANCE &amp; <span class="accent">TRUSTLAYER365</span></h1>
+      <p class="eyebrow" data-i18n>07 — Technology platform</p>
+      <h1 class="page-title" data-i18n>GOVERNANCE &amp; <span class="accent">TRUSTLAYER365</span></h1>
     </div>
-    <p class="page-meta">NTL GROUP / DIGITAL PLATFORM<br>POWERED BY: M365</p>
+    <p class="page-meta" data-i18n>NTL GROUP / DIGITAL PLATFORM<br>POWERED BY: M365</p>
   </div>
 
   <div class="split">
@@ -2279,52 +2312,52 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
         <span class="product-mark"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>
         <div>
           <div class="product-name">TRUSTLAYER365</div>
-          <div class="product-sub">Microsoft 365 Governance &amp; Risk Intelligence</div>
+          <div class="product-sub" data-i18n>Microsoft 365 Governance &amp; Risk Intelligence</div>
         </div>
       </div>
       <div class="panel-body" style="padding:22px;">
-        <p class="lead">Microsoft 365 governance intelligence for regulated organisations. Detect identity, guest access, sharing, privileged access and mailbox delegation risks before they become audit findings.</p>
-        <p class="lead">Supporting risk management, compliance and governance in M365 for banks, insurers and IT service providers.</p>
+        <p class="lead" data-i18n>Microsoft 365 governance intelligence for regulated organisations. Detect identity, guest access, sharing, privileged access and mailbox delegation risks before they become audit findings.</p>
+        <p class="lead" data-i18n>Supporting risk management, compliance and governance in M365 for banks, insurers and IT service providers.</p>
 
         <table class="risk-table">
-          <caption class="visually-hidden">Example Trustlayer365 risk posture across Microsoft 365 modules</caption>
+          <caption class="visually-hidden" data-i18n>Example Trustlayer365 risk posture across Microsoft 365 modules</caption>
           <thead>
-            <tr><th scope="col">Risk Area</th><th scope="col">Module</th><th scope="col">Status</th></tr>
+            <tr><th scope="col" data-i18n>Risk Area</th><th scope="col" data-i18n>Module</th><th scope="col" data-i18n>Status</th></tr>
           </thead>
           <tbody>
-            <tr><td>Identity Access</td><td>IAM</td><td><span class="chip chip-ok">Secure</span></td></tr>
-            <tr><td>Guest Access</td><td>GAM</td><td><span class="chip chip-warn">Review</span></td></tr>
-            <tr><td>External Sharing</td><td>DLP</td><td><span class="chip chip-ok">Secure</span></td></tr>
-            <tr><td>Privileged Access</td><td>PAM</td><td><span class="chip chip-alert">Alert</span></td></tr>
-            <tr><td>Mailbox Delegation</td><td>EXO</td><td><span class="chip chip-ok">Secure</span></td></tr>
+            <tr><td data-i18n>Identity Access</td><td data-i18n>IAM</td><td><span class="chip chip-ok" data-i18n>Secure</span></td></tr>
+            <tr><td data-i18n>Guest Access</td><td data-i18n>GAM</td><td><span class="chip chip-warn" data-i18n>Review</span></td></tr>
+            <tr><td data-i18n>External Sharing</td><td data-i18n>DLP</td><td><span class="chip chip-ok" data-i18n>Secure</span></td></tr>
+            <tr><td data-i18n>Privileged Access</td><td data-i18n>PAM</td><td><span class="chip chip-alert" data-i18n>Alert</span></td></tr>
+            <tr><td data-i18n>Mailbox Delegation</td><td data-i18n>EXO</td><td><span class="chip chip-ok" data-i18n>Secure</span></td></tr>
           </tbody>
         </table>
-        <p class="form-note" style="margin-top:10px;">Illustrative dashboard — values shown are sample output, not live tenant data.</p>
+        <p class="form-note" style="margin-top:10px;" data-i18n>Illustrative dashboard — values shown are sample output, not live tenant data.</p>
 
-        <button class="btn btn-primary btn-block" style="margin-top:18px;" data-goto="contact" data-prefill="Trustlayer365 Demo">Request Demo <span class="btn-arrow">→</span></button>
+        <button class="btn btn-primary btn-block" style="margin-top:18px;" data-goto="contact" data-prefill="Trustlayer365 Demo" data-i18n>Request Demo <span class="btn-arrow">→</span></button>
       </div>
     </div>
 
     <div class="stack-tight">
       <div class="feature" data-reveal>
         <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></span>
-        <div><h2 class="feature-title">Identity &amp; Access Governance</h2><p class="feature-text">Detect and remediate identity risks, guest overprovisioning and access anomalies across M365 before auditors do.</p></div>
+        <div><h2 class="feature-title" data-i18n>Identity &amp; Access Governance</h2><p class="feature-text" data-i18n>Detect and remediate identity risks, guest overprovisioning and access anomalies across M365 before auditors do.</p></div>
       </div>
       <div class="feature" data-reveal>
         <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>
-        <div><h2 class="feature-title">Compliance &amp; Audit Readiness</h2><p class="feature-text">Automated compliance checks aligned with regulatory frameworks for financial institutions.</p></div>
+        <div><h2 class="feature-title" data-i18n>Compliance &amp; Audit Readiness</h2><p class="feature-text" data-i18n>Automated compliance checks aligned with regulatory frameworks for financial institutions.</p></div>
       </div>
       <div class="feature" data-reveal>
         <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span>
-        <div><h2 class="feature-title">Risk Intelligence Reporting</h2><p class="feature-text">Executive-ready risk dashboards and technical reports for security teams and compliance officers.</p></div>
+        <div><h2 class="feature-title" data-i18n>Risk Intelligence Reporting</h2><p class="feature-text" data-i18n>Executive-ready risk dashboards and technical reports for security teams and compliance officers.</p></div>
       </div>
       <div class="feature" data-reveal>
         <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span>
-        <div><h2 class="feature-title">Privileged Access Monitoring</h2><p class="feature-text">Continuous monitoring of privileged roles and admin accounts with real-time alerting.</p></div>
+        <div><h2 class="feature-title" data-i18n>Privileged Access Monitoring</h2><p class="feature-text" data-i18n>Continuous monitoring of privileged roles and admin accounts with real-time alerting.</p></div>
       </div>
       <div class="feature" data-reveal>
         <span class="icon-frame"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span>
-        <div><h2 class="feature-title">Mailbox Delegation Control</h2><p class="feature-text">Identify unauthorised mailbox delegations, shared mailbox sprawl and SendAs anomalies.</p></div>
+        <div><h2 class="feature-title" data-i18n>Mailbox Delegation Control</h2><p class="feature-text" data-i18n>Identify unauthorised mailbox delegations, shared mailbox sprawl and SendAs anomalies.</p></div>
       </div>
     </div>
   </div>
@@ -2336,10 +2369,10 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <div class="inner">
   <div class="page-head">
     <div>
-      <p class="eyebrow">08 — Get in touch</p>
-      <h1 class="page-title">CONTACT <span class="accent">US</span></h1>
+      <p class="eyebrow" data-i18n>08 — Get in touch</p>
+      <h1 class="page-title" data-i18n>CONTACT <span class="accent">US</span></h1>
     </div>
-    <p class="page-meta">POZNAŃ, POLAND<br>NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5</p>
+    <p class="page-meta" data-i18n>POZNAŃ, POLAND<br>NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5</p>
   </div>
 
   <div class="split">
@@ -2348,8 +2381,8 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
         <div class="feature" data-reveal>
           <span class="icon-frame"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></span>
           <div>
-            <div class="feature-title">Mariusz Kołtoniak</div>
-            <div class="mono-note">President of the Management Board</div>
+            <div class="feature-title" data-i18n>Mariusz Kołtoniak</div>
+            <div class="mono-note" data-i18n>President of the Management Board</div>
             <div class="feature-value"><a href="mailto:m.koltoniak@ntl-g.com">m.koltoniak@ntl-g.com</a></div>
             <div class="feature-value"><a href="tel:+48790387800">+48 790 387 800</a></div>
           </div>
@@ -2357,35 +2390,35 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
         <div class="feature" data-reveal>
           <span class="icon-frame"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></span>
           <div>
-            <div class="feature-title">Wioletta Zofia Perz</div>
-            <div class="mono-note">Partner</div>
+            <div class="feature-title" data-i18n>Wioletta Zofia Perz</div>
+            <div class="mono-note" data-i18n>Partner</div>
             <div class="feature-value"><a href="mailto:w.perz@ntl-g.com">w.perz@ntl-g.com</a></div>
             <div class="feature-value"><a href="tel:+48732872698">+48 732 872 698</a></div>
           </div>
         </div>
         <div class="feature" data-reveal>
           <span class="icon-frame"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
-          <div><div class="feature-title">Headquarters</div><div class="feature-value">Poznań, Poland</div></div>
+          <div><div class="feature-title" data-i18n>Headquarters</div><div class="feature-value" data-i18n>Poznań, Poland</div></div>
         </div>
         <div class="feature" data-reveal>
           <span class="icon-frame"><svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span>
-          <div><div class="feature-title">General Enquiries</div><div class="feature-value"><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></div></div>
+          <div><div class="feature-title" data-i18n>General Enquiries</div><div class="feature-value"><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></div></div>
         </div>
       </div>
 
       <div class="note" style="margin-top:12px;" data-reveal>
-        <p class="note-title">Trustlayer365 — Demo Request</p>
-        <p>Interested in our Microsoft 365 Governance &amp; Risk Intelligence platform? Request a personalised demonstration for your organisation.</p>
-        <p><a href="mailto:contact@ntl-g.com?subject=Trustlayer365%20Demo%20Request" style="font-family:var(--font-mono);font-size:11px;letter-spacing:1px;">→ contact@ntl-g.com</a></p>
+        <p class="note-title" data-i18n>Trustlayer365 — Demo Request</p>
+        <p data-i18n>Interested in our Microsoft 365 Governance &amp; Risk Intelligence platform? Request a personalised demonstration for your organisation.</p>
+        <p><a href="mailto:contact@ntl-g.com?subject=Trustlayer365%20Demo%20Request" style="font-family:var(--font-mono);font-size:11px;letter-spacing:1px;" data-i18n>→ contact@ntl-g.com</a></p>
       </div>
 
       <div class="panel" style="margin-top:12px;" data-reveal>
-        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span>OPERATIONS DESK</div>
+        <div class="panel-head"><span class="live-dot" aria-hidden="true"></span><span data-i18n>OPERATIONS DESK</span></div>
         <div class="panel-body">
-          <div class="kv"><span class="kv-key">NCAGE</span><span class="kv-val">9CZ9H</span></div>
-          <div class="kv"><span class="kv-key">LANGUAGES</span><span class="kv-val">PL · EN · DE</span></div>
-          <div class="kv"><span class="kv-key">TIME ZONE</span><span class="kv-val">CET / CEST (UTC+1/+2)</span></div>
-          <div class="kv"><span class="kv-key">GROUP</span><span class="kv-val">NTL Group</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>NCAGE</span><span class="kv-val">9CZ9H</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>LANGUAGES</span><span class="kv-val" data-i18n>PL · EN · DE</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>TIME ZONE</span><span class="kv-val" data-i18n>CET / CEST (UTC+1/+2)</span></div>
+          <div class="kv"><span class="kv-key" data-i18n>GROUP</span><span class="kv-val" data-i18n>NTL Group</span></div>
         </div>
       </div>
     </div>
@@ -2393,25 +2426,25 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
     <form class="form" id="contact-form" data-reveal>
       <div class="form-row">
         <div class="field">
-          <label for="f-name">First &amp; last name <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-name" data-i18n>First &amp; last name <span class="req" aria-hidden="true">*</span></label>
           <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Jan Kowalski" required>
           <p class="field-error" id="err-name" aria-live="polite"></p>
         </div>
         <div class="field">
-          <label for="f-org">Organisation</label>
+          <label for="f-org" data-i18n>Organisation</label>
           <input id="f-org" name="organisation" type="text" autocomplete="organization" placeholder="Organisation name">
           <p class="field-error"></p>
         </div>
       </div>
 
       <div class="field">
-        <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+        <label for="f-email" data-i18n>Email <span class="req" aria-hidden="true">*</span></label>
         <input id="f-email" name="email" type="email" autocomplete="email" placeholder="jan@organisation.com" required>
         <p class="field-error" id="err-email" aria-live="polite"></p>
       </div>
 
       <div class="field">
-        <label for="f-subject">Subject / module <span class="req" aria-hidden="true">*</span></label>
+        <label for="f-subject" data-i18n>Subject / module <span class="req" aria-hidden="true">*</span></label>
         <input id="f-subject" name="subject" type="text" list="subject-options" placeholder="Transport, Fuel, Defense, Trustlayer365 Demo…" required>
         <datalist id="subject-options">
           <option value="Military Transportation"></option>
@@ -2426,14 +2459,14 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
       </div>
 
       <div class="field">
-        <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+        <label for="f-message" data-i18n>Message <span class="req" aria-hidden="true">*</span></label>
         <textarea id="f-message" name="message" placeholder="Describe your operational requirements…" required></textarea>
         <p class="field-error" id="err-message" aria-live="polite"></p>
       </div>
 
-      <button class="btn btn-primary btn-block" type="submit">Send Message <span class="btn-arrow">→</span></button>
+      <button class="btn btn-primary btn-block" type="submit" data-i18n>Send Message <span class="btn-arrow">→</span></button>
       <p class="form-status" id="form-status" role="status" hidden></p>
-      <p class="form-note">
+      <p class="form-note" data-i18n>
         This form opens a pre-filled message in your email client and sends nothing to a third party.
         Prefer to write directly? <a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a>
       </p>
@@ -2447,12 +2480,12 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
 <!-- =============================== STATUS BAR ============================ -->
 <footer class="statusbar">
   <div class="status-group">
-    <span class="status-item"><span class="live-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
-    <span class="status-item">NORTHSTARTACTICALLOGISTICS.COM</span>
+    <span class="status-item" data-i18n><span class="live-dot" aria-hidden="true"></span>SYSTEM ONLINE</span>
+    <span class="status-item" data-i18n>NORTHSTARTACTICALLOGISTICS.COM</span>
     <span class="status-item"><a href="mailto:contact@ntl-g.com" style="color:inherit;">contact@ntl-g.com</a></span>
   </div>
   <div class="status-group">
-    <span class="status-item kbd-hint" aria-hidden="true"><kbd>←</kbd><kbd>→</kbd> navigate</span>
+    <span class="status-item kbd-hint" aria-hidden="true" data-i18n><kbd>←</kbd><kbd>→</kbd> navigate</span>
     <span class="status-item">NCAGE 9CZ9H · UEI S9EYKVSLRSQ5</span>
     <time class="status-clock" id="clock-full">--:--:-- UTC</time>
   </div>
@@ -2596,9 +2629,9 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
       activatePage(page);
     }
 
-    document.title = route.title;
+    document.title = t().titles[id] || route.title;
     current = id;
-    if (announce) announcer.textContent = route.label + ' section';
+    if (announce) announcer.textContent = t().routes[id] + ' — ' + t().section;
   }
 
   /** Programmatic navigation — goes through the URL so history stays honest. */
@@ -2651,6 +2684,393 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
     else if (e.key === 'Home' && el && el.classList.contains('tab')) { e.preventDefault(); goTo(ROUTES[0].id); tabEls[0].focus(); }
     else if (e.key === 'End' && el && el.classList.contains('tab')) { e.preventDefault(); goTo(ROUTES[ROUTES.length - 1].id); tabEls[ROUTES.length - 1].focus(); }
+  });
+
+
+  /* --- I  LANGUAGE ---------------------------------------------------------
+     Content is translated in place: every [data-i18n] element has its English
+     markup snapshotted on load and swapped against the Polish table below.
+     Keyed by the English source rather than by position, so re-editing the
+     page cannot silently shift entries onto the wrong strings.            */
+
+  var PL = {
+    "01 — Who we are": "01 — Kim jesteśmy",
+    "02 — Scope of operations": "02 — Zakres działalności",
+    "03 — Operations &amp; process": "03 — Operacje i procesy",
+    "04 — Allied cooperation": "04 — Współpraca sojusznicza",
+    "05 — Defense support": "05 — Wsparcie obronne",
+    "07 — Technology platform": "07 — Platforma technologiczna",
+    "08 — Get in touch": "08 — Kontakt",
+    "24–72h lead time": "Realizacja 24–72 h",
+    "500 litres": "500 litrów",
+    "<kbd>←</kbd><kbd>→</kbd> navigate": "<kbd>←</kbd><kbd>→</kbd> nawigacja",
+    "<span class=\"kv-key\">LANGUAGES</span><span class=\"kv-val\">PL · EN · DE</span>": "<span class=\"kv-key\">JĘZYKI</span><span class=\"kv-val\">PL · EN · DE</span>",
+    "AI-assisted": "Wspomagana AI",
+    "AUTONOMY": "AUTONOMIA",
+    "Air": "Lotniczy",
+    "Allied Logistics Partnering": "Partnerstwo logistyczne z sojusznikami",
+    "Allied Standards": "Standardy sojusznicze",
+    "Alternative fuel, fleet modernisation": "Paliwa alternatywne, modernizacja floty",
+    "An interdisciplinary team of retired officers with long-standing experience in defence, maritime security and military logistics.": "Interdyscyplinarny zespół oficerów w stanie spoczynku z wieloletnim doświadczeniem w obszarze obronności, bezpieczeństwa morskiego i logistyki wojskowej.",
+    "Automated compliance checks aligned with regulatory frameworks for financial institutions.": "Automatyczne kontrole zgodności dostosowane do ram regulacyjnych instytucji finansowych.",
+    "Autonomous platforms": "Platformy autonomiczne",
+    "BASE": "BAZA",
+    "Baltic Port Operations": "Operacje w portach bałtyckich",
+    "Baltic Ports": "Porty bałtyckie",
+    "Baltic Ports Engaged": "Porty bałtyckie we współpracy",
+    "Baltic Region + EU": "Region bałtycki + UE",
+    "Bunkering Ready": "Gotowość bunkrowania",
+    "CAP-001 / LOGISTICS": "CAP-001 / LOGISTYKA",
+  "CAP-003 / PORTS": "CAP-003 / PORTY",
+  "CAP-007 / FUEL": "CAP-007 / PALIWA",
+    "CAP-004 / INFRASTRUCTURE": "CAP-004 / INFRASTRUKTURA",
+    "CAP-005 / UNMANNED": "CAP-005 / BEZZAŁOGOWE",
+    "CAP-006 / EQUIPMENT": "CAP-006 / WYPOSAŻENIE",
+    "CAPABILITIES &amp; <span class=\"accent\">SERVICES</span>": "KOMPETENCJE I <span class=\"accent\">USŁUGI</span>",
+    "CERT": "NORMY",
+    "CONTACT <span class=\"accent\">US</span>": "SKONTAKTUJ <span class=\"accent\">SIĘ</span>",
+    "CONTACT contact@ntl-g.com": "KONTAKT contact@ntl-g.com",
+    "CONTRACTING": "KONTRAKTOWANIE",
+    "CONTRACTING<br>U.S. &nbsp;<b>REGISTERED</b><br>E.U. &nbsp;<b>REGISTERED</b>": "KONTRAKTOWANIE<br>USA &nbsp;<b>ZAREJESTROWANY</b><br>UE &nbsp;<b>ZAREJESTROWANY</b>",
+    "COVERAGE": "ZASIĘG",
+    "Cdr (ret.) Dr Eng. Rajmund Smolarczyk": "kmdr w st. spocz. dr inż. Rajmund Smolarczyk",
+    "Command": "Dowodzenie",
+    "Compliance &amp; Audit Readiness": "Zgodność i gotowość do audytu",
+    "Construction &amp; infrastructure": "Budownictwo i infrastruktura",
+    "Construction of servicing and maintenance infrastructure supporting sustained operations.": "Budowa infrastruktury serwisowej i utrzymaniowej wspierającej długotrwałe operacje.",
+    "Contact for Government Enquiries <span class=\"btn-arrow\">→</span>": "Kontakt w sprawach rządowych <span class=\"btn-arrow\">→</span>",
+    "Containerised mobile command centres, military tents and associated field equipment.": "Kontenerowe mobilne centra dowodzenia, namioty wojskowe i powiązane wyposażenie polowe.",
+    "Containerised mobile command centres, military tents and related field equipment.": "Kontenerowe mobilne centra dowodzenia, namioty wojskowe i powiązane wyposażenie polowe.",
+    "Containerised mobile command centres, military tents, Ro/Ro ramps and service infrastructure, sourced and delivered through the NTL Group and its manufacturing partners.": "Kontenerowe mobilne centra dowodzenia, namioty wojskowe, rampy Ro/Ro i infrastruktura serwisowa, pozyskiwane i dostarczane przez NTL Group oraz jej partnerów produkcyjnych.",
+    "Continuous monitoring of privileged roles and admin accounts with real-time alerting.": "Ciągłe monitorowanie ról uprzywilejowanych i kont administracyjnych z alertami w czasie rzeczywistym.",
+    "Contracting Registered": "Rejestracja kontraktowa",
+    "Contracting Registrations": "Rejestracje kontraktowe",
+    "Cooperation": "Współpraca",
+    "Coordination": "Koordynacja",
+    "Critical Infrastructure Support": "Wsparcie infrastruktury krytycznej",
+    "DEFENCE ADVISORY BOARD": "RADA DORADCZA DS. OBRONNOŚCI",
+    "DEFENSE <span class=\"accent\">SUPPORT</span>": "WSPARCIE <span class=\"accent\">OBRONNE</span>",
+    "DEFENSIVE": "OBRONA",
+    "DELIVERY": "REALIZACJA",
+    "Defence Logistics": "Logistyka obronna",
+    "Defence logistics and strategic mobility from Poznań — port operations, heavy and specialised transport, fuel supply and unmanned systems for allied and government programmes.": "Logistyka obronna i mobilność strategiczna z Poznania — operacje portowe, transport ciężki i specjalistyczny, zabezpieczenie paliw oraz systemy bezzałogowe dla programów sojuszniczych i rządowych.",
+    "Deployment of drone systems together with operator and maintenance training programmes.": "Wdrażanie systemów dronowych wraz z programami szkolenia operatorów i personelu technicznego.",
+    "Detect and remediate identity risks, guest overprovisioning and access anomalies across M365 before auditors do.": "Wykrywanie i usuwanie ryzyk tożsamości, nadmiernych uprawnień gości oraz anomalii dostępu w M365, zanim zrobi to audytor.",
+    "Drone ecosystem integration and operator training, delivered with an experienced European manufacturer — hybrid UAV, Counter-UAS and autonomous platforms.": "Integracja ekosystemu dronowego oraz szkolenia operatorów, realizowane z doświadczonym europejskim producentem — hybrydowe UAV, technologie Counter-UAS i platformy autonomiczne.",
+    "E.U. GOVERNMENT CONTRACTING": "KONTRAKTOWANIE RZĄDOWE UE",
+    "ENTITY": "PODMIOT",
+    "Eight strategic competencies, delivered under a single chain of command with one point of contact from tasking through to completion.": "Osiem kompetencji strategicznych realizowanych w ramach jednej struktury dowodzenia, z jednym punktem kontaktu od zlecenia po zakończenie zadania.",
+    "Email <span class=\"req\" aria-hidden=\"true\">*</span>": "E-mail <span class=\"req\" aria-hidden=\"true\">*</span>",
+    "End-to-end logistics support for military units, government agencies and allied programmes, coordinated from Poznań.": "Kompleksowe wsparcie logistyczne dla jednostek wojskowych, agencji rządowych i programów sojuszniczych, koordynowane z Poznania.",
+    "Example Trustlayer365 risk posture across Microsoft 365 modules": "Przykładowy obraz ryzyka Trustlayer365 w modułach Microsoft 365",
+    "Executive-ready risk dashboards and technical reports for security teams and compliance officers.": "Pulpity ryzyka dla zarządu oraz raporty techniczne dla zespołów bezpieczeństwa i zgodności.",
+    "Explore Solutions <span class=\"btn-arrow\">→</span>": "Poznaj rozwiązania <span class=\"btn-arrow\">→</span>",
+    "External Sharing": "Udostępnianie zewnętrzne",
+    "FUEL &amp; <span class=\"accent\">ENERGY SUPPLY</span>": "PALIWA I <span class=\"accent\">DOSTAWY ENERGII</span>",
+    "Facilities": "Obiekty",
+    "Field": "Polowe",
+    "First &amp; last name <span class=\"req\" aria-hidden=\"true\">*</span>": "Imię i nazwisko <span class=\"req\" aria-hidden=\"true\">*</span>",
+    "Fleet Coordination &amp; Staging": "Koordynacja floty i punktów zbiórki",
+    "Fuel &amp; energy supply": "Dostawy paliw i energii",
+    "Fuel Supply &amp; Mobile Stations": "Zabezpieczenie paliw i stacje mobilne",
+    "Fuel security arrangements and mobile fuelling stations for deployed operations, delivered with OilGaz within the NTL Group.": "Zabezpieczenie dostaw paliw i mobilne stacje paliwowe dla operacji w terenie, realizowane z OilGaz w ramach NTL Group.",
+    "Full Integration": "Pełna integracja",
+    "GLOBAL REACH.<br><span class=\"accent\">LOCAL PRECISION.</span>": "ZASIĘG GLOBALNY.<br><span class=\"accent\">PRECYZJA LOKALNA.</span>",
+    "GOVERNANCE &amp; <span class=\"accent\">TRUSTLAYER365</span>": "NADZÓR I <span class=\"accent\">TRUSTLAYER365</span>",
+    "GROUP": "GRUPA",
+    "GROUP INTEGRATION": "INTEGRACJA W GRUPIE",
+    "Gdańsk, Szczecin and Świnoujście": "Gdańsk, Szczecin i Świnoujście",
+    "General Enquiries": "Kontakt ogólny",
+    "Government Contracting": "Kontraktowanie rządowe",
+    "Guest Access": "Dostęp gości",
+    "HQ POZNAŃ, POLAND": "SIEDZIBA POZNAŃ, POLSKA",
+    "Handling": "Przeładunek",
+    "Handling and coordination through Polish seaports, drawing on maritime security and port operations expertise within the advisory team.": "Przeładunki i koordynacja przez polskie porty morskie, w oparciu o kompetencje zespołu doradczego w zakresie bezpieczeństwa morskiego i operacji portowych.",
+    "Headquartered in Poznań and operating through Polish seaports, with contracting registrations in place for the United States and the European Union.": "Siedziba w Poznaniu, działalność prowadzona przez polskie porty morskie, z rejestracjami kontraktowymi w Stanach Zjednoczonych i Unii Europejskiej.",
+    "Headquarters": "Siedziba",
+    "Heavy": "Ciężki",
+    "Heavy Equipment Transport": "Transport sprzętu ciężkiego",
+    "Host Nation Support": "Wsparcie Państwa-Gospodarza (HNS)",
+    "Hybrid UAV": "Hybrydowe UAV",
+    "Hybrid UAV platforms, Counter-UAS technology, autonomous systems, AI-assisted observation, MRO and technology transfer, delivered with an experienced European manufacturer.": "Hybrydowe platformy UAV, technologie Counter-UAS, systemy autonomiczne, obserwacja wspomagana sztuczną inteligencją, utrzymanie techniczne i MRO oraz transfer technologii, realizowane z doświadczonym europejskim producentem.",
+    "Hybrid platforms": "Platformy hybrydowe",
+    "Identify unauthorised mailbox delegations, shared mailbox sprawl and SendAs anomalies.": "Identyfikacja nieuprawnionych delegacji skrzynek, rozrostu skrzynek współdzielonych i anomalii SendAs.",
+    "Identity &amp; Access Governance": "Nadzór nad tożsamością i dostępem",
+    "Identity Access": "Dostęp tożsamości",
+    "Illustrative dashboard — values shown are sample output, not live tenant data.": "Pulpit poglądowy — przedstawione wartości są przykładowe i nie pochodzą z rzeczywistego środowiska.",
+    "Initialising secure link": "Nawiązywanie bezpiecznego połączenia",
+    "Integrated logistics support with an emphasis on specialised and heavy transport, coordinated end to end from a single point of contact.": "Zintegrowane wsparcie logistyczne ze szczególnym uwzględnieniem przewozów specjalistycznych i ciężkich, prowadzone kompleksowo z jednego punktu kontaktu.",
+    "Integration, training and sustainment": "Integracja, szkolenia i utrzymanie",
+    "Interested in our Microsoft 365 Governance &amp; Risk Intelligence platform? Request a personalised demonstration for your organisation.": "Interesuje Państwa platforma nadzoru i analizy ryzyka Microsoft 365? Zapraszamy do kontaktu w sprawie prezentacji przygotowanej dla Państwa organizacji.",
+    "It integrates directly with Northstar Tactical Logistics, keeping fuel supply chains secure, reliable and mission-ready at all times.": "Integruje się bezpośrednio z Northstar Tactical Logistics, utrzymując łańcuchy dostaw paliw bezpieczne, niezawodne i gotowe do działania.",
+    "Jet": "Lotnicze",
+    "Jet Fuel / JP-8": "Paliwo lotnicze / JP-8",
+    "LANGUAGES": "JĘZYKI",
+    "LAT <b>52.4064° N</b><br>LON <b>16.9252° E</b><br>HQ &nbsp;POZNAŃ, PL": "SZER. <b>52.4064° N</b><br>DŁ. <b>16.9252° E</b><br>SIEDZIBA &nbsp;POZNAŃ, PL",
+    "LEADERSHIP": "ZARZĄD",
+    "Legal &amp; security consulting": "Doradztwo prawne i bezpieczeństwa",
+    "Logistics Integration": "Integracja logistyczna",
+    "Lt Cdr (ret.) Artur Kukiełko": "kmdr ppor. w st. spocz. Artur Kukiełko",
+    "Lt Col (ret.) Zbigniew Szałaciński": "ppłk w st. spocz. Zbigniew Szałaciński",
+    "MARITIME OPERATIONS &amp; SECURITY": "OPERACJE MORSKIE I BEZPIECZEŃSTWO",
+    "MARITIME SECURITY &amp; PORT PROTECTION": "BEZPIECZEŃSTWO MORSKIE I OCHRONA PORTÓW",
+    "MILITARY": "WOJSKO",
+    "MILITARY LOGISTICS &amp; OPERATIONAL PLANNING": "LOGISTYKA WOJSKOWA I PLANOWANIE OPERACYJNE",
+    "MIN ORDER": "MIN. ZAMÓWIENIE",
+    "MISSION.<br><span class=\"accent\">READINESS.</span>": "MISJA.<br><span class=\"accent\">GOTOWOŚĆ.</span>",
+    "MRO · Tech transfer": "MRO · Transfer technologii",
+    "Mailbox Delegation": "Delegacja skrzynek",
+    "Mailbox Delegation Control": "Kontrola delegacji skrzynek",
+    "Marine Fuel / MDO": "Paliwo okrętowe / MDO",
+    "Marine engineering &amp; operations": "Inżynieria i operacje morskie",
+    "Maritime &amp; coastal solutions": "Rozwiązania morskie i przybrzeżne",
+    "Maritime Security": "Bezpieczeństwo morskie",
+    "Message <span class=\"req\" aria-hidden=\"true\">*</span>": "Wiadomość <span class=\"req\" aria-hidden=\"true\">*</span>",
+    "Microsoft 365 Governance &amp; Risk Intelligence": "Nadzór i analiza ryzyka w Microsoft 365",
+    "Microsoft 365 governance &amp; risk": "Nadzór i ryzyko w Microsoft 365",
+    "Microsoft 365 governance intelligence for regulated organisations. Detect identity, guest access, sharing, privileged access and mailbox delegation risks before they become audit findings.": "Analiza nadzoru nad Microsoft 365 dla organizacji regulowanych. Wykrywa ryzyka tożsamości, dostępu gości, udostępniania, dostępu uprzywilejowanego i delegacji skrzynek, zanim staną się ustaleniami audytu.",
+    "Military Containers &amp; Tents": "Kontenery i namioty wojskowe",
+    "Military Equipment Supply": "Dostawy sprzętu wojskowego",
+    "Military Transport &amp; Troop Relocation": "Transport wojskowy i relokacja wojsk",
+    "Military aviation, tactical aircraft operations": "Lotnictwo wojskowe, operacje statków powietrznych",
+    "Mission Ready.<br><span class=\"accent\">Anywhere. Anytime.</span>": "Gotowi do misji.<br><span class=\"accent\">Wszędzie. Zawsze.</span>",
+    "Mobile": "Mobilne",
+    "Module": "Moduł",
+    "Movement of military cargo and personnel, including relocation of units within Poland and to allied territories.": "Przewóz ładunków wojskowych i personelu, w tym relokacja jednostek na terenie Polski oraz na terytoria sojusznicze.",
+    "NATO <span class=\"accent\">COOPERATION</span>": "WSPÓŁPRACA <span class=\"accent\">Z NATO</span>",
+    "NATO Codification — NCAGE 9CZ9H": "Kodyfikacja NATO — NCAGE 9CZ9H",
+    "NATO Cooperation": "Współpraca z NATO",
+    "NCAGE &nbsp;<b>9CZ9H</b><br>UEI &nbsp;<b>S9EYKVSLRSQ5</b><br>STATUS &nbsp;REGISTERED": "NCAGE &nbsp;<b>9CZ9H</b><br>UEI &nbsp;<b>S9EYKVSLRSQ5</b><br>STATUS &nbsp;ZAREJESTROWANY",
+    "NCAGE (NATO CODIFICATION)": "NCAGE (KODYFIKACJA NATO)",
+    "NCAGE Code": "Kod NCAGE",
+    "NCAGE and UEI are supplier identification codes in the NATO codification system and the U.S. System for Award Management. They identify a registered entity; they are not a certification, endorsement or membership.": "NCAGE i UEI to kody identyfikacyjne dostawcy w systemie kodyfikacyjnym NATO oraz w amerykańskim systemie SAM. Identyfikują zarejestrowany podmiot; nie są certyfikatem, poświadczeniem ani członkostwem.",
+    "NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5<br>U.S. &amp; E.U. REGISTERED": "NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5<br>ZAREJESTROWANI W USA I UE",
+    "NORTHSTAR / NTL GROUP<br>HQ: POZNAŃ, POLAND<br>NCAGE: 9CZ9H": "NORTHSTAR / NTL GROUP<br>SIEDZIBA: POZNAŃ, POLSKA<br>NCAGE: 9CZ9H",
+    "NORTHSTAR / TACTICAL LOGISTICS<br>BASE: POZNAŃ": "NORTHSTAR / TACTICAL LOGISTICS<br>BAZA: POZNAŃ",
+    "NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: CAPABILITIES": "NORTHSTAR / TACTICAL LOGISTICS<br>MODUŁ: KOMPETENCJE",
+    "NORTHSTAR / TACTICAL LOGISTICS<br>MODULE: POSSIBILITIES": "NORTHSTAR / TACTICAL LOGISTICS<br>MODUŁ: MOŻLIWOŚCI",
+    "NTL GROUP / DIGITAL PLATFORM<br>POWERED BY: M365": "NTL GROUP / PLATFORMA CYFROWA<br>OPARTA NA: M365",
+    "NTL GROUP / OILGAZ<br>BASE: POZNAŃ": "NTL GROUP / OILGAZ<br>BAZA: POZNAŃ",
+    "NTL GROUP — PORTFOLIO": "NTL GROUP — PORTFOLIO",
+    "NTL GROUP — SEVEN COMPANIES, ONE OPERATIONAL BACKBONE": "NTL GROUP — SIEDEM SPÓŁEK, JEDEN TRZON OPERACYJNY",
+    "NTL Group Companies": "Spółki NTL Group",
+    "Naval vessels, port operations, offshore": "Jednostki morskie, operacje portowe, offshore",
+    "Newly established": "Podmiot nowo powołany",
+    "Northstar Tactical Logistics is a newly established company formed specifically to support the armed forces, whose management and key personnel bring extensive combined experience in the defence logistics sector.": "Northstar Tactical Logistics jest nowo powołanym podmiotem utworzonym z myślą o wsparciu wojska. Kadra zarządzająca i kluczowy personel spółki dysponują łącznie rozległym doświadczeniem w sektorze logistyki obronnej.",
+    "Northstar Tactical Logistics is registered in the NATO codification system under <strong style=\"color:var(--gold);font-weight:600;\">NCAGE 9CZ9H</strong> and in the U.S. System for Award Management under <strong style=\"color:var(--gold);font-weight:600;\">UEI S9EYKVSLRSQ5</strong> — the identifiers required to contract with allied defence and government customers. Together with a strategic partner, Northstar prepared a proposal for the United States Transportation Command (USTRANSCOM) covering military logistics through the Port of Gdańsk, with further solutions proposed for the Port of Gdynia.": "Northstar Tactical Logistics jest zarejestrowany w systemie kodyfikacyjnym NATO pod numerem <strong style=\"color:var(--gold);font-weight:600;\">NCAGE 9CZ9H</strong> oraz w amerykańskim systemie SAM pod numerem <strong style=\"color:var(--gold);font-weight:600;\">UEI S9EYKVSLRSQ5</strong> — są to identyfikatory wymagane do zawierania kontraktów z sojuszniczymi odbiorcami obronnymi i rządowymi. Wspólnie z partnerem strategicznym Northstar przygotował ofertę dla Dowództwa Transportowego Stanów Zjednoczonych (USTRANSCOM) obejmującą logistykę wojskową realizowaną przez Port Gdańsk, wraz z rozwiązaniami zaproponowanymi dla Portu Gdynia.",
+    "Northstar is the flagship brand of the NTL Group — a multi-sector holding spanning logistics, energy, maritime, legal and technology, based in Poznań, Poland.": "Northstar jest flagową marką NTL Group — wielobranżowej grupy działającej w obszarach logistyki, energetyki, gospodarki morskiej, prawa i technologii, z siedzibą w Poznaniu.",
+    "OBSERVATION": "OBSERWACJA",
+    "OILGAZ — TACTICAL FUEL &amp; ENERGY SUPPLY — NTL GROUP — POZNAŃ": "OILGAZ — TAKTYCZNE ZABEZPIECZENIE PALIW I ENERGII — NTL GROUP — POZNAŃ",
+    "OPERATIONAL": "OPERACYJNY",
+    "OPERATIONAL <span class=\"accent\">POSSIBILITIES</span>": "MOŻLIWOŚCI <span class=\"accent\">OPERACYJNE</span>",
+    "OPERATIONAL PROFILE": "PROFIL OPERACYJNY",
+    "OPERATIONS DESK": "DYŻUR OPERACYJNY",
+    "Officers on Advisory Board": "Oficerowie w radzie doradczej",
+    "OilGaz is the energy supply arm of the NTL Group, specialising in procurement, logistics and delivery of fuel and energy resources for military, maritime and industrial operations across Poland and the Baltic region.": "OilGaz to spółka NTL Group odpowiedzialna za dostawy energii, specjalizująca się w zakupach, logistyce i dostarczaniu paliw oraz nośników energii na potrzeby operacji wojskowych, morskich i przemysłowych w Polsce i regionie bałtyckim.",
+    "OilGaz operates under the NTL Group umbrella, providing seamless fuel supply integration with Northstar Tactical Logistics and JJB&amp;JPP Marine.": "OilGaz działa w ramach NTL Group, zapewniając płynną integrację dostaw paliw z Northstar Tactical Logistics i JJB&amp;JPP Marine.",
+    "Operational cooperation is being developed with the ports of Gdańsk, Szczecin and Świnoujście, strengthening readiness for military transport, heavy cargo and supply chain coordination.": "Rozwijana jest współpraca operacyjna z portami w Gdańsku, Szczecinie i Świnoujściu, wzmacniająca gotowość do transportu wojskowego, przewozu ładunków ciężkich i koordynacji łańcuchów dostaw.",
+    "Organisation": "Organizacja",
+    "Oversized": "Ponadgabarytowy",
+    "Own fuel security arrangements and mobile fuelling stations supporting deployed and static operations.": "Własne zabezpieczenie dostaw paliw oraz mobilne stacje paliwowe wspierające operacje w terenie i stacjonarne.",
+    "PARTNER": "WSPÓLNIK",
+    "PARTNER NATIONS": "PAŃSTWA PARTNERSKIE",
+    "PLATFORMS": "PLATFORMY",
+    "PORT OF GDAŃSK": "PORT GDAŃSK",
+    "PORT OF GDYNIA": "PORT GDYNIA",
+    "PORT OF SZCZECIN": "PORT SZCZECIN",
+    "PORT OF ŚWINOUJŚCIE": "PORT ŚWINOUJŚCIE",
+    "PORTS": "PORTY",
+    "PORTS GDAŃSK · SZCZECIN · ŚWINOUJŚCIE": "PORTY GDAŃSK · SZCZECIN · ŚWINOUJŚCIE",
+    "PORTS<br>GDAŃSK · SZCZECIN<br>ŚWINOUJŚCIE": "PORTY<br>GDAŃSK · SZCZECIN<br>ŚWINOUJŚCIE",
+    "POZNAŃ, POLAND<br>NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5": "POZNAŃ, POLSKA<br>NCAGE: 9CZ9H<br>UEI: S9EYKVSLRSQ5",
+    "PRESIDENT OF THE BOARD": "PREZES ZARZĄDU",
+    "Partner": "Wspólnik",
+    "Personnel": "Osobowy",
+    "Personnel Mobility Services": "Przewozy osobowe",
+    "Planning": "Planowanie",
+    "Poland": "Polska",
+    "Port Access": "Dostęp do portów",
+    "Port Logistics": "Logistyka portowa",
+    "Port Operations": "Operacje portowe",
+    "Port logistics and maritime security expertise, with cooperation developed at Gdańsk, Szczecin and Świnoujście.": "Logistyka portowa i kompetencje w zakresie bezpieczeństwa morskiego, przy rozwijanej współpracy z portami w Gdańsku, Szczecinie i Świnoujściu.",
+    "Port protection and security systems": "Ochrona portów i systemy bezpieczeństwa",
+    "Poznań — Primary": "Poznań — główny",
+    "Poznań — Reserve Depot": "Poznań — skład rezerwowy",
+    "Poznań, Poland": "Poznań, Polska",
+    "Poznań, Poland · NCAGE 9CZ9H · Registered for U.S. and E.U. Government Contracting": "Poznań, Polska · NCAGE 9CZ9H · Zarejestrowani do kontraktowania rządowego w USA i UE",
+    "President of the Management Board": "Prezes Zarządu",
+    "Privileged Access": "Dostęp uprzywilejowany",
+    "Privileged Access Monitoring": "Monitorowanie dostępu uprzywilejowanego",
+    "Proposal prepared": "Oferta przygotowana",
+    "Proposed": "Proponowany",
+    "Protection and servicing of critical infrastructure, including construction of service and maintenance facilities.": "Ochrona i obsługa infrastruktury krytycznej, w tym budowa obiektów serwisowych i utrzymaniowych.",
+    "REACH": "ZASIĘG",
+    "REGISTERED": "ZAREJESTROWANY",
+    "REGISTERED FOR U.S. AND E.U. GOVERNMENT CONTRACTING": "ZAREJESTROWANI DO KONTRAKTOWANIA RZĄDOWEGO W USA I UE",
+    "REGISTRATIONS &amp; ENGAGEMENTS": "REJESTRACJE I WSPÓŁPRACA",
+    "Rail": "Kolejowy",
+    "Registered": "Zarejestrowany",
+    "Registered in the NATO codification system, the supplier identifier required to be recognised as a contracting entity by allied defence customers.": "Rejestracja w systemie kodyfikacyjnym NATO — identyfikator dostawcy wymagany, aby sojusznicze instytucje obronne mogły uznać podmiot za stronę kontraktującą.",
+    "Registered in the U.S. and the E.U.": "Rejestracja w USA i UE",
+    "Request Demo <span class=\"btn-arrow\">→</span>": "Zamów demo <span class=\"btn-arrow\">→</span>",
+    "Review": "Do przeglądu",
+    "Risk Area": "Obszar ryzyka",
+    "Risk Intelligence Reporting": "Raportowanie ryzyka",
+    "Ro/Ro Ramps": "Rampy Ro/Ro",
+    "Ro/Ro Ramps &amp; Heavy Cargo": "Rampy Ro/Ro i ładunki ciężkie",
+    "Road": "Drogowy",
+    "Road transport, generators, heavy machinery": "Transport drogowy, agregaty, maszyny ciężkie",
+    "Roll-on/roll-off ramp solutions for vehicle and heavy equipment movement.": "Rozwiązania rampowe roll-on/roll-off dla przemieszczania pojazdów i sprzętu ciężkiego.",
+    "Roll-on/roll-off ramps and handling solutions for vehicles, tracked equipment and outsized cargo.": "Rampy typu roll-on/roll-off oraz rozwiązania przeładunkowe dla pojazdów, sprzętu gąsienicowego i ładunków ponadgabarytowych.",
+    "SEAPORT COOPERATION": "WSPÓŁPRACA PORTOWA",
+    "STRATEGIC DEFENSE LOGISTICS — ALLIED OPERATIONS — POZNAŃ, POLAND": "STRATEGICZNA LOGISTYKA OBRONNA — OPERACJE SOJUSZNICZE — POZNAŃ, POLSKA",
+    "STRATEGIC HUBS": "HUBY STRATEGICZNE",
+    "SUPPLY PARAMETERS": "PARAMETRY DOSTAW",
+    "SUSTAINMENT": "UTRZYMANIE",
+    "Sea": "Morski",
+    "Secure": "Bezpieczny",
+    "Send Message <span class=\"btn-arrow\">→</span>": "Wyślij wiadomość <span class=\"btn-arrow\">→</span>",
+    "Service Infrastructure": "Infrastruktura serwisowa",
+    "Servicing": "Serwis",
+    "Seven companies": "Siedem spółek",
+    "Shelter": "Zakwaterowanie",
+    "Skip to content": "Przejdź do treści",
+    "Solutions proposed": "Rozwiązania zaproponowane",
+    "Specialised and heavy haulage, military transport, personnel movement and troop relocation across Poland and allied territories.": "Przewozy specjalistyczne i ciężkie, transport wojskowy, przewozy osobowe oraz relokacja wojsk na terenie Polski oraz terytoriów sojuszniczych.",
+    "Status": "Status",
+    "Strategic Transport": "Transport strategiczny",
+    "Subject / module <span class=\"req\" aria-hidden=\"true\">*</span>": "Temat / moduł <span class=\"req\" aria-hidden=\"true\">*</span>",
+    "Support offered to allied forces in Poland — fuel, logistics, maintenance, warehousing and administrative services aligned with bilateral Host Nation Support frameworks.": "Wsparcie oferowane siłom sojuszniczym w Polsce — paliwa, logistyka, obsługa techniczna, magazynowanie i obsługa administracyjna, zgodnie z dwustronnymi porozumieniami HNS.",
+    "Supporting operational readiness": "Wsparcie gotowości operacyjnej",
+    "Supporting risk management, compliance and governance in M365 for banks, insurers and IT service providers.": "Wsparcie zarządzania ryzykiem, zgodności i nadzoru w M365 dla banków, ubezpieczycieli i dostawców usług IT.",
+    "Sustainment": "Utrzymanie",
+    "TECHNOLOGY": "TECHNOLOGIA",
+    "TIME ZONE": "STREFA CZASOWA",
+    "TRANSFER": "TRANSFER",
+    "TRANSPORT MODES": "GAŁĘZIE TRANSPORTU",
+    "Tactical Vehicle Mobility": "Mobilność pojazdów taktycznych",
+    "Tactical logistics &amp; defense transport": "Logistyka taktyczna i transport obronny",
+    "Tanker / IBC / Drum": "Cysterna / IBC / Beczka",
+    "Technology programmes": "Programy technologiczne",
+    "That experience spans maritime port security management, strategic transport, government contracting, port operations, unmanned systems integration and critical infrastructure support. The company is registered under NCAGE 9CZ9H and UEI S9EYKVSLRSQ5 for U.S. and E.U. government contracting.": "Doświadczenie to obejmuje zarządzanie systemem bezpieczeństwa portów morskich, transport strategiczny, kontrakty rządowe, operacje portowe, integrację systemów bezzałogowych oraz wsparcie infrastruktury krytycznej. Spółka jest zarejestrowana pod numerami NCAGE 9CZ9H i UEI S9EYKVSLRSQ5 do kontraktowania rządowego w USA i UE.",
+    "This form opens a pre-filled message in your email client and sends nothing to a third party. Prefer to write directly? <a href=\"mailto:contact@ntl-g.com\">contact@ntl-g.com</a>": "Formularz otwiera gotową wiadomość w Państwa programie pocztowym i nie wysyła niczego do podmiotów trzecich. Wolą Państwo napisać bezpośrednio? <a href=\"mailto:contact@ntl-g.com\">contact@ntl-g.com</a>",
+    "Training": "Szkolenia",
+    "Trustlayer365 — Demo Request": "Trustlayer365 — zamówienie demo",
+    "U.S. &amp; E.U.": "USA i UE",
+    "U.S. &amp; E.U. registered": "Zarejestrowani w USA i UE",
+    "U.S. GOVERNMENT CONTRACTING": "KONTRAKTOWANIE RZĄDOWE USA",
+    "UNMANNED SYSTEMS": "SYSTEMY BEZZAŁOGOWE",
+    "USTRANSCOM Engagement": "Oferta dla USTRANSCOM",
+    "United States": "Stany Zjednoczone",
+    "Unmanned Systems": "Systemy bezzałogowe",
+    "Unmanned Systems &amp; Training": "Systemy bezzałogowe i szkolenia",
+    "Unmanned Systems Support": "Wsparcie systemów bezzałogowych",
+    "WHO WE <span class=\"accent\">ARE</span>": "KIM <span class=\"accent\">JESTEŚMY</span>",
+    "With a strategic partner, Northstar coordinated and prepared a comprehensive proposal for the United States Transportation Command supporting military logistics through the Port of Gdańsk.": "Wspólnie z partnerem strategicznym Northstar koordynował i przygotował kompleksową ofertę dla Dowództwa Transportowego Stanów Zjednoczonych, wspierającą logistykę wojskową realizowaną przez Port Gdańsk.",
+    "Wrocław Terminal": "Terminal Wrocław",
+    "● AVAILABLE": "● DOSTĘPNE",
+    "● ON REQUEST": "● NA ZAMÓWIENIE"
+  };
+
+  var UI = {
+    en: {
+      html: 'en',
+      routes: { home:'Home', about:'About', capabilities:'Capabilities', possibilities:'Possibilities',
+                nato:'NATO', defense:'Defense', fuel:'Fuel', governance:'Governance', contact:'Contact' },
+      titles: {
+        home:'Northstar Tactical Logistics — Mission Ready. Anywhere. Anytime.',
+        about:'About — Northstar Tactical Logistics',
+        capabilities:'Capabilities & Services — Northstar Tactical Logistics',
+        possibilities:'Operational Possibilities — Northstar Tactical Logistics',
+        nato:'NATO Cooperation — Northstar Tactical Logistics',
+        defense:'Defense Support — Northstar Tactical Logistics',
+        fuel:'Fuel & Energy Supply — OilGaz, NTL Group',
+        governance:'Governance & Trustlayer365 — NTL Group',
+        contact:'Contact — Northstar Tactical Logistics'
+      },
+      description:'Northstar Tactical Logistics — defence logistics and strategic mobility from Poznan, Poland. NCAGE 9CZ9H, registered for U.S. and E.U. government contracting.',
+      err: { name:'Name is required.', email:'A valid email address is required.',
+             subject:'Please state a subject or module.', message:'Please describe your requirements.' },
+      boot: ['Initialising secure link','Authenticating NTL node','Loading mission data','Console ready'],
+      formOk:'\u25cf MESSAGE PREPARED \u2014 your email client should now be open. If nothing happened, write to contact@ntl-g.com.',
+      section:'section',
+      mail: { name:'Name', org:'Organisation', email:'Email', sent:'\u2014 sent from northstartacticallogistics.com' }
+    },
+    pl: {
+      html: 'pl',
+      routes: { home:'Start', about:'O nas', capabilities:'Kompetencje', possibilities:'Możliwości',
+                nato:'NATO', defense:'Obronność', fuel:'Paliwa', governance:'Nadzór', contact:'Kontakt' },
+      titles: {
+        home:'Northstar Tactical Logistics — Gotowi do misji. Wszędzie. Zawsze.',
+        about:'O nas — Northstar Tactical Logistics',
+        capabilities:'Kompetencje i usługi — Northstar Tactical Logistics',
+        possibilities:'Możliwości operacyjne — Northstar Tactical Logistics',
+        nato:'Współpraca z NATO — Northstar Tactical Logistics',
+        defense:'Wsparcie obronne — Northstar Tactical Logistics',
+        fuel:'Paliwa i dostawy energii — OilGaz, NTL Group',
+        governance:'Nadzór i Trustlayer365 — NTL Group',
+        contact:'Kontakt — Northstar Tactical Logistics'
+      },
+      description:'Northstar Tactical Logistics — logistyka obronna i mobilność strategiczna z Poznania. NCAGE 9CZ9H, rejestracja do kontraktowania rządowego w USA i UE.',
+      err: { name:'Proszę podać imię i nazwisko.', email:'Proszę podać poprawny adres e-mail.',
+             subject:'Proszę wskazać temat lub moduł.', message:'Proszę opisać swoje potrzeby.' },
+      boot: ['Nawiązywanie bezpiecznego połączenia','Uwierzytelnianie węzła NTL','Wczytywanie danych','Konsola gotowa'],
+      formOk:'\u25cf WIADOMOŚĆ PRZYGOTOWANA \u2014 program pocztowy powinien się otworzyć. Jeśli nic się nie stało, prosimy napisać na contact@ntl-g.com.',
+      section:'sekcja',
+      mail: { name:'Imię i nazwisko', org:'Organizacja', email:'E-mail', sent:'\u2014 wysłano ze strony northstartacticallogistics.com' }
+    }
+  };
+
+  var lang = 'en';
+  function t() { return UI[lang]; }
+
+  function norm(str) { return str.replace(/\s+/g, ' ').trim(); }
+
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+  var ORIGINAL = nodes.map(function (el) { return el.innerHTML; });
+
+  function readLang() {
+    var q = /[?&]lang=(pl|en)\b/.exec(window.location.search);
+    if (q) return q[1];
+    try { var v = window.localStorage.getItem('ns-lang'); if (v === 'pl' || v === 'en') return v; } catch (e) {}
+    return (navigator.language || '').toLowerCase().indexOf('pl') === 0 ? 'pl' : 'en';
+  }
+
+  function applyLanguage(next, remember) {
+    lang = (next === 'pl') ? 'pl' : 'en';
+
+    nodes.forEach(function (el, i) {
+      var original = ORIGINAL[i];
+      el.innerHTML = (lang === 'pl' && PL[norm(original)]) ? PL[norm(original)] : original;
+    });
+
+    document.documentElement.lang = t().html;
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', t().description);
+
+    tabEls.forEach(function (el, i) {
+      el.innerHTML = '<span class="tab-idx">' + pad2(i) + '</span>' + t().routes[ROUTES[i].id].toUpperCase();
+    });
+    mtabEls.forEach(function (el, i) {
+      el.innerHTML = '<span class="mtab-idx">' + pad2(i) + '</span>' + t().routes[ROUTES[i].id].toUpperCase();
+    });
+
+    if (current) document.title = t().titles[current];
+
+    langButtons.forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+
+    if (remember) {
+      try { window.localStorage.setItem('ns-lang', lang); } catch (e) {}
+      var qs = lang === 'pl' ? '?lang=pl' : '?lang=en';
+      try { window.history.replaceState(null, '', qs + (window.location.hash || '')); } catch (e) {}
+    }
+  }
+
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll('.lang-btn'));
+  langButtons.forEach(function (b) {
+    b.addEventListener('click', function () { applyLanguage(b.dataset.lang, true); });
   });
 
   /* --- C  PAGE ACTIVATION EFFECTS ---------------------------------------- */
@@ -2744,6 +3164,7 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
       try { window.history.replaceState(null, '', '#home'); } catch (err) { /* older WebKit */ }
     }
     render(initial, false);
+    applyLanguage(readLang(), false);
   })();
 
   /* Optional modules run inside this guard. A browser missing one API can
@@ -2824,11 +3245,11 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
       form.setAttribute('novalidate', '');
       var statusEl = document.getElementById('form-status');
       var RULES = [
-        { id: 'f-name',    err: 'err-name',    message: 'Name is required.' },
-        { id: 'f-email',   err: 'err-email',   message: 'A valid email address is required.',
+        { id: 'f-name',    err: 'err-name',    msg: 'name' },
+        { id: 'f-email',   err: 'err-email',   msg: 'email',
           test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); } },
-        { id: 'f-subject', err: 'err-subject', message: 'Please state a subject or module.' },
-        { id: 'f-message', err: 'err-message', message: 'Please describe your requirements.' }
+        { id: 'f-subject', err: 'err-subject', msg: 'subject' },
+        { id: 'f-message', err: 'err-message', msg: 'message' }
       ];
 
       function validateField(rule) {
@@ -2838,7 +3259,7 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
         var ok = rule.test ? rule.test(value) : value.length > 0;
 
         field.setAttribute('aria-invalid', ok ? 'false' : 'true');
-        if (errEl) errEl.textContent = ok ? '' : rule.message;
+        if (errEl) errEl.textContent = ok ? '' : t().err[rule.msg];
         return ok;
       }
 
@@ -2876,21 +3297,22 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
           message: document.getElementById('f-message').value.trim()
         };
 
+        var m = t().mail;
         var body = [
-          'Name: ' + data.name,
-          'Organisation: ' + (data.org || '—'),
-          'Email: ' + data.email,
+          m.name + ': ' + data.name,
+          m.org + ': ' + (data.org || '—'),
+          m.email + ': ' + data.email,
           '',
           data.message,
           '',
-          '— sent from ntl-g.com'
+          m.sent
         ].join('\n');
 
         var href = 'mailto:contact@ntl-g.com'
           + '?subject=' + encodeURIComponent('[' + data.subject + '] ' + data.name)
           + '&body=' + encodeURIComponent(body);
 
-        statusEl.textContent = '● MESSAGE PREPARED — your email client should now be open. If nothing happened, write to contact@ntl-g.com.';
+        statusEl.textContent = t().formOk;
         statusEl.hidden = false;
         window.location.href = href;
       });
@@ -2908,7 +3330,7 @@ main{ flex:1; min-height:0; overflow:hidden; position:relative; }
     if (reduceMotion || alreadySeen) { el.hidden = true; return; }
 
     var log = document.getElementById('boot-log');
-    var lines = ['Initialising secure link', 'Authenticating NTL node', 'Loading mission data', 'Console ready'];
+    var lines = t().boot;
     var i = 0;
     var stepTimer = setInterval(function () {
       i += 1;
