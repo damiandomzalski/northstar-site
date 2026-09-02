@@ -176,7 +176,8 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   width:min(56vw,640px); opacity:.13;
   pointer-events:none;
 }
-.hero-body{ position:relative; z-index:2; padding:clamp(40px,8vh,96px) 0 34px; }
+/* Vertical padding only, so .wrap keeps its horizontal gutters. */
+.hero-body{ position:relative; z-index:2; padding-top:clamp(40px,8vh,96px); padding-bottom:34px; }
 .hero .eyebrow{ margin-bottom:22px; display:flex; align-items:center; gap:14px; }
 .hero .eyebrow::before{ content:''; width:36px; height:2px; background:var(--khaki); }
 .hero .h1{ max-width:12ch; margin-bottom:24px; text-shadow:0 6px 40px rgba(0,0,0,.6); }
@@ -336,7 +337,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   .burger{ display:flex; }
   .two,.creds,.contact-grid,.foot .wrap{ grid-template-columns:1fr; }
   .cred .wrap{ grid-template-columns:1fr 1fr; }
-  .cred-item{ border-right:0; margin-right:0; border-bottom:1px solid rgba(201,184,128,.14); }
+  .cred-item{ border-right:0; margin-right:0; padding-right:0; border-bottom:1px solid rgba(201,184,128,.14); }
   .about-photo img{ height:380px; }
   .hero-star{ right:-30%; opacity:.07; }
 }
