@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.className = 'js';</script>
+
+<title>Northstar Tactical Logistics — Logistics Without Borders</title>
+<meta name="description" content="Northstar Tactical Logistics — heavy military transport, port operations, fuel supply and unmanned systems from Poznań, Poland. NCAGE 9CZ9H. Registered for U.S. and E.U. government contracting.">
+<meta name="theme-color" content="#0d100c">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://www.northstartacticallogistics.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Northstar Tactical Logistics">
+<meta property="og:title" content="Northstar Tactical Logistics — Logistics Without Borders">
+<meta property="og:description" content="Heavy military transport, port operations, fuel supply and unmanned systems. Poznań, Poland.">
+<meta property="og:image" content="assets/img/hero.jpg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230d100c'/%3E%3Cpath d='M50 6 L55 45 L94 50 L55 55 L50 94 L45 55 L6 50 L45 45 Z' fill='%23dfe4e8'/%3E%3Cpath d='M50 24 L53 47 L76 24 L53 47 L76 76 L53 53 L50 76 L47 53 L24 76 L47 47 L24 24 L47 47 Z' fill='%239aa5ad'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   NORTHSTAR TACTICAL LOGISTICS — v2
+   Editorial, photo-led, military palette. Single scrolling page.
+
+   01 Tokens · 02 Base · 03 Header · 04 Hero · 05 Sections & primitives
+   06 Services · 07 Field gallery · 08 Reach & compass · 09 Credentials
+   10 About · 11 Contact · 12 Footer · 13 Motion · 14 Responsive
+   ========================================================================== */
+
+/* 01 TOKENS ---------------------------------------------------------------- */
+:root{
+  --bg:#0d100c;
+  --bg-2:#121611;
+  --panel:#181e16;
+  --panel-2:#20281d;
+  --line:#2b3426;
+  --line-2:#3a4633;
+
+  --olive:#586a47;
+  --olive-2:#728563;
+  --khaki:#c9b880;        /* accent — taglines, rules, icons */
+  --khaki-2:#e2d5a4;
+  --khaki-dim:rgba(201,184,128,.14);
+  --sand:#ede7d6;         /* headlines */
+  --text:#cdd2c4;
+  --muted:#9aa390;
+  --steel:#c9d1d8;        /* the star */
+  --ok:#8fc27a;
+  --alert:#d98a6a;
+
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'Barlow','Helvetica Neue',Arial,sans-serif;
+
+  --nav-h:72px;
+  --maxw:1280px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* 02 BASE ------------------------------------------------------------------ */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  font-family:var(--body); font-size:16px; line-height:1.6;
+  background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,video{ max-width:100%; display:block; }
+a{ color:var(--khaki); text-decoration:none; }
+a:hover{ color:var(--khaki-2); }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+:focus-visible{ outline:2px solid var(--khaki-2); outline-offset:3px; }
+::selection{ background:var(--khaki); color:#0d100c; }
+
+.visually-hidden{ position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.skip{ position:absolute; top:-80px; left:16px; z-index:999; background:var(--khaki); color:#0d100c; padding:10px 16px; font-weight:600; }
+.skip:focus{ top:12px; }
+
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,4vw,48px); }
+
+/* Typographic primitives */
+.eyebrow{
+  font-family:var(--display); font-weight:600; font-size:14px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--khaki);
+}
+.h1{ font-family:var(--display); font-weight:800; font-size:clamp(48px,7vw,104px); line-height:.92; letter-spacing:-.5px; text-transform:uppercase; color:var(--sand); }
+.h2{ font-family:var(--display); font-weight:700; font-size:clamp(34px,4.4vw,58px); line-height:.95; letter-spacing:.5px; text-transform:uppercase; color:var(--sand); }
+.h3{ font-family:var(--display); font-weight:700; font-size:22px; letter-spacing:1px; text-transform:uppercase; color:var(--sand); line-height:1.1; }
+.tagline{ font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:2.5px; text-transform:uppercase; color:var(--khaki); }
+.lead{ font-size:17.5px; line-height:1.7; color:var(--text); max-width:62ch; }
+.muted{ color:var(--muted); }
+
+.btn{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:14px 26px;
+  font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:2.5px; text-transform:uppercase;
+  border:1px solid var(--khaki); color:var(--sand);
+  transition:background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+}
+.btn:hover{ background:var(--khaki); color:#0d100c; }
+.btn .arr{ transition:transform .2s var(--ease); }
+.btn:hover .arr{ transform:translateX(4px); }
+.btn-solid{ background:var(--khaki); color:#0d100c; }
+.btn-solid:hover{ background:var(--khaki-2); }
+
+.rule{ width:56px; height:2px; background:var(--khaki); margin:18px 0 22px; }
+
+/* 03 HEADER ---------------------------------------------------------------- */
+.top{
+  position:sticky; top:0; z-index:100;
+  height:var(--nav-h);
+  background:rgba(13,16,12,.82);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(201,184,128,.14);
+}
+.top .wrap{ height:100%; display:flex; align-items:center; gap:28px; }
+.brand{ display:flex; align-items:center; gap:14px; color:inherit; flex-shrink:0; }
+.brand-star{ width:44px; height:44px; flex-shrink:0; }
+.brand-name{ font-family:var(--display); font-weight:800; font-size:24px; letter-spacing:5px; line-height:1; color:var(--sand); }
+.brand-sub{ font-family:var(--display); font-weight:600; font-size:10.5px; letter-spacing:4.2px; color:var(--khaki); margin-top:3px; }
+.nav{ display:flex; gap:6px; margin-left:auto; }
+.nav a{
+  padding:10px 14px;
+  font-family:var(--display); font-weight:600; font-size:15px; letter-spacing:2.2px; text-transform:uppercase;
+  color:var(--text);
+  border-bottom:2px solid transparent;
+  transition:color .2s, border-color .2s;
+}
+.nav a:hover{ color:var(--sand); border-bottom-color:var(--khaki); }
+.lang{ display:flex; gap:4px; margin-left:8px; padding-left:16px; border-left:1px solid var(--line-2); }
+.lang button{ display:flex; align-items:center; gap:8px; padding:6px 8px; opacity:.5; border:1px solid transparent; font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; color:var(--text); transition:opacity .2s, border-color .2s; }
+.lang button:hover{ opacity:.9; }
+.lang button[aria-pressed="true"]{ opacity:1; border-color:var(--khaki); }
+.lang svg{ width:24px; height:16px; border:1px solid rgba(255,255,255,.15); }
+.burger{ display:none; margin-left:auto; width:44px; height:44px; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
+.burger span{ display:block; width:24px; height:2px; background:var(--sand); transition:transform .25s, opacity .2s; }
+.burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.mnav{ display:none; position:fixed; top:var(--nav-h); left:0; right:0; z-index:99; background:rgba(13,16,12,.97); border-bottom:1px solid var(--line-2); flex-direction:column; padding:8px 0 12px; }
+.mnav.open{ display:flex; }
+.mnav a{ padding:14px clamp(20px,4vw,48px); font-family:var(--display); font-weight:600; font-size:18px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text); border-bottom:1px solid var(--line); }
+.mnav .lang{ margin:10px clamp(20px,4vw,48px) 0; padding:0; border:0; }
+
+/* 04 HERO ------------------------------------------------------------------ */
+.hero{
+  position:relative; min-height:calc(100vh - var(--nav-h)); min-height:calc(100svh - var(--nav-h));
+  display:flex; flex-direction:column; justify-content:flex-end;
+  overflow:hidden;
+  background:var(--bg);
+}
+.hero-media{ position:absolute; inset:0; top:0; right:0; bottom:0; left:0; }
+.hero-media video,.hero-media img{ width:100%; height:100%; object-fit:cover; }
+.hero-media video{ display:none; }
+.js .hero-media video.ready{ display:block; }
+.js .hero-media video.ready + img{ display:none; }
+/* military grade: desaturate, pull toward olive, darken the left for copy */
+.hero-shade{
+  position:absolute; inset:0; top:0; right:0; bottom:0; left:0;
+  background:
+    linear-gradient(90deg,rgba(13,16,12,.94) 0%,rgba(13,16,12,.72) 42%,rgba(13,16,12,.28) 100%),
+    linear-gradient(0deg,rgba(13,16,12,1) 0%,rgba(13,16,12,.35) 34%,rgba(13,16,12,.1) 70%),
+    linear-gradient(180deg,rgba(13,16,12,.55) 0%,transparent 30%),
+    rgba(52,64,40,.28);
+  mix-blend-mode:normal;
+}
+.hero-media img,.hero-media video{ filter:saturate(.55) contrast(1.08) brightness(.9) sepia(.12); }
+.hero-star{
+  position:absolute; right:-4%; top:50%; transform:translateY(-52%);
+  width:min(56vw,640px); opacity:.13;
+  pointer-events:none;
+}
+.hero-body{ position:relative; z-index:2; padding:clamp(40px,8vh,96px) 0 34px; }
+.hero .eyebrow{ margin-bottom:22px; display:flex; align-items:center; gap:14px; }
+.hero .eyebrow::before{ content:''; width:36px; height:2px; background:var(--khaki); }
+.hero .h1{ max-width:12ch; margin-bottom:24px; text-shadow:0 6px 40px rgba(0,0,0,.6); }
+.hero .lead{ margin-bottom:34px; font-size:18.5px; color:#dfe3d6; }
+.hero-cta{ display:flex; gap:14px; flex-wrap:wrap; }
+.cred{
+  position:relative; z-index:2;
+  margin-top:48px;
+  border-top:1px solid rgba(201,184,128,.22);
+  background:rgba(13,16,12,.72);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+}
+.cred .wrap{ display:grid; grid-template-columns:repeat(4,1fr); }
+.cred-item{ padding:18px 22px 18px 0; border-right:1px solid rgba(201,184,128,.14); margin-right:22px; }
+.cred-item:last-child{ border-right:0; margin-right:0; }
+.cred-k{ font-family:var(--display); font-weight:600; font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); }
+.cred-v{ font-family:var(--display); font-weight:700; font-size:22px; letter-spacing:1.5px; color:var(--sand); margin-top:2px; }
+.cred-v.small{ font-size:16px; letter-spacing:1px; line-height:1.3; }
+
+/* 05 SECTIONS & PRIMITIVES ------------------------------------------------- */
+.sec{ padding:clamp(72px,10vh,120px) 0; position:relative; }
+.sec-alt{ background:var(--bg-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.sec-head{ margin-bottom:clamp(36px,5vh,56px); max-width:760px; }
+.sec-head .eyebrow{ margin-bottom:14px; }
+.sec-head .tagline{ margin-top:14px; }
+.two{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,72px); align-items:center; }
+
+.card{
+  background:var(--panel); border:1px solid var(--line);
+  transition:border-color .25s var(--ease), transform .25s var(--ease);
+}
+.card:hover{ border-color:rgba(201,184,128,.45); transform:translateY(-3px); }
+
+.icon{ width:48px; height:48px; color:var(--khaki); }
+.icon svg{ width:100%; height:100%; }
+
+.kv{ display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid var(--line); }
+.kv:last-child{ border-bottom:0; }
+.kv-k{ font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+.kv-v{ font-family:var(--display); font-weight:700; font-size:18px; letter-spacing:.8px; color:var(--sand); text-align:right; }
+
+/* 06 SERVICES -------------------------------------------------------------- */
+.svc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+.svc{ background:var(--panel); position:relative; min-height:340px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; }
+.svc-photo{ position:absolute; inset:0; top:0; right:0; bottom:0; left:0; }
+.svc-photo img{ width:100%; height:100%; object-fit:cover; filter:saturate(.6) brightness(.72) contrast(1.05); transition:transform .8s var(--ease), filter .4s; }
+.svc:hover .svc-photo img{ transform:scale(1.05); filter:saturate(.7) brightness(.8) contrast(1.05); }
+.svc-photo::after{ content:''; position:absolute; inset:0; top:0; right:0; bottom:0; left:0; background:linear-gradient(0deg,rgba(13,16,12,.96) 0%,rgba(13,16,12,.55) 45%,rgba(13,16,12,.15) 100%); }
+.svc-body{ position:relative; z-index:1; padding:26px 24px 24px; }
+.svc .icon{ width:40px; height:40px; margin-bottom:16px; }
+.svc-num{ position:absolute; top:18px; right:22px; font-family:var(--display); font-weight:700; font-size:14px; letter-spacing:2px; color:var(--muted); }
+.svc .h3{ margin-bottom:6px; }
+.svc .tagline{ font-size:13px; letter-spacing:2px; margin-bottom:12px; }
+.svc p{ font-size:14.5px; line-height:1.6; color:var(--muted); }
+.svc-wide{ grid-column:span 2; }
+.svc-full{ grid-column:1/-1; min-height:300px; }
+.svc-full .svc-body{ max-width:640px; }
+
+/* 07 FIELD GALLERY --------------------------------------------------------- */
+.gal{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:220px; grid-auto-flow:dense; gap:8px; }
+.gal figure{ position:relative; overflow:hidden; background:var(--panel); }
+.gal img{ width:100%; height:100%; object-fit:cover; filter:saturate(.72) contrast(1.05); transition:transform .9s var(--ease), filter .4s; }
+.gal figure:hover img{ transform:scale(1.04); filter:saturate(.85) contrast(1.05); }
+.gal figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:22px 16px 14px;
+  background:linear-gradient(0deg,rgba(13,16,12,.9),transparent);
+  font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--sand);
+}
+.gal .tall{ grid-row:span 2; }
+.gal .wide{ grid-column:span 2; }
+
+/* 08 REACH & COMPASS ------------------------------------------------------- */
+.reach{ position:relative; overflow:hidden; }
+.reach-map{ position:absolute; inset:0; top:0; right:0; bottom:0; left:0; opacity:.22; pointer-events:none; display:flex; align-items:center; justify-content:center; }
+.reach-map svg{ width:min(1400px,120%); }
+.compass-wrap{ position:relative; max-width:520px; margin:0 auto; }
+.compass{ width:100%; height:auto; filter:drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
+.compass .ring-ticks{ transform-origin:50% 50%; }
+.stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:32px; }
+.stat{ background:var(--panel); padding:22px 20px; }
+.stat-n{ font-family:var(--display); font-weight:800; font-size:44px; line-height:1; color:var(--khaki); }
+.stat-l{ font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+
+/* 09 CREDENTIALS ----------------------------------------------------------- */
+.creds{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+.creds .card{ padding:28px; }
+.creds .h3{ margin-bottom:6px; }
+.note{ border-left:2px solid var(--khaki); padding:14px 18px; background:var(--panel); font-size:14.5px; color:var(--muted); line-height:1.65; margin-top:24px; }
+
+/* 10 ABOUT ----------------------------------------------------------------- */
+.about-photo{ position:relative; }
+.about-photo img{ width:100%; height:520px; object-fit:cover; filter:saturate(.6) contrast(1.05); }
+.about-photo::after{ content:''; position:absolute; inset:0; top:0; right:0; bottom:0; left:0; border:1px solid rgba(201,184,128,.3); transform:translate(14px,14px); pointer-events:none; }
+.people{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:28px; }
+.person{ background:var(--panel); padding:20px 22px; }
+.person:last-child:nth-child(odd){ grid-column:1/-1; }
+.person-n{ font-family:var(--display); font-weight:700; font-size:20px; letter-spacing:.6px; color:var(--sand); }
+.person-r{ font-family:var(--display); font-weight:600; font-size:12.5px; letter-spacing:2px; text-transform:uppercase; color:var(--khaki); margin-top:3px; }
+.person-d{ font-size:14px; color:var(--muted); margin-top:8px; line-height:1.5; }
+
+/* 11 CONTACT --------------------------------------------------------------- */
+.contact-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(32px,5vw,72px); }
+.cinfo .kv-v a{ color:var(--sand); }
+.cinfo .kv-v a:hover{ color:var(--khaki); }
+.form{ display:grid; gap:14px; }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.field label{ display:block; font-family:var(--display); font-weight:600; font-size:12.5px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.field input,.field textarea{
+  width:100%; padding:13px 14px;
+  background:var(--panel); border:1px solid var(--line-2); color:var(--sand);
+  font:inherit; font-size:15.5px;
+  transition:border-color .2s;
+}
+.field input:focus,.field textarea:focus{ border-color:var(--khaki); outline:none; }
+.field textarea{ min-height:130px; resize:vertical; }
+.field [aria-invalid="true"]{ border-color:var(--alert); }
+.err{ font-size:13px; color:var(--alert); min-height:1.2em; margin-top:4px; }
+.form-ok{ padding:14px; border:1px solid rgba(143,194,122,.4); background:rgba(143,194,122,.08); color:var(--ok); font-size:14.5px; }
+.form-ok[hidden]{ display:none; }
+.form-note{ font-size:13px; color:var(--muted); line-height:1.6; }
+
+/* 12 FOOTER ---------------------------------------------------------------- */
+.foot{ border-top:1px solid var(--line); background:#0a0c09; padding:48px 0 28px; }
+.foot .wrap{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; align-items:start; }
+.foot-brand{ display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+.foot-brand .brand-star{ width:52px; height:52px; }
+.foot p{ font-size:14px; color:var(--muted); line-height:1.65; max-width:46ch; }
+.foot-h{ font-family:var(--display); font-weight:700; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--khaki); margin-bottom:12px; }
+.foot ul{ list-style:none; }
+.foot li{ margin-bottom:8px; font-size:15px; }
+.foot li a{ color:var(--text); }
+.foot li a:hover{ color:var(--khaki); }
+.foot-bottom{ margin-top:36px; padding-top:18px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:13px; color:var(--muted); }
+
+/* 13 MOTION ---------------------------------------------------------------- */
+.js [data-reveal]{ opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+.js [data-reveal].in{ opacity:1; transform:none; }
+.hero-body > *{ animation:rise .9s var(--ease) both; }
+.hero-body > *:nth-child(2){ animation-delay:.12s } .hero-body > *:nth-child(3){ animation-delay:.24s } .hero-body > *:nth-child(4){ animation-delay:.36s }
+@keyframes rise{ from{ opacity:0; transform:translateY(22px) } to{ opacity:1; transform:none } }
+@keyframes spin{ to{ transform:rotate(360deg) } }
+.compass .ring-ticks{ animation:spin 120s linear infinite; }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:.001ms!important; transition-duration:.001ms!important; }
+  .js [data-reveal]{ opacity:1; transform:none; }
+  html{ scroll-behavior:auto; }
+}
+
+/* 14 RESPONSIVE ------------------------------------------------------------ */
+@media (max-width:1100px){
+  .svc-grid{ grid-template-columns:repeat(2,1fr); }
+  .gal{ grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width:900px){
+  .nav,.top .lang{ display:none; }
+  .burger{ display:flex; }
+  .two,.creds,.contact-grid,.foot .wrap{ grid-template-columns:1fr; }
+  .cred .wrap{ grid-template-columns:1fr 1fr; }
+  .cred-item{ border-right:0; margin-right:0; border-bottom:1px solid rgba(201,184,128,.14); }
+  .about-photo img{ height:380px; }
+  .hero-star{ right:-30%; opacity:.07; }
+}
+@media (max-width:600px){
+  :root{ --nav-h:64px; }
+  .brand-name{ font-size:20px; letter-spacing:4px; }
+  .brand-sub{ font-size:9px; letter-spacing:3px; }
+  .svc-grid{ grid-template-columns:1fr; }
+  .svc-wide,.svc-full{ grid-column:auto; }
+  .svc{ min-height:280px; }
+  .gal{ grid-template-columns:1fr 1fr; grid-auto-rows:160px; }
+  .gal .wide{ grid-column:span 2; }
+  .cred .wrap{ grid-template-columns:1fr; }
+  .stats,.people,.form-row{ grid-template-columns:1fr; }
+  .hero .lead{ font-size:16.5px; }
+  .hero-cta .btn{ width:100%; justify-content:center; }
+}
+</style>
+<noscript><style>[data-reveal]{opacity:1;transform:none} .hero-media video{display:none}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- The Northstar mark: eight points, long cardinals, bevelled in steel. Defined
+     once and reused wherever the star appears. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="st-l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f7f9"/><stop offset="1" stop-color="#b9c3cb"/></linearGradient>
+    <linearGradient id="st-d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e9aa4"/><stop offset="1" stop-color="#4c565e"/></linearGradient>
+    <linearGradient id="st-m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c2ccd4"/><stop offset="1" stop-color="#6f7a83"/></linearGradient>
+    <symbol id="star" viewBox="0 0 200 200">
+      <!-- diagonals: shorter, sit behind the cardinals -->
+      <path d="M100 100 L152 48 L100 84 Z"  fill="url(#st-d)"/><path d="M100 100 L152 48 L116 100 Z" fill="url(#st-m)"/>
+      <path d="M100 100 L48 48 L84 100 Z"   fill="url(#st-d)"/><path d="M100 100 L48 48 L100 84 Z"   fill="url(#st-m)"/>
+      <path d="M100 100 L48 152 L100 116 Z" fill="url(#st-d)"/><path d="M100 100 L48 152 L84 100 Z"  fill="url(#st-m)"/>
+      <path d="M100 100 L152 152 L116 100 Z" fill="url(#st-d)"/><path d="M100 100 L152 152 L100 116 Z" fill="url(#st-m)"/>
+      <!-- cardinals: long, two facets each — lit and shadowed -->
+      <path d="M100 2 L113 100 L100 100 Z"   fill="url(#st-l)"/><path d="M100 2 L87 100 L100 100 Z"    fill="url(#st-d)"/>
+      <path d="M198 100 L100 113 L100 100 Z" fill="url(#st-d)"/><path d="M198 100 L100 87 L100 100 Z"  fill="url(#st-l)"/>
+      <path d="M100 198 L87 100 L100 100 Z"  fill="url(#st-l)"/><path d="M100 198 L113 100 L100 100 Z" fill="url(#st-d)"/>
+      <path d="M2 100 L100 87 L100 100 Z"    fill="url(#st-d)"/><path d="M2 100 L100 113 L100 100 Z"   fill="url(#st-l)"/>
+      <circle cx="100" cy="100" r="3.6" fill="#fff"/>
+    </symbol>
+    <symbol id="flag-pl" viewBox="0 0 24 16"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#dc143c"/></symbol>
+    <symbol id="flag-us" viewBox="0 0 24 16">
+      <rect width="24" height="16" fill="#b22234"/>
+      <g fill="#fff"><rect y="1.23" width="24" height="1.23"/><rect y="3.69" width="24" height="1.23"/><rect y="6.15" width="24" height="1.23"/><rect y="8.62" width="24" height="1.23"/><rect y="11.08" width="24" height="1.23"/><rect y="13.54" width="24" height="1.23"/></g>
+      <rect width="10" height="8.62" fill="#3c3b6e"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Northstar Tactical Logistics — home">
+      <svg class="brand-star" aria-hidden="true"><use href="#star"/></svg>
+      <span><span class="brand-name">NORTHSTAR</span><br><span class="brand-sub">TACTICAL LOGISTICS</span></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services" data-i18n>Services</a>
+      <a href="#field" data-i18n>Operations</a>
+      <a href="#reach" data-i18n>Reach</a>
+      <a href="#credentials" data-i18n>Credentials</a>
+      <a href="#about" data-i18n>About</a>
+      <a href="#contact" data-i18n>Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language / Język">
+      <button type="button" data-lang="pl" aria-pressed="false" lang="pl"><svg><use href="#flag-pl"/></svg>PL</button>
+      <button type="button" data-lang="en" aria-pressed="true" lang="en"><svg><use href="#flag-us"/></svg>EN</button>
+    </div>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Main (mobile)">
+  <a href="#services" data-i18n>Services</a>
+  <a href="#field" data-i18n>Operations</a>
+  <a href="#reach" data-i18n>Reach</a>
+  <a href="#credentials" data-i18n>Credentials</a>
+  <a href="#about" data-i18n>About</a>
+  <a href="#contact" data-i18n>Contact</a>
+  <div class="lang" role="group" aria-label="Language / Język">
+    <button type="button" data-lang="pl" aria-pressed="false" lang="pl"><svg><use href="#flag-pl"/></svg>PL</button>
+    <button type="button" data-lang="en" aria-pressed="true" lang="en"><svg><use href="#flag-us"/></svg>EN</button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ================================ HERO ================================= -->
+<section class="hero" id="top" aria-label="Introduction">
+  <div class="hero-media" aria-hidden="true">
+    <video id="hero-video" muted loop playsinline preload="none" poster="assets/video/hero-poster.jpg">
+      <source src="assets/video/hero-a.mp4" type="video/mp4" media="(min-width: 700px)">
+      <source src="assets/video/hero-m.mp4" type="video/mp4">
+    </video>
+    <img src="assets/img/hero.jpg" srcset="assets/img/hero-800.jpg 800w, assets/img/hero.jpg 1600w" sizes="100vw" alt="" fetchpriority="high">
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <svg class="hero-star" aria-hidden="true"><use href="#star"/></svg>
+
+  <div class="wrap hero-body">
+    <p class="eyebrow" data-i18n>Reliability. Precision. Security.</p>
+    <h1 class="h1" data-i18n>Logistics without borders.</h1>
+    <p class="lead" data-i18n>Heavy military transport, port operations, fuel supply and unmanned systems — delivered from Poznań for allied and government programmes across Europe.</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#services"><span data-i18n>Our services</span> <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn" href="#contact"><span data-i18n>Contact us</span> <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <div class="cred">
+    <div class="wrap">
+      <div class="cred-item"><div class="cred-k" data-i18n>NCAGE code</div><div class="cred-v">9CZ9H</div></div>
+      <div class="cred-item"><div class="cred-k" data-i18n>UEI · SAM.gov</div><div class="cred-v">S9EYKVSLRSQ5</div></div>
+      <div class="cred-item"><div class="cred-k" data-i18n>Government contracting</div><div class="cred-v small" data-i18n>U.S. &amp; E.U. — registered</div></div>
+      <div class="cred-item"><div class="cred-k" data-i18n>Headquarters</div><div class="cred-v small" data-i18n>Poznań, Poland</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SERVICES =============================== -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow" data-i18n>What we do</p>
+      <h2 class="h2" data-i18n>Eight competencies. One chain of command.</h2>
+      <p class="tagline" data-i18n>Planned. Coordinated. Delivered.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc" data-reveal>
+        <span class="svc-num">01</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3 class="h3" data-i18n>Defence Logistics</h3>
+          <p class="tagline" data-i18n>Planned. Coordinated. Sustained.</p>
+          <p data-i18n>End-to-end logistics support for military units, government agencies and allied programmes.</p>
+        </div>
+      </article>
+
+      <article class="svc svc-wide" data-reveal>
+        <div class="svc-photo"><img src="assets/img/paladin.jpg" srcset="assets/img/paladin-800.jpg 800w, assets/img/paladin.jpg 1600w" sizes="(max-width:600px) 100vw, 50vw" alt="Self-propelled howitzer secured on a lowloader trailer" loading="lazy"></div>
+        <span class="svc-num">02</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V8h11v8M14 11h4l3 3v2h-7"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg></div>
+          <h3 class="h3" data-i18n>Strategic Transport</h3>
+          <p class="tagline" data-i18n>Heavy. Secure. Anywhere.</p>
+          <p data-i18n>Specialised and heavy haulage, military transport, personnel movement and troop relocation across Poland and allied territories.</p>
+        </div>
+      </article>
+
+      <article class="svc" data-reveal>
+        <span class="svc-num">03</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v13M8 21h8M12 3a2 2 0 100 4 2 2 0 000-4zM5 13a7 7 0 0014 0"/></svg></div>
+          <h3 class="h3" data-i18n>Port Operations</h3>
+          <p class="tagline">Gdańsk. Szczecin. Świnoujście.</p>
+          <p data-i18n>Port logistics and maritime security expertise, with cooperation developed at Poland's Baltic seaports.</p>
+        </div>
+      </article>
+
+      <article class="svc" data-reveal>
+        <span class="svc-num">04</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div>
+          <h3 class="h3" data-i18n>Critical Infrastructure</h3>
+          <p class="tagline" data-i18n>Protected. Serviced. Ready.</p>
+          <p data-i18n>Support and servicing of critical infrastructure, including construction of service and maintenance facilities.</p>
+        </div>
+      </article>
+
+      <article class="svc" data-reveal>
+        <span class="svc-num">05</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h4M6 4v4M16 6h4M18 4v4M4 18h4M6 16v4M16 18h4M18 16v4M9 9h6v6H9z"/></svg></div>
+          <h3 class="h3" data-i18n>Unmanned Systems &amp; Training</h3>
+          <p class="tagline">Hybrid UAV. Counter-UAS. Autonomous.</p>
+          <p data-i18n>Drone ecosystem integration and operator training, delivered with an experienced European manufacturer.</p>
+        </div>
+      </article>
+
+      <article class="svc" data-reveal>
+        <span class="svc-num">06</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v10H3zM7 7v10M11 7v10M15 7v10"/></svg></div>
+          <h3 class="h3" data-i18n>Military Containers &amp; Tents</h3>
+          <p class="tagline" data-i18n>Command. Shelter. Field.</p>
+          <p data-i18n>Containerised mobile command centres, military tents and associated field equipment.</p>
+        </div>
+      </article>
+
+      <article class="svc" data-reveal>
+        <span class="svc-num">07</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4H6v16h8V4zM14 9h3a2 2 0 012 2v6a1.5 1.5 0 01-3 0v-4M8 8h4"/></svg></div>
+          <h3 class="h3" data-i18n>Fuel Supply &amp; Mobile Stations</h3>
+          <p class="tagline" data-i18n>Secured. Mobile. Mission-ready.</p>
+          <p data-i18n>Own fuel security arrangements and mobile fuelling stations for deployed and static operations.</p>
+        </div>
+      </article>
+
+      <article class="svc svc-full" data-reveal>
+        <div class="svc-photo"><img src="assets/img/m88.jpg" srcset="assets/img/m88-800.jpg 800w, assets/img/m88.jpg 1600w" sizes="100vw" alt="Armoured recovery vehicle chained down on a lowloader trailer" loading="lazy"></div>
+        <span class="svc-num">08</span>
+        <div class="svc-body">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18M3 17l6-6h9M9 11V7h6"/></svg></div>
+          <h3 class="h3" data-i18n>Ro/Ro Ramps &amp; Heavy Cargo</h3>
+          <p class="tagline" data-i18n>Roll on. Roll off. Move.</p>
+          <p data-i18n>Roll-on/roll-off ramps and handling solutions for vehicles, tracked equipment and outsized cargo.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FIELD GALLERY ============================ -->
+<section class="sec sec-alt" id="field">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow" data-i18n>In the field</p>
+      <h2 class="h2" data-i18n>Heavy equipment. Moved.</h2>
+      <p class="tagline" data-i18n>Tracked. Wheeled. Outsized.</p>
+    </div>
+    <div class="gal" data-reveal>
+      <figure class="wide"><img src="assets/img/dozer.jpg" srcset="assets/img/dozer-800.jpg 800w, assets/img/dozer.jpg 1600w" sizes="(max-width:600px) 100vw, 50vw" alt="Armoured bulldozer secured on a lowloader trailer" loading="lazy"><figcaption data-i18n>Engineer equipment — lowloader</figcaption></figure>
+      <figure class="tall"><img src="assets/img/abrams-transit.jpg" srcset="assets/img/abrams-transit-800.jpg 800w, assets/img/abrams-transit.jpg 1600w" sizes="(max-width:600px) 50vw, 25vw" alt="Main battle tank on a trailer seen from the following truck cab at dawn" loading="lazy"><figcaption data-i18n>Main battle tank — road move</figcaption></figure>
+      <figure><img src="assets/img/bradley-road.jpg" srcset="assets/img/bradley-road-800.jpg 800w, assets/img/bradley-road.jpg 1600w" sizes="(max-width:600px) 50vw, 25vw" alt="Infantry fighting vehicle on a four-axle lowloader" loading="lazy"><figcaption data-i18n>Infantry fighting vehicle</figcaption></figure>
+      <figure><img src="assets/img/hemtt-road.jpg" srcset="assets/img/hemtt-road-800.jpg 800w, assets/img/hemtt-road.jpg 1600w" sizes="(max-width:600px) 50vw, 25vw" alt="Heavy tactical trucks in convoy on a gravel road" loading="lazy"><figcaption data-i18n>Heavy tactical trucks — convoy</figcaption></figure>
+      <figure><img src="assets/img/t72.jpg" srcset="assets/img/t72-800.jpg 800w, assets/img/t72.jpg 1600w" sizes="(max-width:600px) 50vw, 25vw" alt="Main battle tank with reactive armour secured on a lowloader" loading="lazy"><figcaption data-i18n>Main battle tank — lowloader</figcaption></figure>
+      <figure class="tall"><img src="assets/img/loading.jpg" srcset="assets/img/loading-800.jpg 800w, assets/img/loading.jpg 1600w" sizes="(max-width:600px) 50vw, 25vw" alt="Soldier guiding a tactical truck onto a trailer" loading="lazy"><figcaption data-i18n>Loading operations</figcaption></figure>
+      <figure><img src="assets/img/fmtv-ramps.jpg" srcset="assets/img/fmtv-ramps-800.jpg 800w, assets/img/fmtv-ramps.jpg 1600w" sizes="(max-width:600px) 50vw, 25vw" alt="Tactical truck loaded on a lowloader with hydraulic ramps raised" loading="lazy"><figcaption data-i18n>Hydraulic ramps — secured</figcaption></figure>
+      <figure><img src="assets/img/jltv.jpg" srcset="assets/img/jltv-800.jpg 800w, assets/img/jltv.jpg 1600w" sizes="(max-width:600px) 50vw, 25vw" alt="Row of light tactical vehicles in a staging area" loading="lazy"><figcaption data-i18n>Tactical vehicles — staging</figcaption></figure>
+      <figure class="wide"><img src="assets/img/hemtt-yard.jpg" srcset="assets/img/hemtt-yard-800.jpg 800w, assets/img/hemtt-yard.jpg 1600w" sizes="(max-width:600px) 100vw, 50vw" alt="Heavy tactical truck on a lowloader in a vehicle yard" loading="lazy"><figcaption data-i18n>Heavy tactical truck — yard</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ REACH & COMPASS ========================== -->
+<section class="sec reach" id="reach">
+  <div class="reach-map" aria-hidden="true">
+<svg viewBox="0 0 948 402" aria-hidden="true"><g fill="#c9b880"><circle cx="214" cy="19" r="2"/><circle cx="227" cy="19" r="2"/><circle cx="240" cy="19" r="2"/><circle cx="253" cy="19" r="2"/><circle cx="266" cy="19" r="2"/><circle cx="279" cy="19" r="2"/><circle cx="292" cy="19" r="2"/><circle cx="318" cy="19" r="2"/><circle cx="331" cy="19" r="2"/><circle cx="344" cy="19" r="2"/><circle cx="357" cy="19" r="2"/><circle cx="370" cy="19" r="2"/><circle cx="383" cy="19" r="2"/><circle cx="396" cy="19" r="2"/><circle cx="409" cy="19" r="2"/><circle cx="188" cy="32" r="2"/><circle cx="201" cy="32" r="2"/><circle cx="214" cy="32" r="2"/><circle cx="227" cy="32" r="2"/><circle cx="240" cy="32" r="2"/><circle cx="253" cy="32" r="2"/><circle cx="266" cy="32" r="2"/><circle cx="279" cy="32" r="2"/><circle cx="292" cy="32" r="2"/><circle cx="305" cy="32" r="2"/><circle cx="318" cy="32" r="2"/><circle cx="331" cy="32" r="2"/><circle cx="344" cy="32" r="2"/><circle cx="357" cy="32" r="2"/><circle cx="370" cy="32" r="2"/><circle cx="383" cy="32" r="2"/><circle cx="396" cy="32" r="2"/><circle cx="409" cy="32" r="2"/><circle cx="422" cy="32" r="2"/><circle cx="500" cy="32" r="2"/><circle cx="513" cy="32" r="2"/><circle cx="721" cy="32" r="2"/><circle cx="58" cy="45" r="2"/><circle cx="71" cy="45" r="2"/><circle cx="84" cy="45" r="2"/><circle cx="97" cy="45" r="2"/><circle cx="110" cy="45" r="2"/><circle cx="123" cy="45" r="2"/><circle cx="136" cy="45" r="2"/><circle cx="149" cy="45" r="2"/><circle cx="162" cy="45" r="2"/><circle cx="175" cy="45" r="2"/><circle cx="188" cy="45" r="2"/><circle cx="201" cy="45" r="2"/><circle cx="214" cy="45" r="2"/><circle cx="227" cy="45" r="2"/><circle cx="240" cy="45" r="2"/><circle cx="253" cy="45" r="2"/><circle cx="266" cy="45" r="2"/><circle cx="279" cy="45" r="2"/><circle cx="292" cy="45" r="2"/><circle cx="305" cy="45" r="2"/><circle cx="331" cy="45" r="2"/><circle cx="344" cy="45" r="2"/><circle cx="357" cy="45" r="2"/><circle cx="370" cy="45" r="2"/><circle cx="383" cy="45" r="2"/><circle cx="396" cy="45" r="2"/><circle cx="409" cy="45" r="2"/><circle cx="422" cy="45" r="2"/><circle cx="630" cy="45" r="2"/><circle cx="643" cy="45" r="2"/><circle cx="656" cy="45" r="2"/><circle cx="669" cy="45" r="2"/><circle cx="682" cy="45" r="2"/><circle cx="695" cy="45" r="2"/><circle cx="708" cy="45" r="2"/><circle cx="721" cy="45" r="2"/><circle cx="734" cy="45" r="2"/><circle cx="747" cy="45" r="2"/><circle cx="760" cy="45" r="2"/><circle cx="773" cy="45" r="2"/><circle cx="786" cy="45" r="2"/><circle cx="799" cy="45" r="2"/><circle cx="812" cy="45" r="2"/><circle cx="825" cy="45" r="2"/><circle cx="838" cy="45" r="2"/><circle cx="851" cy="45" r="2"/><circle cx="864" cy="45" r="2"/><circle cx="877" cy="45" r="2"/><circle cx="890" cy="45" r="2"/><circle cx="903" cy="45" r="2"/><circle cx="916" cy="45" r="2"/><circle cx="929" cy="45" r="2"/><circle cx="32" cy="58" r="2"/><circle cx="45" cy="58" r="2"/><circle cx="58" cy="58" r="2"/><circle cx="71" cy="58" r="2"/><circle cx="84" cy="58" r="2"/><circle cx="97" cy="58" r="2"/><circle cx="110" cy="58" r="2"/><circle cx="123" cy="58" r="2"/><circle cx="136" cy="58" r="2"/><circle cx="149" cy="58" r="2"/><circle cx="162" cy="58" r="2"/><circle cx="175" cy="58" r="2"/><circle cx="188" cy="58" r="2"/><circle cx="201" cy="58" r="2"/><circle cx="214" cy="58" r="2"/><circle cx="227" cy="58" r="2"/><circle cx="240" cy="58" r="2"/><circle cx="253" cy="58" r="2"/><circle cx="266" cy="58" r="2"/><circle cx="279" cy="58" r="2"/><circle cx="292" cy="58" r="2"/><circle cx="305" cy="58" r="2"/><circle cx="318" cy="58" r="2"/><circle cx="344" cy="58" r="2"/><circle cx="357" cy="58" r="2"/><circle cx="370" cy="58" r="2"/><circle cx="383" cy="58" r="2"/><circle cx="396" cy="58" r="2"/><circle cx="409" cy="58" r="2"/><circle cx="422" cy="58" r="2"/><circle cx="487" cy="58" r="2"/><circle cx="500" cy="58" r="2"/><circle cx="513" cy="58" r="2"/><circle cx="526" cy="58" r="2"/><circle cx="539" cy="58" r="2"/><circle cx="552" cy="58" r="2"/><circle cx="565" cy="58" r="2"/><circle cx="578" cy="58" r="2"/><circle cx="591" cy="58" r="2"/><circle cx="604" cy="58" r="2"/><circle cx="617" cy="58" r="2"/><circle cx="630" cy="58" r="2"/><circle cx="643" cy="58" r="2"/><circle cx="656" cy="58" r="2"/><circle cx="669" cy="58" r="2"/><circle cx="682" cy="58" r="2"/><circle cx="695" cy="58" r="2"/><circle cx="708" cy="58" r="2"/><circle cx="721" cy="58" r="2"/><circle cx="734" cy="58" r="2"/><circle cx="747" cy="58" r="2"/><circle cx="760" cy="58" r="2"/><circle cx="773" cy="58" r="2"/><circle cx="786" cy="58" r="2"/><circle cx="799" cy="58" r="2"/><circle cx="812" cy="58" r="2"/><circle cx="825" cy="58" r="2"/><circle cx="838" cy="58" r="2"/><circle cx="851" cy="58" r="2"/><circle cx="864" cy="58" r="2"/><circle cx="877" cy="58" r="2"/><circle cx="890" cy="58" r="2"/><circle cx="903" cy="58" r="2"/><circle cx="916" cy="58" r="2"/><circle cx="929" cy="58" r="2"/><circle cx="19" cy="71" r="2"/><circle cx="32" cy="71" r="2"/><circle cx="45" cy="71" r="2"/><circle cx="58" cy="71" r="2"/><circle cx="71" cy="71" r="2"/><circle cx="84" cy="71" r="2"/><circle cx="97" cy="71" r="2"/><circle cx="110" cy="71" r="2"/><circle cx="123" cy="71" r="2"/><circle cx="136" cy="71" r="2"/><circle cx="149" cy="71" r="2"/><circle cx="162" cy="71" r="2"/><circle cx="175" cy="71" r="2"/><circle cx="188" cy="71" r="2"/><circle cx="201" cy="71" r="2"/><circle cx="214" cy="71" r="2"/><circle cx="227" cy="71" r="2"/><circle cx="240" cy="71" r="2"/><circle cx="253" cy="71" r="2"/><circle cx="266" cy="71" r="2"/><circle cx="279" cy="71" r="2"/><circle cx="292" cy="71" r="2"/><circle cx="305" cy="71" r="2"/><circle cx="318" cy="71" r="2"/><circle cx="331" cy="71" r="2"/><circle cx="357" cy="71" r="2"/><circle cx="370" cy="71" r="2"/><circle cx="383" cy="71" r="2"/><circle cx="396" cy="71" r="2"/><circle cx="422" cy="71" r="2"/><circle cx="435" cy="71" r="2"/><circle cx="474" cy="71" r="2"/><circle cx="487" cy="71" r="2"/><circle cx="500" cy="71" r="2"/><circle cx="513" cy="71" r="2"/><circle cx="526" cy="71" r="2"/><circle cx="539" cy="71" r="2"/><circle cx="552" cy="71" r="2"/><circle cx="565" cy="71" r="2"/><circle cx="578" cy="71" r="2"/><circle cx="591" cy="71" r="2"/><circle cx="604" cy="71" r="2"/><circle cx="617" cy="71" r="2"/><circle cx="630" cy="71" r="2"/><circle cx="643" cy="71" r="2"/><circle cx="656" cy="71" r="2"/><circle cx="669" cy="71" r="2"/><circle cx="682" cy="71" r="2"/><circle cx="695" cy="71" r="2"/><circle cx="708" cy="71" r="2"/><circle cx="721" cy="71" r="2"/><circle cx="734" cy="71" r="2"/><circle cx="747" cy="71" r="2"/><circle cx="760" cy="71" r="2"/><circle cx="773" cy="71" r="2"/><circle cx="786" cy="71" r="2"/><circle cx="799" cy="71" r="2"/><circle cx="812" cy="71" r="2"/><circle cx="825" cy="71" r="2"/><circle cx="838" cy="71" r="2"/><circle cx="851" cy="71" r="2"/><circle cx="864" cy="71" r="2"/><circle cx="877" cy="71" r="2"/><circle cx="890" cy="71" r="2"/><circle cx="903" cy="71" r="2"/><circle cx="916" cy="71" r="2"/><circle cx="929" cy="71" r="2"/><circle cx="19" cy="84" r="2"/><circle cx="32" cy="84" r="2"/><circle cx="45" cy="84" r="2"/><circle cx="58" cy="84" r="2"/><circle cx="71" cy="84" r="2"/><circle cx="84" cy="84" r="2"/><circle cx="97" cy="84" r="2"/><circle cx="110" cy="84" r="2"/><circle cx="123" cy="84" r="2"/><circle cx="136" cy="84" r="2"/><circle cx="149" cy="84" r="2"/><circle cx="162" cy="84" r="2"/><circle cx="175" cy="84" r="2"/><circle cx="188" cy="84" r="2"/><circle cx="201" cy="84" r="2"/><circle cx="214" cy="84" r="2"/><circle cx="227" cy="84" r="2"/><circle cx="240" cy="84" r="2"/><circle cx="253" cy="84" r="2"/><circle cx="266" cy="84" r="2"/><circle cx="279" cy="84" r="2"/><circle cx="292" cy="84" r="2"/><circle cx="305" cy="84" r="2"/><circle cx="318" cy="84" r="2"/><circle cx="331" cy="84" r="2"/><circle cx="344" cy="84" r="2"/><circle cx="448" cy="84" r="2"/><circle cx="461" cy="84" r="2"/><circle cx="474" cy="84" r="2"/><circle cx="487" cy="84" r="2"/><circle cx="500" cy="84" r="2"/><circle cx="513" cy="84" r="2"/><circle cx="526" cy="84" r="2"/><circle cx="539" cy="84" r="2"/><circle cx="552" cy="84" r="2"/><circle cx="565" cy="84" r="2"/><circle cx="578" cy="84" r="2"/><circle cx="591" cy="84" r="2"/><circle cx="604" cy="84" r="2"/><circle cx="617" cy="84" r="2"/><circle cx="630" cy="84" r="2"/><circle cx="643" cy="84" r="2"/><circle cx="656" cy="84" r="2"/><circle cx="669" cy="84" r="2"/><circle cx="682" cy="84" r="2"/><circle cx="695" cy="84" r="2"/><circle cx="708" cy="84" r="2"/><circle cx="721" cy="84" r="2"/><circle cx="734" cy="84" r="2"/><circle cx="747" cy="84" r="2"/><circle cx="760" cy="84" r="2"/><circle cx="773" cy="84" r="2"/><circle cx="786" cy="84" r="2"/><circle cx="799" cy="84" r="2"/><circle cx="812" cy="84" r="2"/><circle cx="825" cy="84" r="2"/><circle cx="838" cy="84" r="2"/><circle cx="851" cy="84" r="2"/><circle cx="864" cy="84" r="2"/><circle cx="877" cy="84" r="2"/><circle cx="890" cy="84" r="2"/><circle cx="903" cy="84" r="2"/><circle cx="916" cy="84" r="2"/><circle cx="929" cy="84" r="2"/><circle cx="71" cy="97" r="2"/><circle cx="84" cy="97" r="2"/><circle cx="97" cy="97" r="2"/><circle cx="110" cy="97" r="2"/><circle cx="123" cy="97" r="2"/><circle cx="136" cy="97" r="2"/><circle cx="149" cy="97" r="2"/><circle cx="162" cy="97" r="2"/><circle cx="175" cy="97" r="2"/><circle cx="188" cy="97" r="2"/><circle cx="201" cy="97" r="2"/><circle cx="214" cy="97" r="2"/><circle cx="227" cy="97" r="2"/><circle cx="240" cy="97" r="2"/><circle cx="253" cy="97" r="2"/><circle cx="266" cy="97" r="2"/><circle cx="279" cy="97" r="2"/><circle cx="292" cy="97" r="2"/><circle cx="305" cy="97" r="2"/><circle cx="318" cy="97" r="2"/><circle cx="331" cy="97" r="2"/><circle cx="344" cy="97" r="2"/><circle cx="448" cy="97" r="2"/><circle cx="461" cy="97" r="2"/><circle cx="474" cy="97" r="2"/><circle cx="487" cy="97" r="2"/><circle cx="500" cy="97" r="2"/><circle cx="513" cy="97" r="2"/><circle cx="526" cy="97" r="2"/><circle cx="539" cy="97" r="2"/><circle cx="552" cy="97" r="2"/><circle cx="565" cy="97" r="2"/><circle cx="578" cy="97" r="2"/><circle cx="591" cy="97" r="2"/><circle cx="604" cy="97" r="2"/><circle cx="617" cy="97" r="2"/><circle cx="630" cy="97" r="2"/><circle cx="643" cy="97" r="2"/><circle cx="656" cy="97" r="2"/><circle cx="669" cy="97" r="2"/><circle cx="682" cy="97" r="2"/><circle cx="695" cy="97" r="2"/><circle cx="708" cy="97" r="2"/><circle cx="721" cy="97" r="2"/><circle cx="734" cy="97" r="2"/><circle cx="747" cy="97" r="2"/><circle cx="760" cy="97" r="2"/><circle cx="773" cy="97" r="2"/><circle cx="786" cy="97" r="2"/><circle cx="799" cy="97" r="2"/><circle cx="812" cy="97" r="2"/><circle cx="825" cy="97" r="2"/><circle cx="838" cy="97" r="2"/><circle cx="851" cy="97" r="2"/><circle cx="864" cy="97" r="2"/><circle cx="877" cy="97" r="2"/><circle cx="890" cy="97" r="2"/><circle cx="903" cy="97" r="2"/><circle cx="916" cy="97" r="2"/><circle cx="929" cy="97" r="2"/><circle cx="84" cy="110" r="2"/><circle cx="97" cy="110" r="2"/><circle cx="110" cy="110" r="2"/><circle cx="123" cy="110" r="2"/><circle cx="136" cy="110" r="2"/><circle cx="149" cy="110" r="2"/><circle cx="162" cy="110" r="2"/><circle cx="175" cy="110" r="2"/><circle cx="188" cy="110" r="2"/><circle cx="201" cy="110" r="2"/><circle cx="214" cy="110" r="2"/><circle cx="227" cy="110" r="2"/><circle cx="240" cy="110" r="2"/><circle cx="253" cy="110" r="2"/><circle cx="266" cy="110" r="2"/><circle cx="279" cy="110" r="2"/><circle cx="292" cy="110" r="2"/><circle cx="305" cy="110" r="2"/><circle cx="318" cy="110" r="2"/><circle cx="331" cy="110" r="2"/><circle cx="344" cy="110" r="2"/><circle cx="461" cy="110" r="2"/><circle cx="474" cy="110" r="2"/><circle cx="487" cy="110" r="2"/><circle cx="500" cy="110" r="2"/><circle cx="513" cy="110" r="2"/><circle cx="526" cy="110" r="2"/><circle cx="539" cy="110" r="2"/><circle cx="552" cy="110" r="2"/><circle cx="565" cy="110" r="2"/><circle cx="578" cy="110" r="2"/><circle cx="591" cy="110" r="2"/><circle cx="604" cy="110" r="2"/><circle cx="617" cy="110" r="2"/><circle cx="630" cy="110" r="2"/><circle cx="643" cy="110" r="2"/><circle cx="656" cy="110" r="2"/><circle cx="669" cy="110" r="2"/><circle cx="682" cy="110" r="2"/><circle cx="695" cy="110" r="2"/><circle cx="708" cy="110" r="2"/><circle cx="721" cy="110" r="2"/><circle cx="734" cy="110" r="2"/><circle cx="747" cy="110" r="2"/><circle cx="760" cy="110" r="2"/><circle cx="773" cy="110" r="2"/><circle cx="786" cy="110" r="2"/><circle cx="799" cy="110" r="2"/><circle cx="812" cy="110" r="2"/><circle cx="825" cy="110" r="2"/><circle cx="838" cy="110" r="2"/><circle cx="851" cy="110" r="2"/><circle cx="864" cy="110" r="2"/><circle cx="877" cy="110" r="2"/><circle cx="890" cy="110" r="2"/><circle cx="903" cy="110" r="2"/><circle cx="916" cy="110" r="2"/><circle cx="929" cy="110" r="2"/><circle cx="97" cy="123" r="2"/><circle cx="110" cy="123" r="2"/><circle cx="123" cy="123" r="2"/><circle cx="136" cy="123" r="2"/><circle cx="149" cy="123" r="2"/><circle cx="162" cy="123" r="2"/><circle cx="175" cy="123" r="2"/><circle cx="188" cy="123" r="2"/><circle cx="201" cy="123" r="2"/><circle cx="214" cy="123" r="2"/><circle cx="227" cy="123" r="2"/><circle cx="240" cy="123" r="2"/><circle cx="253" cy="123" r="2"/><circle cx="266" cy="123" r="2"/><circle cx="279" cy="123" r="2"/><circle cx="292" cy="123" r="2"/><circle cx="305" cy="123" r="2"/><circle cx="318" cy="123" r="2"/><circle cx="331" cy="123" r="2"/><circle cx="448" cy="123" r="2"/><circle cx="461" cy="123" r="2"/><circle cx="474" cy="123" r="2"/><circle cx="487" cy="123" r="2"/><circle cx="500" cy="123" r="2"/><circle cx="513" cy="123" r="2"/><circle cx="526" cy="123" r="2"/><circle cx="539" cy="123" r="2"/><circle cx="552" cy="123" r="2"/><circle cx="565" cy="123" r="2"/><circle cx="578" cy="123" r="2"/><circle cx="591" cy="123" r="2"/><circle cx="604" cy="123" r="2"/><circle cx="617" cy="123" r="2"/><circle cx="630" cy="123" r="2"/><circle cx="643" cy="123" r="2"/><circle cx="656" cy="123" r="2"/><circle cx="669" cy="123" r="2"/><circle cx="682" cy="123" r="2"/><circle cx="695" cy="123" r="2"/><circle cx="708" cy="123" r="2"/><circle cx="721" cy="123" r="2"/><circle cx="734" cy="123" r="2"/><circle cx="747" cy="123" r="2"/><circle cx="760" cy="123" r="2"/><circle cx="773" cy="123" r="2"/><circle cx="786" cy="123" r="2"/><circle cx="799" cy="123" r="2"/><circle cx="812" cy="123" r="2"/><circle cx="825" cy="123" r="2"/><circle cx="838" cy="123" r="2"/><circle cx="851" cy="123" r="2"/><circle cx="864" cy="123" r="2"/><circle cx="877" cy="123" r="2"/><circle cx="890" cy="123" r="2"/><circle cx="903" cy="123" r="2"/><circle cx="916" cy="123" r="2"/><circle cx="110" cy="136" r="2"/><circle cx="123" cy="136" r="2"/><circle cx="136" cy="136" r="2"/><circle cx="149" cy="136" r="2"/><circle cx="162" cy="136" r="2"/><circle cx="175" cy="136" r="2"/><circle cx="188" cy="136" r="2"/><circle cx="201" cy="136" r="2"/><circle cx="214" cy="136" r="2"/><circle cx="227" cy="136" r="2"/><circle cx="240" cy="136" r="2"/><circle cx="253" cy="136" r="2"/><circle cx="266" cy="136" r="2"/><circle cx="279" cy="136" r="2"/><circle cx="292" cy="136" r="2"/><circle cx="305" cy="136" r="2"/><circle cx="318" cy="136" r="2"/><circle cx="448" cy="136" r="2"/><circle cx="461" cy="136" r="2"/><circle cx="474" cy="136" r="2"/><circle cx="487" cy="136" r="2"/><circle cx="500" cy="136" r="2"/><circle cx="513" cy="136" r="2"/><circle cx="526" cy="136" r="2"/><circle cx="539" cy="136" r="2"/><circle cx="552" cy="136" r="2"/><circle cx="565" cy="136" r="2"/><circle cx="578" cy="136" r="2"/><circle cx="591" cy="136" r="2"/><circle cx="604" cy="136" r="2"/><circle cx="617" cy="136" r="2"/><circle cx="630" cy="136" r="2"/><circle cx="643" cy="136" r="2"/><circle cx="656" cy="136" r="2"/><circle cx="669" cy="136" r="2"/><circle cx="682" cy="136" r="2"/><circle cx="695" cy="136" r="2"/><circle cx="708" cy="136" r="2"/><circle cx="721" cy="136" r="2"/><circle cx="734" cy="136" r="2"/><circle cx="747" cy="136" r="2"/><circle cx="760" cy="136" r="2"/><circle cx="773" cy="136" r="2"/><circle cx="786" cy="136" r="2"/><circle cx="799" cy="136" r="2"/><circle cx="812" cy="136" r="2"/><circle cx="825" cy="136" r="2"/><circle cx="838" cy="136" r="2"/><circle cx="851" cy="136" r="2"/><circle cx="864" cy="136" r="2"/><circle cx="877" cy="136" r="2"/><circle cx="890" cy="136" r="2"/><circle cx="903" cy="136" r="2"/><circle cx="916" cy="136" r="2"/><circle cx="123" cy="149" r="2"/><circle cx="136" cy="149" r="2"/><circle cx="149" cy="149" r="2"/><circle cx="162" cy="149" r="2"/><circle cx="175" cy="149" r="2"/><circle cx="188" cy="149" r="2"/><circle cx="201" cy="149" r="2"/><circle cx="214" cy="149" r="2"/><circle cx="227" cy="149" r="2"/><circle cx="240" cy="149" r="2"/><circle cx="253" cy="149" r="2"/><circle cx="266" cy="149" r="2"/><circle cx="279" cy="149" r="2"/><circle cx="292" cy="149" r="2"/><circle cx="305" cy="149" r="2"/><circle cx="318" cy="149" r="2"/><circle cx="448" cy="149" r="2"/><circle cx="461" cy="149" r="2"/><circle cx="474" cy="149" r="2"/><circle cx="487" cy="149" r="2"/><circle cx="500" cy="149" r="2"/><circle cx="513" cy="149" r="2"/><circle cx="526" cy="149" r="2"/><circle cx="539" cy="149" r="2"/><circle cx="552" cy="149" r="2"/><circle cx="565" cy="149" r="2"/><circle cx="578" cy="149" r="2"/><circle cx="591" cy="149" r="2"/><circle cx="604" cy="149" r="2"/><circle cx="617" cy="149" r="2"/><circle cx="630" cy="149" r="2"/><circle cx="643" cy="149" r="2"/><circle cx="656" cy="149" r="2"/><circle cx="669" cy="149" r="2"/><circle cx="682" cy="149" r="2"/><circle cx="695" cy="149" r="2"/><circle cx="708" cy="149" r="2"/><circle cx="721" cy="149" r="2"/><circle cx="734" cy="149" r="2"/><circle cx="747" cy="149" r="2"/><circle cx="760" cy="149" r="2"/><circle cx="773" cy="149" r="2"/><circle cx="786" cy="149" r="2"/><circle cx="799" cy="149" r="2"/><circle cx="812" cy="149" r="2"/><circle cx="825" cy="149" r="2"/><circle cx="838" cy="149" r="2"/><circle cx="851" cy="149" r="2"/><circle cx="864" cy="149" r="2"/><circle cx="877" cy="149" r="2"/><circle cx="890" cy="149" r="2"/><circle cx="903" cy="149" r="2"/><circle cx="149" cy="162" r="2"/><circle cx="162" cy="162" r="2"/><circle cx="175" cy="162" r="2"/><circle cx="188" cy="162" r="2"/><circle cx="201" cy="162" r="2"/><circle cx="214" cy="162" r="2"/><circle cx="227" cy="162" r="2"/><circle cx="240" cy="162" r="2"/><circle cx="253" cy="162" r="2"/><circle cx="266" cy="162" r="2"/><circle cx="279" cy="162" r="2"/><circle cx="292" cy="162" r="2"/><circle cx="305" cy="162" r="2"/><circle cx="448" cy="162" r="2"/><circle cx="461" cy="162" r="2"/><circle cx="474" cy="162" r="2"/><circle cx="487" cy="162" r="2"/><circle cx="500" cy="162" r="2"/><circle cx="513" cy="162" r="2"/><circle cx="526" cy="162" r="2"/><circle cx="539" cy="162" r="2"/><circle cx="552" cy="162" r="2"/><circle cx="565" cy="162" r="2"/><circle cx="578" cy="162" r="2"/><circle cx="591" cy="162" r="2"/><circle cx="604" cy="162" r="2"/><circle cx="617" cy="162" r="2"/><circle cx="630" cy="162" r="2"/><circle cx="643" cy="162" r="2"/><circle cx="656" cy="162" r="2"/><circle cx="669" cy="162" r="2"/><circle cx="682" cy="162" r="2"/><circle cx="695" cy="162" r="2"/><circle cx="708" cy="162" r="2"/><circle cx="721" cy="162" r="2"/><circle cx="734" cy="162" r="2"/><circle cx="747" cy="162" r="2"/><circle cx="760" cy="162" r="2"/><circle cx="773" cy="162" r="2"/><circle cx="786" cy="162" r="2"/><circle cx="799" cy="162" r="2"/><circle cx="812" cy="162" r="2"/><circle cx="825" cy="162" r="2"/><circle cx="838" cy="162" r="2"/><circle cx="851" cy="162" r="2"/><circle cx="864" cy="162" r="2"/><circle cx="877" cy="162" r="2"/><circle cx="890" cy="162" r="2"/><circle cx="175" cy="175" r="2"/><circle cx="188" cy="175" r="2"/><circle cx="201" cy="175" r="2"/><circle cx="214" cy="175" r="2"/><circle cx="227" cy="175" r="2"/><circle cx="240" cy="175" r="2"/><circle cx="253" cy="175" r="2"/><circle cx="266" cy="175" r="2"/><circle cx="279" cy="175" r="2"/><circle cx="292" cy="175" r="2"/><circle cx="305" cy="175" r="2"/><circle cx="318" cy="175" r="2"/><circle cx="435" cy="175" r="2"/><circle cx="448" cy="175" r="2"/><circle cx="461" cy="175" r="2"/><circle cx="474" cy="175" r="2"/><circle cx="487" cy="175" r="2"/><circle cx="500" cy="175" r="2"/><circle cx="513" cy="175" r="2"/><circle cx="526" cy="175" r="2"/><circle cx="539" cy="175" r="2"/><circle cx="552" cy="175" r="2"/><circle cx="565" cy="175" r="2"/><circle cx="578" cy="175" r="2"/><circle cx="591" cy="175" r="2"/><circle cx="604" cy="175" r="2"/><circle cx="617" cy="175" r="2"/><circle cx="630" cy="175" r="2"/><circle cx="643" cy="175" r="2"/><circle cx="656" cy="175" r="2"/><circle cx="669" cy="175" r="2"/><circle cx="682" cy="175" r="2"/><circle cx="695" cy="175" r="2"/><circle cx="708" cy="175" r="2"/><circle cx="721" cy="175" r="2"/><circle cx="734" cy="175" r="2"/><circle cx="747" cy="175" r="2"/><circle cx="760" cy="175" r="2"/><circle cx="773" cy="175" r="2"/><circle cx="786" cy="175" r="2"/><circle cx="799" cy="175" r="2"/><circle cx="812" cy="175" r="2"/><circle cx="825" cy="175" r="2"/><circle cx="838" cy="175" r="2"/><circle cx="851" cy="175" r="2"/><circle cx="188" cy="188" r="2"/><circle cx="201" cy="188" r="2"/><circle cx="214" cy="188" r="2"/><circle cx="227" cy="188" r="2"/><circle cx="240" cy="188" r="2"/><circle cx="253" cy="188" r="2"/><circle cx="266" cy="188" r="2"/><circle cx="279" cy="188" r="2"/><circle cx="292" cy="188" r="2"/><circle cx="305" cy="188" r="2"/><circle cx="318" cy="188" r="2"/><circle cx="331" cy="188" r="2"/><circle cx="344" cy="188" r="2"/><circle cx="422" cy="188" r="2"/><circle cx="435" cy="188" r="2"/><circle cx="448" cy="188" r="2"/><circle cx="461" cy="188" r="2"/><circle cx="474" cy="188" r="2"/><circle cx="487" cy="188" r="2"/><circle cx="500" cy="188" r="2"/><circle cx="513" cy="188" r="2"/><circle cx="526" cy="188" r="2"/><circle cx="539" cy="188" r="2"/><circle cx="552" cy="188" r="2"/><circle cx="565" cy="188" r="2"/><circle cx="578" cy="188" r="2"/><circle cx="591" cy="188" r="2"/><circle cx="604" cy="188" r="2"/><circle cx="617" cy="188" r="2"/><circle cx="630" cy="188" r="2"/><circle cx="643" cy="188" r="2"/><circle cx="656" cy="188" r="2"/><circle cx="669" cy="188" r="2"/><circle cx="682" cy="188" r="2"/><circle cx="695" cy="188" r="2"/><circle cx="708" cy="188" r="2"/><circle cx="721" cy="188" r="2"/><circle cx="734" cy="188" r="2"/><circle cx="747" cy="188" r="2"/><circle cx="760" cy="188" r="2"/><circle cx="773" cy="188" r="2"/><circle cx="786" cy="188" r="2"/><circle cx="799" cy="188" r="2"/><circle cx="812" cy="188" r="2"/><circle cx="825" cy="188" r="2"/><circle cx="838" cy="188" r="2"/><circle cx="201" cy="201" r="2"/><circle cx="214" cy="201" r="2"/><circle cx="227" cy="201" r="2"/><circle cx="240" cy="201" r="2"/><circle cx="253" cy="201" r="2"/><circle cx="266" cy="201" r="2"/><circle cx="279" cy="201" r="2"/><circle cx="292" cy="201" r="2"/><circle cx="305" cy="201" r="2"/><circle cx="318" cy="201" r="2"/><circle cx="331" cy="201" r="2"/><circle cx="344" cy="201" r="2"/><circle cx="357" cy="201" r="2"/><circle cx="370" cy="201" r="2"/><circle cx="409" cy="201" r="2"/><circle cx="422" cy="201" r="2"/><circle cx="435" cy="201" r="2"/><circle cx="448" cy="201" r="2"/><circle cx="461" cy="201" r="2"/><circle cx="474" cy="201" r="2"/><circle cx="487" cy="201" r="2"/><circle cx="500" cy="201" r="2"/><circle cx="513" cy="201" r="2"/><circle cx="526" cy="201" r="2"/><circle cx="539" cy="201" r="2"/><circle cx="552" cy="201" r="2"/><circle cx="565" cy="201" r="2"/><circle cx="578" cy="201" r="2"/><circle cx="591" cy="201" r="2"/><circle cx="604" cy="201" r="2"/><circle cx="617" cy="201" r="2"/><circle cx="630" cy="201" r="2"/><circle cx="643" cy="201" r="2"/><circle cx="656" cy="201" r="2"/><circle cx="669" cy="201" r="2"/><circle cx="682" cy="201" r="2"/><circle cx="695" cy="201" r="2"/><circle cx="708" cy="201" r="2"/><circle cx="721" cy="201" r="2"/><circle cx="734" cy="201" r="2"/><circle cx="747" cy="201" r="2"/><circle cx="760" cy="201" r="2"/><circle cx="773" cy="201" r="2"/><circle cx="786" cy="201" r="2"/><circle cx="799" cy="201" r="2"/><circle cx="812" cy="201" r="2"/><circle cx="825" cy="201" r="2"/><circle cx="227" cy="214" r="2"/><circle cx="240" cy="214" r="2"/><circle cx="253" cy="214" r="2"/><circle cx="266" cy="214" r="2"/><circle cx="279" cy="214" r="2"/><circle cx="292" cy="214" r="2"/><circle cx="305" cy="214" r="2"/><circle cx="318" cy="214" r="2"/><circle cx="331" cy="214" r="2"/><circle cx="344" cy="214" r="2"/><circle cx="357" cy="214" r="2"/><circle cx="370" cy="214" r="2"/><circle cx="383" cy="214" r="2"/><circle cx="396" cy="214" r="2"/><circle cx="409" cy="214" r="2"/><circle cx="422" cy="214" r="2"/><circle cx="435" cy="214" r="2"/><circle cx="448" cy="214" r="2"/><circle cx="461" cy="214" r="2"/><circle cx="474" cy="214" r="2"/><circle cx="487" cy="214" r="2"/><circle cx="500" cy="214" r="2"/><circle cx="513" cy="214" r="2"/><circle cx="526" cy="214" r="2"/><circle cx="539" cy="214" r="2"/><circle cx="552" cy="214" r="2"/><circle cx="565" cy="214" r="2"/><circle cx="578" cy="214" r="2"/><circle cx="591" cy="214" r="2"/><circle cx="604" cy="214" r="2"/><circle cx="617" cy="214" r="2"/><circle cx="630" cy="214" r="2"/><circle cx="643" cy="214" r="2"/><circle cx="656" cy="214" r="2"/><circle cx="669" cy="214" r="2"/><circle cx="682" cy="214" r="2"/><circle cx="734" cy="214" r="2"/><circle cx="747" cy="214" r="2"/><circle cx="760" cy="214" r="2"/><circle cx="773" cy="214" r="2"/><circle cx="786" cy="214" r="2"/><circle cx="799" cy="214" r="2"/><circle cx="812" cy="214" r="2"/><circle cx="825" cy="214" r="2"/><circle cx="279" cy="227" r="2"/><circle cx="292" cy="227" r="2"/><circle cx="305" cy="227" r="2"/><circle cx="318" cy="227" r="2"/><circle cx="331" cy="227" r="2"/><circle cx="344" cy="227" r="2"/><circle cx="357" cy="227" r="2"/><circle cx="370" cy="227" r="2"/><circle cx="383" cy="227" r="2"/><circle cx="396" cy="227" r="2"/><circle cx="409" cy="227" r="2"/><circle cx="422" cy="227" r="2"/><circle cx="435" cy="227" r="2"/><circle cx="448" cy="227" r="2"/><circle cx="461" cy="227" r="2"/><circle cx="474" cy="227" r="2"/><circle cx="487" cy="227" r="2"/><circle cx="500" cy="227" r="2"/><circle cx="513" cy="227" r="2"/><circle cx="526" cy="227" r="2"/><circle cx="539" cy="227" r="2"/><circle cx="552" cy="227" r="2"/><circle cx="565" cy="227" r="2"/><circle cx="578" cy="227" r="2"/><circle cx="591" cy="227" r="2"/><circle cx="604" cy="227" r="2"/><circle cx="617" cy="227" r="2"/><circle cx="630" cy="227" r="2"/><circle cx="643" cy="227" r="2"/><circle cx="656" cy="227" r="2"/><circle cx="669" cy="227" r="2"/><circle cx="682" cy="227" r="2"/><circle cx="721" cy="227" r="2"/><circle cx="734" cy="227" r="2"/><circle cx="747" cy="227" r="2"/><circle cx="760" cy="227" r="2"/><circle cx="773" cy="227" r="2"/><circle cx="786" cy="227" r="2"/><circle cx="799" cy="227" r="2"/><circle cx="812" cy="227" r="2"/><circle cx="825" cy="227" r="2"/><circle cx="838" cy="227" r="2"/><circle cx="279" cy="240" r="2"/><circle cx="292" cy="240" r="2"/><circle cx="305" cy="240" r="2"/><circle cx="318" cy="240" r="2"/><circle cx="331" cy="240" r="2"/><circle cx="344" cy="240" r="2"/><circle cx="357" cy="240" r="2"/><circle cx="370" cy="240" r="2"/><circle cx="383" cy="240" r="2"/><circle cx="396" cy="240" r="2"/><circle cx="409" cy="240" r="2"/><circle cx="422" cy="240" r="2"/><circle cx="435" cy="240" r="2"/><circle cx="448" cy="240" r="2"/><circle cx="461" cy="240" r="2"/><circle cx="474" cy="240" r="2"/><circle cx="487" cy="240" r="2"/><circle cx="500" cy="240" r="2"/><circle cx="513" cy="240" r="2"/><circle cx="526" cy="240" r="2"/><circle cx="539" cy="240" r="2"/><circle cx="552" cy="240" r="2"/><circle cx="565" cy="240" r="2"/><circle cx="578" cy="240" r="2"/><circle cx="591" cy="240" r="2"/><circle cx="604" cy="240" r="2"/><circle cx="617" cy="240" r="2"/><circle cx="630" cy="240" r="2"/><circle cx="643" cy="240" r="2"/><circle cx="656" cy="240" r="2"/><circle cx="669" cy="240" r="2"/><circle cx="682" cy="240" r="2"/><circle cx="721" cy="240" r="2"/><circle cx="734" cy="240" r="2"/><circle cx="747" cy="240" r="2"/><circle cx="760" cy="240" r="2"/><circle cx="773" cy="240" r="2"/><circle cx="786" cy="240" r="2"/><circle cx="799" cy="240" r="2"/><circle cx="812" cy="240" r="2"/><circle cx="825" cy="240" r="2"/><circle cx="838" cy="240" r="2"/><circle cx="851" cy="240" r="2"/><circle cx="864" cy="240" r="2"/><circle cx="279" cy="253" r="2"/><circle cx="292" cy="253" r="2"/><circle cx="305" cy="253" r="2"/><circle cx="318" cy="253" r="2"/><circle cx="331" cy="253" r="2"/><circle cx="344" cy="253" r="2"/><circle cx="357" cy="253" r="2"/><circle cx="370" cy="253" r="2"/><circle cx="383" cy="253" r="2"/><circle cx="396" cy="253" r="2"/><circle cx="409" cy="253" r="2"/><circle cx="422" cy="253" r="2"/><circle cx="435" cy="253" r="2"/><circle cx="448" cy="253" r="2"/><circle cx="461" cy="253" r="2"/><circle cx="474" cy="253" r="2"/><circle cx="487" cy="253" r="2"/><circle cx="500" cy="253" r="2"/><circle cx="513" cy="253" r="2"/><circle cx="526" cy="253" r="2"/><circle cx="539" cy="253" r="2"/><circle cx="552" cy="253" r="2"/><circle cx="565" cy="253" r="2"/><circle cx="578" cy="253" r="2"/><circle cx="591" cy="253" r="2"/><circle cx="604" cy="253" r="2"/><circle cx="617" cy="253" r="2"/><circle cx="630" cy="253" r="2"/><circle cx="643" cy="253" r="2"/><circle cx="656" cy="253" r="2"/><circle cx="669" cy="253" r="2"/><circle cx="734" cy="253" r="2"/><circle cx="747" cy="253" r="2"/><circle cx="760" cy="253" r="2"/><circle cx="773" cy="253" r="2"/><circle cx="786" cy="253" r="2"/><circle cx="799" cy="253" r="2"/><circle cx="812" cy="253" r="2"/><circle cx="825" cy="253" r="2"/><circle cx="838" cy="253" r="2"/><circle cx="851" cy="253" r="2"/><circle cx="864" cy="253" r="2"/><circle cx="877" cy="253" r="2"/><circle cx="292" cy="266" r="2"/><circle cx="305" cy="266" r="2"/><circle cx="318" cy="266" r="2"/><circle cx="331" cy="266" r="2"/><circle cx="344" cy="266" r="2"/><circle cx="357" cy="266" r="2"/><circle cx="370" cy="266" r="2"/><circle cx="383" cy="266" r="2"/><circle cx="396" cy="266" r="2"/><circle cx="409" cy="266" r="2"/><circle cx="422" cy="266" r="2"/><circle cx="435" cy="266" r="2"/><circle cx="448" cy="266" r="2"/><circle cx="461" cy="266" r="2"/><circle cx="474" cy="266" r="2"/><circle cx="487" cy="266" r="2"/><circle cx="500" cy="266" r="2"/><circle cx="513" cy="266" r="2"/><circle cx="526" cy="266" r="2"/><circle cx="539" cy="266" r="2"/><circle cx="552" cy="266" r="2"/><circle cx="565" cy="266" r="2"/><circle cx="578" cy="266" r="2"/><circle cx="591" cy="266" r="2"/><circle cx="604" cy="266" r="2"/><circle cx="617" cy="266" r="2"/><circle cx="630" cy="266" r="2"/><circle cx="643" cy="266" r="2"/><circle cx="656" cy="266" r="2"/><circle cx="669" cy="266" r="2"/><circle cx="682" cy="266" r="2"/><circle cx="799" cy="266" r="2"/><circle cx="812" cy="266" r="2"/><circle cx="825" cy="266" r="2"/><circle cx="838" cy="266" r="2"/><circle cx="851" cy="266" r="2"/><circle cx="864" cy="266" r="2"/><circle cx="877" cy="266" r="2"/><circle cx="890" cy="266" r="2"/><circle cx="903" cy="266" r="2"/><circle cx="916" cy="266" r="2"/><circle cx="292" cy="279" r="2"/><circle cx="305" cy="279" r="2"/><circle cx="318" cy="279" r="2"/><circle cx="331" cy="279" r="2"/><circle cx="344" cy="279" r="2"/><circle cx="357" cy="279" r="2"/><circle cx="370" cy="279" r="2"/><circle cx="383" cy="279" r="2"/><circle cx="396" cy="279" r="2"/><circle cx="409" cy="279" r="2"/><circle cx="422" cy="279" r="2"/><circle cx="435" cy="279" r="2"/><circle cx="448" cy="279" r="2"/><circle cx="461" cy="279" r="2"/><circle cx="474" cy="279" r="2"/><circle cx="487" cy="279" r="2"/><circle cx="500" cy="279" r="2"/><circle cx="513" cy="279" r="2"/><circle cx="526" cy="279" r="2"/><circle cx="539" cy="279" r="2"/><circle cx="552" cy="279" r="2"/><circle cx="565" cy="279" r="2"/><circle cx="578" cy="279" r="2"/><circle cx="591" cy="279" r="2"/><circle cx="604" cy="279" r="2"/><circle cx="617" cy="279" r="2"/><circle cx="630" cy="279" r="2"/><circle cx="643" cy="279" r="2"/><circle cx="656" cy="279" r="2"/><circle cx="682" cy="279" r="2"/><circle cx="695" cy="279" r="2"/><circle cx="786" cy="279" r="2"/><circle cx="799" cy="279" r="2"/><circle cx="812" cy="279" r="2"/><circle cx="825" cy="279" r="2"/><circle cx="838" cy="279" r="2"/><circle cx="851" cy="279" r="2"/><circle cx="864" cy="279" r="2"/><circle cx="877" cy="279" r="2"/><circle cx="890" cy="279" r="2"/><circle cx="903" cy="279" r="2"/><circle cx="916" cy="279" r="2"/><circle cx="929" cy="279" r="2"/><circle cx="305" cy="292" r="2"/><circle cx="318" cy="292" r="2"/><circle cx="331" cy="292" r="2"/><circle cx="344" cy="292" r="2"/><circle cx="357" cy="292" r="2"/><circle cx="370" cy="292" r="2"/><circle cx="383" cy="292" r="2"/><circle cx="396" cy="292" r="2"/><circle cx="409" cy="292" r="2"/><circle cx="422" cy="292" r="2"/><circle cx="435" cy="292" r="2"/><circle cx="474" cy="292" r="2"/><circle cx="487" cy="292" r="2"/><circle cx="500" cy="292" r="2"/><circle cx="513" cy="292" r="2"/><circle cx="526" cy="292" r="2"/><circle cx="539" cy="292" r="2"/><circle cx="552" cy="292" r="2"/><circle cx="565" cy="292" r="2"/><circle cx="578" cy="292" r="2"/><circle cx="591" cy="292" r="2"/><circle cx="604" cy="292" r="2"/><circle cx="617" cy="292" r="2"/><circle cx="630" cy="292" r="2"/><circle cx="643" cy="292" r="2"/><circle cx="682" cy="292" r="2"/><circle cx="695" cy="292" r="2"/><circle cx="773" cy="292" r="2"/><circle cx="786" cy="292" r="2"/><circle cx="799" cy="292" r="2"/><circle cx="812" cy="292" r="2"/><circle cx="825" cy="292" r="2"/><circle cx="838" cy="292" r="2"/><circle cx="851" cy="292" r="2"/><circle cx="864" cy="292" r="2"/><circle cx="877" cy="292" r="2"/><circle cx="890" cy="292" r="2"/><circle cx="903" cy="292" r="2"/><circle cx="916" cy="292" r="2"/><circle cx="929" cy="292" r="2"/><circle cx="318" cy="305" r="2"/><circle cx="331" cy="305" r="2"/><circle cx="344" cy="305" r="2"/><circle cx="357" cy="305" r="2"/><circle cx="370" cy="305" r="2"/><circle cx="383" cy="305" r="2"/><circle cx="396" cy="305" r="2"/><circle cx="409" cy="305" r="2"/><circle cx="422" cy="305" r="2"/><circle cx="435" cy="305" r="2"/><circle cx="487" cy="305" r="2"/><circle cx="500" cy="305" r="2"/><circle cx="513" cy="305" r="2"/><circle cx="526" cy="305" r="2"/><circle cx="539" cy="305" r="2"/><circle cx="552" cy="305" r="2"/><circle cx="565" cy="305" r="2"/><circle cx="578" cy="305" r="2"/><circle cx="591" cy="305" r="2"/><circle cx="604" cy="305" r="2"/><circle cx="617" cy="305" r="2"/><circle cx="630" cy="305" r="2"/><circle cx="773" cy="305" r="2"/><circle cx="786" cy="305" r="2"/><circle cx="799" cy="305" r="2"/><circle cx="812" cy="305" r="2"/><circle cx="825" cy="305" r="2"/><circle cx="838" cy="305" r="2"/><circle cx="851" cy="305" r="2"/><circle cx="864" cy="305" r="2"/><circle cx="877" cy="305" r="2"/><circle cx="890" cy="305" r="2"/><circle cx="903" cy="305" r="2"/><circle cx="916" cy="305" r="2"/><circle cx="929" cy="305" r="2"/><circle cx="331" cy="318" r="2"/><circle cx="344" cy="318" r="2"/><circle cx="357" cy="318" r="2"/><circle cx="370" cy="318" r="2"/><circle cx="383" cy="318" r="2"/><circle cx="396" cy="318" r="2"/><circle cx="409" cy="318" r="2"/><circle cx="422" cy="318" r="2"/><circle cx="500" cy="318" r="2"/><circle cx="513" cy="318" r="2"/><circle cx="526" cy="318" r="2"/><circle cx="539" cy="318" r="2"/><circle cx="552" cy="318" r="2"/><circle cx="565" cy="318" r="2"/><circle cx="578" cy="318" r="2"/><circle cx="591" cy="318" r="2"/><circle cx="604" cy="318" r="2"/><circle cx="786" cy="318" r="2"/><circle cx="799" cy="318" r="2"/><circle cx="812" cy="318" r="2"/><circle cx="825" cy="318" r="2"/><circle cx="838" cy="318" r="2"/><circle cx="851" cy="318" r="2"/><circle cx="864" cy="318" r="2"/><circle cx="877" cy="318" r="2"/><circle cx="890" cy="318" r="2"/><circle cx="903" cy="318" r="2"/><circle cx="916" cy="318" r="2"/><circle cx="331" cy="331" r="2"/><circle cx="344" cy="331" r="2"/><circle cx="357" cy="331" r="2"/><circle cx="370" cy="331" r="2"/><circle cx="383" cy="331" r="2"/><circle cx="396" cy="331" r="2"/><circle cx="409" cy="331" r="2"/><circle cx="812" cy="331" r="2"/><circle cx="825" cy="331" r="2"/><circle cx="838" cy="331" r="2"/><circle cx="903" cy="331" r="2"/><circle cx="916" cy="331" r="2"/><circle cx="929" cy="331" r="2"/><circle cx="344" cy="344" r="2"/><circle cx="357" cy="344" r="2"/><circle cx="370" cy="344" r="2"/><circle cx="383" cy="344" r="2"/><circle cx="396" cy="344" r="2"/><circle cx="903" cy="344" r="2"/><circle cx="916" cy="344" r="2"/><circle cx="929" cy="344" r="2"/><circle cx="357" cy="357" r="2"/><circle cx="370" cy="357" r="2"/><circle cx="383" cy="357" r="2"/><circle cx="396" cy="357" r="2"/><circle cx="357" cy="370" r="2"/><circle cx="370" cy="370" r="2"/><circle cx="383" cy="370" r="2"/><circle cx="396" cy="370" r="2"/><circle cx="370" cy="383" r="2"/><circle cx="383" cy="383" r="2"/></g><circle cx="518" cy="104" r="5" fill="#e2d5a4"/><circle cx="518" cy="104" r="14" fill="none" stroke="#e2d5a4" stroke-opacity=".6"/></svg>
+  </div>
+  <div class="wrap two">
+    <div class="compass-wrap" data-reveal>
+<svg class="compass" viewBox="0 0 400 400" role="img" aria-label="Compass rose with the Northstar mark at its centre; the north-east sector carries the flag of the United States and the south-east sector the flag of Poland">
+  <defs>
+    <radialGradient id="cp-face" cx="42%" cy="36%" r="70%"><stop offset="0" stop-color="#2a3227"/><stop offset=".6" stop-color="#161b14"/><stop offset="1" stop-color="#0c0f0b"/></radialGradient>
+    <linearGradient id="cp-rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6ebee"/><stop offset=".5" stop-color="#8a949c"/><stop offset="1" stop-color="#d9dfe3"/></linearGradient>
+    <clipPath id="cp-ne"><path d="M200 200 L200 35 A165 165 0 0 1 365 200 Z"/></clipPath>
+    <clipPath id="cp-se"><path d="M200 200 L365 200 A165 165 0 0 1 200 365 Z"/></clipPath>
+    <pattern id="cp-grain" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".5" fill="#fff" opacity=".05"/></pattern>
+  </defs>
+  <circle cx="200" cy="200" r="198" fill="url(#cp-rim)"/>
+  <circle cx="200" cy="200" r="190" fill="#1a1f18"/>
+  <g class="ring-ticks" stroke="#c9d1d8" stroke-opacity=".8" stroke-width="1.4"><line x1="200.0" y1="22.0" x2="200.0" y2="8.0"/><line x1="216.0" y1="16.7" x2="216.7" y2="8.7"/><line x1="232.0" y1="18.8" x2="233.3" y2="10.9"/><line x1="247.6" y1="22.3" x2="249.7" y2="14.5"/><line x1="262.9" y1="27.1" x2="265.7" y2="19.6"/><line x1="277.8" y1="33.2" x2="281.1" y2="26.0"/><line x1="292.0" y1="40.7" x2="296.0" y2="33.7"/><line x1="305.5" y1="49.3" x2="310.1" y2="42.7"/><line x1="318.3" y1="59.0" x2="323.4" y2="52.9"/><line x1="325.9" y1="74.1" x2="335.8" y2="64.2"/><line x1="341.0" y1="81.7" x2="347.1" y2="76.6"/><line x1="350.7" y1="94.5" x2="357.3" y2="89.9"/><line x1="359.3" y1="108.0" x2="366.3" y2="104.0"/><line x1="366.8" y1="122.2" x2="374.0" y2="118.9"/><line x1="372.9" y1="137.1" x2="380.4" y2="134.3"/><line x1="377.7" y1="152.4" x2="385.5" y2="150.3"/><line x1="381.2" y1="168.0" x2="389.1" y2="166.7"/><line x1="383.3" y1="184.0" x2="391.3" y2="183.3"/><line x1="378.0" y1="200.0" x2="392.0" y2="200.0"/><line x1="383.3" y1="216.0" x2="391.3" y2="216.7"/><line x1="381.2" y1="232.0" x2="389.1" y2="233.3"/><line x1="377.7" y1="247.6" x2="385.5" y2="249.7"/><line x1="372.9" y1="262.9" x2="380.4" y2="265.7"/><line x1="366.8" y1="277.8" x2="374.0" y2="281.1"/><line x1="359.3" y1="292.0" x2="366.3" y2="296.0"/><line x1="350.7" y1="305.5" x2="357.3" y2="310.1"/><line x1="341.0" y1="318.3" x2="347.1" y2="323.4"/><line x1="325.9" y1="325.9" x2="335.8" y2="335.8"/><line x1="318.3" y1="341.0" x2="323.4" y2="347.1"/><line x1="305.5" y1="350.7" x2="310.1" y2="357.3"/><line x1="292.0" y1="359.3" x2="296.0" y2="366.3"/><line x1="277.8" y1="366.8" x2="281.1" y2="374.0"/><line x1="262.9" y1="372.9" x2="265.7" y2="380.4"/><line x1="247.6" y1="377.7" x2="249.7" y2="385.5"/><line x1="232.0" y1="381.2" x2="233.3" y2="389.1"/><line x1="216.0" y1="383.3" x2="216.7" y2="391.3"/><line x1="200.0" y1="378.0" x2="200.0" y2="392.0"/><line x1="184.0" y1="383.3" x2="183.3" y2="391.3"/><line x1="168.0" y1="381.2" x2="166.7" y2="389.1"/><line x1="152.4" y1="377.7" x2="150.3" y2="385.5"/><line x1="137.1" y1="372.9" x2="134.3" y2="380.4"/><line x1="122.2" y1="366.8" x2="118.9" y2="374.0"/><line x1="108.0" y1="359.3" x2="104.0" y2="366.3"/><line x1="94.5" y1="350.7" x2="89.9" y2="357.3"/><line x1="81.7" y1="341.0" x2="76.6" y2="347.1"/><line x1="74.1" y1="325.9" x2="64.2" y2="335.8"/><line x1="59.0" y1="318.3" x2="52.9" y2="323.4"/><line x1="49.3" y1="305.5" x2="42.7" y2="310.1"/><line x1="40.7" y1="292.0" x2="33.7" y2="296.0"/><line x1="33.2" y1="277.8" x2="26.0" y2="281.1"/><line x1="27.1" y1="262.9" x2="19.6" y2="265.7"/><line x1="22.3" y1="247.6" x2="14.5" y2="249.7"/><line x1="18.8" y1="232.0" x2="10.9" y2="233.3"/><line x1="16.7" y1="216.0" x2="8.7" y2="216.7"/><line x1="22.0" y1="200.0" x2="8.0" y2="200.0"/><line x1="16.7" y1="184.0" x2="8.7" y2="183.3"/><line x1="18.8" y1="168.0" x2="10.9" y2="166.7"/><line x1="22.3" y1="152.4" x2="14.5" y2="150.3"/><line x1="27.1" y1="137.1" x2="19.6" y2="134.3"/><line x1="33.2" y1="122.2" x2="26.0" y2="118.9"/><line x1="40.7" y1="108.0" x2="33.7" y2="104.0"/><line x1="49.3" y1="94.5" x2="42.7" y2="89.9"/><line x1="59.0" y1="81.7" x2="52.9" y2="76.6"/><line x1="74.1" y1="74.1" x2="64.2" y2="64.2"/><line x1="81.7" y1="59.0" x2="76.6" y2="52.9"/><line x1="94.5" y1="49.3" x2="89.9" y2="42.7"/><line x1="108.0" y1="40.7" x2="104.0" y2="33.7"/><line x1="122.2" y1="33.2" x2="118.9" y2="26.0"/><line x1="137.1" y1="27.1" x2="134.3" y2="19.6"/><line x1="152.4" y1="22.3" x2="150.3" y2="14.5"/><line x1="168.0" y1="18.8" x2="166.7" y2="10.9"/><line x1="184.0" y1="16.7" x2="183.3" y2="8.7"/></g>
+  <circle cx="200" cy="200" r="172" fill="url(#cp-face)" stroke="#8a949c" stroke-opacity=".5"/>
+  <g clip-path="url(#cp-ne)" opacity=".62"><rect x="200" y="35.00" width="165" height="12.69" fill="#b22234"/><rect x="200" y="47.69" width="165" height="12.69" fill="#e9e6e0"/><rect x="200" y="60.38" width="165" height="12.69" fill="#b22234"/><rect x="200" y="73.08" width="165" height="12.69" fill="#e9e6e0"/><rect x="200" y="85.77" width="165" height="12.69" fill="#b22234"/><rect x="200" y="98.46" width="165" height="12.69" fill="#e9e6e0"/><rect x="200" y="111.15" width="165" height="12.69" fill="#b22234"/><rect x="200" y="123.85" width="165" height="12.69" fill="#e9e6e0"/><rect x="200" y="136.54" width="165" height="12.69" fill="#b22234"/><rect x="200" y="149.23" width="165" height="12.69" fill="#e9e6e0"/><rect x="200" y="161.92" width="165" height="12.69" fill="#b22234"/><rect x="200" y="174.62" width="165" height="12.69" fill="#e9e6e0"/><rect x="200" y="187.31" width="165" height="12.69" fill="#b22234"/><rect x="200" y="35" width="70" height="88" fill="#3c3b6e"/><circle cx="208.0" cy="42.0" r="1.6" fill="#fff"/><circle cx="221.0" cy="42.0" r="1.6" fill="#fff"/><circle cx="234.0" cy="42.0" r="1.6" fill="#fff"/><circle cx="247.0" cy="42.0" r="1.6" fill="#fff"/><circle cx="260.0" cy="42.0" r="1.6" fill="#fff"/><circle cx="214.5" cy="53.0" r="1.6" fill="#fff"/><circle cx="227.5" cy="53.0" r="1.6" fill="#fff"/><circle cx="240.5" cy="53.0" r="1.6" fill="#fff"/><circle cx="253.5" cy="53.0" r="1.6" fill="#fff"/><circle cx="266.5" cy="53.0" r="1.6" fill="#fff"/><circle cx="208.0" cy="64.0" r="1.6" fill="#fff"/><circle cx="221.0" cy="64.0" r="1.6" fill="#fff"/><circle cx="234.0" cy="64.0" r="1.6" fill="#fff"/><circle cx="247.0" cy="64.0" r="1.6" fill="#fff"/><circle cx="260.0" cy="64.0" r="1.6" fill="#fff"/><circle cx="214.5" cy="75.0" r="1.6" fill="#fff"/><circle cx="227.5" cy="75.0" r="1.6" fill="#fff"/><circle cx="240.5" cy="75.0" r="1.6" fill="#fff"/><circle cx="253.5" cy="75.0" r="1.6" fill="#fff"/><circle cx="266.5" cy="75.0" r="1.6" fill="#fff"/><circle cx="208.0" cy="86.0" r="1.6" fill="#fff"/><circle cx="221.0" cy="86.0" r="1.6" fill="#fff"/><circle cx="234.0" cy="86.0" r="1.6" fill="#fff"/><circle cx="247.0" cy="86.0" r="1.6" fill="#fff"/><circle cx="260.0" cy="86.0" r="1.6" fill="#fff"/><circle cx="214.5" cy="97.0" r="1.6" fill="#fff"/><circle cx="227.5" cy="97.0" r="1.6" fill="#fff"/><circle cx="240.5" cy="97.0" r="1.6" fill="#fff"/><circle cx="253.5" cy="97.0" r="1.6" fill="#fff"/><circle cx="266.5" cy="97.0" r="1.6" fill="#fff"/><circle cx="208.0" cy="108.0" r="1.6" fill="#fff"/><circle cx="221.0" cy="108.0" r="1.6" fill="#fff"/><circle cx="234.0" cy="108.0" r="1.6" fill="#fff"/><circle cx="247.0" cy="108.0" r="1.6" fill="#fff"/><circle cx="260.0" cy="108.0" r="1.6" fill="#fff"/></g>
+  <g clip-path="url(#cp-se)" opacity=".62"><rect x="200" y="200" width="165" height="82.5" fill="#efece6"/><rect x="200" y="282.5" width="165" height="82.5" fill="#c1121f"/></g>
+  <circle cx="200" cy="200" r="172" fill="url(#cp-grain)"/>
+  <circle cx="200" cy="200" r="172" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="14"/>
+  <g fill="none" stroke="#c9d1d8" stroke-opacity=".25"><circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="60"/><path d="M200 28V372M28 200H372"/></g>
+  <g font-family="Barlow Condensed, sans-serif" font-weight="700" fill="#ede7d6" letter-spacing="1"><text x="200.0" y="57.0" text-anchor="middle" font-size="22">N</text><text x="306.1" y="100.9" text-anchor="middle" font-size="15">NE</text><text x="350.0" y="207.0" text-anchor="middle" font-size="22">E</text><text x="306.1" y="313.1" text-anchor="middle" font-size="15">SE</text><text x="200.0" y="357.0" text-anchor="middle" font-size="22">S</text><text x="93.9" y="313.1" text-anchor="middle" font-size="15">SW</text><text x="50.0" y="207.0" text-anchor="middle" font-size="22">W</text><text x="93.9" y="100.9" text-anchor="middle" font-size="15">NW</text></g>
+  <use href="#star" x="112" y="112" width="176" height="176"/>
+</svg>
+    </div>
+    <div data-reveal>
+      <p class="eyebrow" data-i18n>Global reach. Local precision.</p>
+      <h2 class="h2" data-i18n>One mission. Worldwide delivery.</h2>
+      <div class="rule"></div>
+      <p class="lead" data-i18n>Headquartered in Poznań and operating through Poland's Baltic seaports, with contracting registrations in place for the United States and the European Union. Built on the Polish-American partnership, ready for allied programmes wherever they deploy.</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l" data-i18n>Baltic seaports engaged</div></div>
+        <div class="stat"><div class="stat-n">2</div><div class="stat-l" data-i18n>Contracting registrations</div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l" data-i18n>Retired officers advising</div></div>
+        <div class="stat"><div class="stat-n">24/7</div><div class="stat-l" data-i18n>Operational readiness</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CREDENTIALS ============================= -->
+<section class="sec sec-alt" id="credentials">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow" data-i18n>Government &amp; allied contracting</p>
+      <h2 class="h2" data-i18n>Registered. Verified.</h2>
+      <p class="tagline" data-i18n>NATO codification. U.S. SAM. E.U. contracting.</p>
+    </div>
+    <div class="creds">
+      <div class="card" data-reveal>
+        <h3 class="h3" data-i18n>Identifiers</h3>
+        <p class="muted" style="margin-bottom:14px" data-i18n>Supplier identifiers required to contract with allied defence and government customers.</p>
+        <div class="kv"><span class="kv-k">NCAGE</span><span class="kv-v">9CZ9H</span></div>
+        <div class="kv"><span class="kv-k">UEI (SAM.gov)</span><span class="kv-v">S9EYKVSLRSQ5</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>U.S. government contracting</span><span class="kv-v" data-i18n>Registered</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>E.U. government contracting</span><span class="kv-v" data-i18n>Registered</span></div>
+      </div>
+      <div class="card" data-reveal>
+        <h3 class="h3" data-i18n>Engagements</h3>
+        <p class="muted" style="margin-bottom:14px" data-i18n>Current strategic activity and operational cooperation.</p>
+        <div class="kv"><span class="kv-k">USTRANSCOM</span><span class="kv-v" data-i18n>Proposal prepared</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Port of Gdańsk</span><span class="kv-v" data-i18n>Cooperation</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Port of Szczecin</span><span class="kv-v" data-i18n>Cooperation</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Port of Świnoujście</span><span class="kv-v" data-i18n>Cooperation</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Port of Gdynia</span><span class="kv-v" data-i18n>Solutions proposed</span></div>
+      </div>
+    </div>
+    <p class="note" data-reveal data-i18n>Northstar coordinated and prepared a comprehensive proposal for the United States Transportation Command covering military logistics through the Port of Gdańsk. NCAGE and UEI are supplier identification codes in the NATO codification system and the U.S. System for Award Management; they identify a registered entity and are not a certification or membership.</p>
+  </div>
+</section>
+
+<!-- ================================ ABOUT ================================ -->
+<section class="sec" id="about">
+  <div class="wrap two">
+    <div data-reveal>
+      <p class="eyebrow" data-i18n>About Northstar</p>
+      <h2 class="h2" data-i18n>Mission first.</h2>
+      <div class="rule"></div>
+      <p class="lead" data-i18n>Northstar Tactical Logistics is a newly established company formed specifically to support the armed forces. Its management and key personnel bring extensive combined experience in the defence logistics sector — maritime port security, strategic transport, government contracting, port operations, unmanned systems and critical infrastructure.</p>
+      <div class="people">
+        <div class="person"><div class="person-n">Mariusz Kołtoniak</div><div class="person-r" data-i18n>President of the Management Board</div></div>
+        <div class="person"><div class="person-n">Wioletta Zofia Perz</div><div class="person-r" data-i18n>Partner</div></div>
+        <div class="person"><div class="person-n" data-i18n>Cdr (ret.) Dr Eng. Rajmund Smolarczyk</div><div class="person-r" data-i18n>Defence advisory board</div><div class="person-d" data-i18n>Maritime security and port protection.</div></div>
+        <div class="person"><div class="person-n" data-i18n>Lt Col (ret.) Zbigniew Szałaciński</div><div class="person-r" data-i18n>Defence advisory board</div><div class="person-d" data-i18n>Military logistics and operational planning.</div></div>
+        <div class="person"><div class="person-n" data-i18n>Lt Cdr (ret.) Artur Kukiełko</div><div class="person-r" data-i18n>Defence advisory board</div><div class="person-d" data-i18n>Maritime operations and security.</div></div>
+      </div>
+    </div>
+    <div class="about-photo" data-reveal>
+      <img src="assets/img/hemtt-tractor.jpg" srcset="assets/img/hemtt-tractor-800.jpg 800w, assets/img/hemtt-tractor.jpg 1600w" sizes="(max-width:900px) 100vw, 50vw" alt="Heavy tactical tractor unit loaded on a lowloader trailer" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- =============================== CONTACT =============================== -->
+<section class="sec sec-alt" id="contact">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow" data-i18n>Contact</p>
+      <h2 class="h2" data-i18n>Ready. Anywhere. Anytime.</h2>
+      <p class="tagline" data-i18n>We deliver. You succeed.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo" data-reveal>
+        <div class="kv"><span class="kv-k" data-i18n>President of the Board</span><span class="kv-v"><a href="mailto:m.koltoniak@ntl-g.com">m.koltoniak@ntl-g.com</a><br><a href="tel:+48790387800">+48 790 387 800</a></span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Partner</span><span class="kv-v"><a href="mailto:w.perz@ntl-g.com">w.perz@ntl-g.com</a><br><a href="tel:+48732872698">+48 732 872 698</a></span></div>
+        <div class="kv"><span class="kv-k" data-i18n>General enquiries</span><span class="kv-v"><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Headquarters</span><span class="kv-v" data-i18n>Poznań, Poland</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Languages</span><span class="kv-v">PL · EN · DE</span></div>
+      </div>
+      <form class="form" id="form" data-reveal>
+        <div class="form-row">
+          <div class="field"><label for="f-name" data-i18n>Name *</label><input id="f-name" type="text" autocomplete="name" required><p class="err" id="e-name"></p></div>
+          <div class="field"><label for="f-org" data-i18n>Organisation</label><input id="f-org" type="text" autocomplete="organization"></div>
+        </div>
+        <div class="field"><label for="f-email" data-i18n>Email *</label><input id="f-email" type="email" autocomplete="email" required><p class="err" id="e-email"></p></div>
+        <div class="field"><label for="f-msg" data-i18n>Message *</label><textarea id="f-msg" required></textarea><p class="err" id="e-msg"></p></div>
+        <button class="btn btn-solid" type="submit"><span data-i18n>Send message</span> <span class="arr" aria-hidden="true">→</span></button>
+        <p class="form-ok" id="form-ok" role="status" hidden></p>
+        <p class="form-note" data-i18n>This form opens a pre-filled message in your email client and sends nothing to a third party.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <div class="foot-brand">
+        <svg class="brand-star" aria-hidden="true"><use href="#star"/></svg>
+        <span><span class="brand-name">NORTHSTAR</span><br><span class="brand-sub">TACTICAL LOGISTICS</span></span>
+      </div>
+      <p data-i18n>Defence logistics and strategic mobility from Poznań, Poland. NCAGE 9CZ9H · UEI S9EYKVSLRSQ5 · Registered for U.S. and E.U. government contracting.</p>
+    </div>
+    <div>
+      <div class="foot-h" data-i18n>Navigation</div>
+      <ul>
+        <li><a href="#services" data-i18n>Services</a></li>
+        <li><a href="#field" data-i18n>Operations</a></li>
+        <li><a href="#credentials" data-i18n>Credentials</a></li>
+        <li><a href="#about" data-i18n>About</a></li>
+        <li><a href="#contact" data-i18n>Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-h" data-i18n>Contact</div>
+      <ul>
+        <li><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></li>
+        <li><a href="tel:+48790387800">+48 790 387 800</a></li>
+        <li><a href="https://www.northstartacticallogistics.com/">northstartacticallogistics.com</a></li>
+        <li data-i18n>Poznań, Poland</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="foot-bottom"><span>© <span id="year">2026</span> Northstar Tactical Logistics</span><span data-i18n>Preview build — v2</span></div></div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- Polish ------------------------------------------------------------
+     Keyed by the English source markup of each [data-i18n] element. Anything
+     absent here stays in English on purpose: names, codes, identical terms. */
+  var PL = {
+    "Skip to content":"Przejdź do treści",
+    "Services":"Usługi","Operations":"Operacje","Reach":"Zasięg","Credentials":"Rejestracje","About":"O nas","Contact":"Kontakt",
+    "Reliability. Precision. Security.":"Niezawodność. Precyzja. Bezpieczeństwo.",
+    "Logistics without borders.":"Logistyka bez granic.",
+    "Heavy military transport, port operations, fuel supply and unmanned systems — delivered from Poznań for allied and government programmes across Europe.":"Ciężki transport wojskowy, operacje portowe, zabezpieczenie paliw i systemy bezzałogowe — realizowane z Poznania dla programów sojuszniczych i rządowych w całej Europie.",
+    "Our services":"Nasze usługi","Contact us":"Skontaktuj się",
+    "NCAGE code":"Kod NCAGE","Government contracting":"Kontraktowanie rządowe","U.S. &amp; E.U. — registered":"USA i UE — zarejestrowani","Headquarters":"Siedziba","Poznań, Poland":"Poznań, Polska",
+    "What we do":"Czym się zajmujemy","Eight competencies. One chain of command.":"Osiem kompetencji. Jedna struktura dowodzenia.","Planned. Coordinated. Delivered.":"Zaplanowane. Skoordynowane. Dostarczone.",
+    "Defence Logistics":"Logistyka obronna","Planned. Coordinated. Sustained.":"Planowanie. Koordynacja. Utrzymanie.",
+    "End-to-end logistics support for military units, government agencies and allied programmes.":"Kompleksowe wsparcie logistyczne dla jednostek wojskowych, agencji rządowych i programów sojuszniczych.",
+    "Strategic Transport":"Transport strategiczny","Heavy. Secure. Anywhere.":"Ciężki. Bezpieczny. Wszędzie.",
+    "Specialised and heavy haulage, military transport, personnel movement and troop relocation across Poland and allied territories.":"Przewozy specjalistyczne i ciężkie, transport wojskowy, przewozy osobowe oraz relokacja wojsk na terenie Polski oraz terytoriów sojuszniczych.",
+    "Port Operations":"Operacje portowe",
+    "Port logistics and maritime security expertise, with cooperation developed at Poland's Baltic seaports.":"Logistyka portowa i kompetencje w zakresie bezpieczeństwa morskiego, przy współpracy rozwijanej z polskimi portami bałtyckimi.",
+    "Critical Infrastructure":"Infrastruktura krytyczna","Protected. Serviced. Ready.":"Chroniona. Obsługiwana. Gotowa.",
+    "Support and servicing of critical infrastructure, including construction of service and maintenance facilities.":"Wsparcie i obsługa infrastruktury krytycznej, w tym budowa obiektów serwisowych i utrzymaniowych.",
+    "Unmanned Systems &amp; Training":"Systemy bezzałogowe i szkolenia",
+    "Drone ecosystem integration and operator training, delivered with an experienced European manufacturer.":"Integracja ekosystemu dronowego oraz szkolenia operatorów, realizowane z doświadczonym europejskim producentem.",
+    "Military Containers &amp; Tents":"Kontenery i namioty wojskowe","Command. Shelter. Field.":"Dowodzenie. Zakwaterowanie. Teren.",
+    "Containerised mobile command centres, military tents and associated field equipment.":"Kontenerowe mobilne centra dowodzenia, namioty wojskowe i powiązane wyposażenie polowe.",
+    "Fuel Supply &amp; Mobile Stations":"Zabezpieczenie paliw i stacje mobilne","Secured. Mobile. Mission-ready.":"Zabezpieczone. Mobilne. Gotowe.",
+    "Own fuel security arrangements and mobile fuelling stations for deployed and static operations.":"Własne zabezpieczenie dostaw paliw oraz mobilne stacje paliwowe dla operacji w terenie i stacjonarnych.",
+    "Ro/Ro Ramps &amp; Heavy Cargo":"Rampy Ro/Ro i ładunki ciężkie","Roll on. Roll off. Move.":"Wjazd. Zjazd. Ruch.",
+    "Roll-on/roll-off ramps and handling solutions for vehicles, tracked equipment and outsized cargo.":"Rampy roll-on/roll-off oraz rozwiązania przeładunkowe dla pojazdów, sprzętu gąsienicowego i ładunków ponadgabarytowych.",
+    "In the field":"W terenie","Heavy equipment. Moved.":"Ciężki sprzęt. W ruchu.","Tracked. Wheeled. Outsized.":"Gąsienicowy. Kołowy. Ponadgabarytowy.",
+    "Engineer equipment — lowloader":"Sprzęt inżynieryjny — naczepa niskopodwoziowa",
+    "Main battle tank — road move":"Czołg podstawowy — przejazd drogowy","Infantry fighting vehicle":"Bojowy wóz piechoty",
+    "Heavy tactical trucks — convoy":"Ciężkie ciężarówki taktyczne — konwój","Main battle tank — lowloader":"Czołg podstawowy — naczepa niskopodwoziowa",
+    "Loading operations":"Operacje załadunku","Hydraulic ramps — secured":"Rampy hydrauliczne — zabezpieczone",
+    "Tactical vehicles — staging":"Pojazdy taktyczne — punkt zbiórki","Heavy tactical truck — yard":"Ciężka ciężarówka taktyczna — plac",
+    "Global reach. Local precision.":"Zasięg globalny. Precyzja lokalna.","One mission. Worldwide delivery.":"Jedna misja. Dostawa na cały świat.",
+    "Headquartered in Poznań and operating through Poland's Baltic seaports, with contracting registrations in place for the United States and the European Union. Built on the Polish-American partnership, ready for allied programmes wherever they deploy.":"Siedziba w Poznaniu, działalność przez polskie porty bałtyckie, z rejestracjami kontraktowymi w Stanach Zjednoczonych i Unii Europejskiej. W oparciu o partnerstwo polsko-amerykańskie — gotowi na programy sojusznicze wszędzie tam, gdzie są prowadzone.",
+    "Baltic seaports engaged":"Porty bałtyckie we współpracy","Contracting registrations":"Rejestracje kontraktowe","Retired officers advising":"Oficerów w radzie doradczej","Operational readiness":"Gotowość operacyjna",
+    "Government &amp; allied contracting":"Kontraktowanie rządowe i sojusznicze","Registered. Verified.":"Zarejestrowani. Zweryfikowani.","NATO codification. U.S. SAM. E.U. contracting.":"Kodyfikacja NATO. SAM USA. Kontraktowanie UE.",
+    "Identifiers":"Identyfikatory","Supplier identifiers required to contract with allied defence and government customers.":"Identyfikatory dostawcy wymagane do zawierania kontraktów z sojuszniczymi odbiorcami obronnymi i rządowymi.",
+    "U.S. government contracting":"Kontraktowanie rządowe USA","E.U. government contracting":"Kontraktowanie rządowe UE","Registered":"Zarejestrowany",
+    "Engagements":"Zaangażowanie","Current strategic activity and operational cooperation.":"Aktualna działalność strategiczna i współpraca operacyjna.",
+    "Proposal prepared":"Oferta przygotowana","Port of Gdańsk":"Port Gdańsk","Port of Szczecin":"Port Szczecin","Port of Świnoujście":"Port Świnoujście","Port of Gdynia":"Port Gdynia","Cooperation":"Współpraca","Solutions proposed":"Rozwiązania zaproponowane",
+    "Northstar coordinated and prepared a comprehensive proposal for the United States Transportation Command covering military logistics through the Port of Gdańsk. NCAGE and UEI are supplier identification codes in the NATO codification system and the U.S. System for Award Management; they identify a registered entity and are not a certification or membership.":"Northstar koordynował i przygotował kompleksową ofertę dla Dowództwa Transportowego Stanów Zjednoczonych obejmującą logistykę wojskową realizowaną przez Port Gdańsk. NCAGE i UEI to kody identyfikacyjne dostawcy w systemie kodyfikacyjnym NATO oraz w amerykańskim systemie SAM; identyfikują zarejestrowany podmiot i nie są certyfikatem ani członkostwem.",
+    "About Northstar":"O Northstar","Mission first.":"Misja przede wszystkim.",
+    "Northstar Tactical Logistics is a newly established company formed specifically to support the armed forces. Its management and key personnel bring extensive combined experience in the defence logistics sector — maritime port security, strategic transport, government contracting, port operations, unmanned systems and critical infrastructure.":"Northstar Tactical Logistics jest nowo powołanym podmiotem utworzonym z myślą o wsparciu wojska. Kadra zarządzająca i kluczowy personel spółki dysponują łącznie rozległym doświadczeniem w sektorze logistyki obronnej — bezpieczeństwo portów morskich, transport strategiczny, kontrakty rządowe, operacje portowe, systemy bezzałogowe i infrastruktura krytyczna.",
+    "President of the Management Board":"Prezes Zarządu","President of the Board":"Prezes Zarządu","Partner":"Wspólnik",
+    "Cdr (ret.) Dr Eng. Rajmund Smolarczyk":"kmdr w st. spocz. dr inż. Rajmund Smolarczyk","Lt Col (ret.) Zbigniew Szałaciński":"ppłk w st. spocz. Zbigniew Szałaciński","Lt Cdr (ret.) Artur Kukiełko":"kmdr ppor. w st. spocz. Artur Kukiełko",
+    "Defence advisory board":"Rada doradcza ds. obronności","Maritime security and port protection.":"Bezpieczeństwo morskie i ochrona portów.","Military logistics and operational planning.":"Logistyka wojskowa i planowanie operacyjne.","Maritime operations and security.":"Operacje morskie i bezpieczeństwo.",
+    "Ready. Anywhere. Anytime.":"Gotowi. Wszędzie. Zawsze.","We deliver. You succeed.":"My dostarczamy. Wy realizujecie cel.",
+    "General enquiries":"Kontakt ogólny","Languages":"Języki",
+    "Name *":"Imię i nazwisko *","Organisation":"Organizacja","Email *":"E-mail *","Message *":"Wiadomość *","Send message":"Wyślij wiadomość",
+    "This form opens a pre-filled message in your email client and sends nothing to a third party.":"Formularz otwiera gotową wiadomość w Państwa programie pocztowym i nie wysyła niczego do podmiotów trzecich.",
+    "Defence logistics and strategic mobility from Poznań, Poland. NCAGE 9CZ9H · UEI S9EYKVSLRSQ5 · Registered for U.S. and E.U. government contracting.":"Logistyka obronna i mobilność strategiczna z Poznania. NCAGE 9CZ9H · UEI S9EYKVSLRSQ5 · Rejestracja do kontraktowania rządowego w USA i UE.",
+    "Navigation":"Nawigacja","Preview build — v2":"Wersja podglądowa — v2"
+  };
+  var UI = {
+    en:{ title:'Northstar Tactical Logistics — Logistics Without Borders',
+         err:{ name:'Name is required.', email:'A valid email address is required.', msg:'Please describe your requirements.' },
+         ok:'Message prepared — your email client should now be open. If nothing happened, write to contact@ntl-g.com.',
+         mail:{ name:'Name', org:'Organisation', email:'Email', sent:'— sent from northstartacticallogistics.com' } },
+    pl:{ title:'Northstar Tactical Logistics — Logistyka bez granic',
+         err:{ name:'Proszę podać imię i nazwisko.', email:'Proszę podać poprawny adres e-mail.', msg:'Proszę opisać swoje potrzeby.' },
+         ok:'Wiadomość przygotowana — program pocztowy powinien się otworzyć. Jeśli nic się nie stało, prosimy napisać na contact@ntl-g.com.',
+         mail:{ name:'Imię i nazwisko', org:'Organizacja', email:'E-mail', sent:'— wysłano ze strony northstartacticallogistics.com' } }
+  };
+
+  var lang = 'en';
+  var nodes = [].slice.call(document.querySelectorAll('[data-i18n]'));
+  var EN = nodes.map(function (n) { return n.innerHTML; });
+  function norm(s) { return s.replace(/\s+/g, ' ').trim(); }
+  function readLang() {
+    var q = /[?&]lang=(pl|en)\b/.exec(location.search); if (q) return q[1];
+    try { var v = localStorage.getItem('ns-lang'); if (v === 'pl' || v === 'en') return v; } catch (e) {}
+    return (navigator.language || '').toLowerCase().indexOf('pl') === 0 ? 'pl' : 'en';
+  }
+  function setLang(next, remember) {
+    lang = next === 'pl' ? 'pl' : 'en';
+    nodes.forEach(function (n, i) { var k = norm(EN[i]); n.innerHTML = (lang === 'pl' && PL[k]) ? PL[k] : EN[i]; });
+    document.documentElement.lang = lang;
+    document.title = UI[lang].title;
+    [].forEach.call(document.querySelectorAll('[data-lang]'), function (b) { b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false'); });
+    if (remember) {
+      try { localStorage.setItem('ns-lang', lang); } catch (e) {}
+      try { history.replaceState(null, '', '?lang=' + lang + location.hash); } catch (e) {}
+    }
+  }
+  [].forEach.call(document.querySelectorAll('[data-lang]'), function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang, true); }); });
+  setLang(readLang(), false);
+
+  /* --- mobile nav -------------------------------------------------------- */
+  var burger = document.getElementById('burger'), mnav = document.getElementById('mnav');
+  function closeNav() { mnav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  burger.addEventListener('click', function () {
+    var open = mnav.classList.toggle('open'); burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mnav.addEventListener('click', function (e) { if (e.target.closest('a')) closeNav(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+
+  /* --- reveal ------------------------------------------------------------ */
+  var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if (reduce || typeof IntersectionObserver !== 'function') {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    try {
+      var io = new IntersectionObserver(function (es, obs) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      items.forEach(function (el) { io.observe(el); });
+      // Whatever happens to the observer, nothing stays hidden for long.
+      setTimeout(function () { items.forEach(function (el) { el.classList.add('in'); }); }, 2500);
+    } catch (e) { items.forEach(function (el) { el.classList.add('in'); }); }
+  }
+
+  /* --- hero video ----------------------------------------------------------
+     The photograph is the baseline. Video is layered in only when motion is
+     welcome, the connection is not metered, and the browser actually starts
+     playback. Paused while off-screen.                                       */
+  (function () {
+    var v = document.getElementById('hero-video'); if (!v) return;
+    var c = navigator.connection || {};
+    if (reduce || c.saveData || /2g/.test(c.effectiveType || '')) return;
+    var started = false;
+    function start() {
+      if (started) return; started = true;
+      v.load();
+      var p = v.play();
+      if (p && p.then) p.then(function () { v.classList.add('ready'); }).catch(function () {});
+      else v.classList.add('ready');
+    }
+    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 }); else setTimeout(start, 300);
+    if (typeof IntersectionObserver === 'function') {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (!started) return; if (e.isIntersecting) v.play().catch(function () {}); else v.pause(); });
+      }, { threshold: 0.05 }).observe(v);
+    }
+  })();
+
+  /* --- contact form ------------------------------------------------------ */
+  var form = document.getElementById('form');
+  if (form) {
+    form.setAttribute('novalidate', '');
+    var F = { name: document.getElementById('f-name'), org: document.getElementById('f-org'), email: document.getElementById('f-email'), msg: document.getElementById('f-msg') };
+    var E = { name: document.getElementById('e-name'), email: document.getElementById('e-email'), msg: document.getElementById('e-msg') };
+    function check(k, ok) { F[k].setAttribute('aria-invalid', ok ? 'false' : 'true'); E[k].textContent = ok ? '' : UI[lang].err[k]; return ok; }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var a = check('name', F.name.value.trim().length > 0);
+      var b = check('email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(F.email.value.trim()));
+      var c = check('msg', F.msg.value.trim().length > 0);
+      if (!(a && b && c)) { (!a ? F.name : !b ? F.email : F.msg).focus(); return; }
+      var m = UI[lang].mail;
+      var body = [m.name + ': ' + F.name.value.trim(), m.org + ': ' + (F.org.value.trim() || '—'), m.email + ': ' + F.email.value.trim(), '', F.msg.value.trim(), '', m.sent].join('\n');
+      var ok = document.getElementById('form-ok'); ok.textContent = UI[lang].ok; ok.hidden = false;
+      location.href = 'mailto:contact@ntl-g.com?subject=' + encodeURIComponent('[Northstar] ' + F.name.value.trim()) + '&body=' + encodeURIComponent(body);
+    });
+  }
+
+  document.getElementById('year').textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>

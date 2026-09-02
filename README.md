@@ -111,6 +111,22 @@ Terminologia branżowa pochodzi z dokumentu kierowniczego klienta. Pisownia
 została sprawdzona słownikiem `hunspell -d pl_PL`; jedyne zgłoszenia to nazwy
 własne i akronimy.
 
+## Wersja v2 (podgląd do zbierania opinii)
+
+Równolegle z obecną stroną działa przebudowa od zera pod adresem **/v2/**:
+https://damiandomzalski.com/northstar-site/v2/
+
+Założenia v2: paleta wojskowa (czerń-zieleń, oliwka, khaki), układ redakcyjny
+z jedną długą stroną zamiast konsoli z zakładkami, prawdziwe zdjęcia z operacji
+zamiast grafik wektorowych, gwiazda Northstar w nagłówku i jako znak wodny hero,
+róża kompasowa z poprawionymi kierunkami (w pierwowzorze NE i NW były
+zamienione) oraz krótkie pętle wideo pod hero z fotografią jako stanem
+bazowym. Brak flag i nazw spółek partnerskich — zgodnie z decyzją klienta.
+
+Zasoby leżą w `v2/assets/` (zdjęcia 1600 px i 800 px bez metadanych, wideo
+960 px, 9 s, bez dźwięku, łącznie ok. 6,6 MB). Strona główna pozostaje bez
+zmian do czasu zebrania opinii o v2.
+
 ## Do uzupełnienia
 
 Flagi w pierścieniu NTL Group są przygotowane pod linkowanie, ale nie mają
