@@ -286,6 +286,10 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 
 /* 11 CONTACT --------------------------------------------------------------- */
 .contact-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(32px,5vw,72px); }
+/* Language marker on a phone line. Not interactive — unlike the pair in the
+   header, which switch the page language. */
+.ph-flag{ width:28px; height:19px; display:block; border:1px solid rgba(255,255,255,.18); }
+.foot-tel{ display:flex; align-items:center; gap:10px; }
 .cinfo .kv-v a{ color:var(--sand); }
 .cinfo .kv-v a:hover{ color:var(--khaki); }
 .form{ display:grid; gap:14px; }
@@ -364,7 +368,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 <noscript><style>[data-reveal]{opacity:1;transform:none} .hero-media video{display:none}</style></noscript>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-i18n>Skip to content</a>
 
 <!-- The Northstar mark: eight points, long cardinals, bevelled in steel. Defined
      once and reused wherever the star appears. -->
@@ -659,12 +663,11 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
       <h2 class="h2" data-i18n>Mission first.</h2>
       <div class="rule"></div>
       <p class="lead" data-i18n>Northstar Tactical Logistics is a newly established company formed specifically to support the armed forces. Its management and key personnel bring extensive combined experience in the defence logistics sector — maritime port security, strategic transport, government contracting, port operations, unmanned systems and critical infrastructure.</p>
+      <p class="lead" style="margin-top:26px;" data-i18n>An interdisciplinary board of retired officers advises the company across three areas:</p>
       <div class="people">
-        <div class="person"><div class="person-n">Mariusz Kołtoniak</div><div class="person-r" data-i18n>President of the Management Board</div></div>
-        <div class="person"><div class="person-n">Wioletta Zofia Perz</div><div class="person-r" data-i18n>Partner</div></div>
-        <div class="person"><div class="person-n" data-i18n>Cdr (ret.) Dr Eng. Rajmund Smolarczyk</div><div class="person-r" data-i18n>Defence advisory board</div><div class="person-d" data-i18n>Maritime security and port protection.</div></div>
-        <div class="person"><div class="person-n" data-i18n>Lt Col (ret.) Zbigniew Szałaciński</div><div class="person-r" data-i18n>Defence advisory board</div><div class="person-d" data-i18n>Military logistics and operational planning.</div></div>
-        <div class="person"><div class="person-n" data-i18n>Lt Cdr (ret.) Artur Kukiełko</div><div class="person-r" data-i18n>Defence advisory board</div><div class="person-d" data-i18n>Maritime operations and security.</div></div>
+        <div class="person"><div class="person-n" data-i18n>Maritime security and port protection</div></div>
+        <div class="person"><div class="person-n" data-i18n>Military logistics and operational planning</div></div>
+        <div class="person"><div class="person-n" data-i18n>Maritime operations and security</div></div>
       </div>
     </div>
     <div class="about-photo" data-reveal>
@@ -683,8 +686,8 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     </div>
     <div class="contact-grid">
       <div class="cinfo" data-reveal>
-        <div class="kv"><span class="kv-k" data-i18n>President of the Board</span><span class="kv-v"><a href="mailto:m.koltoniak@ntl-g.com">m.koltoniak@ntl-g.com</a><br><a href="tel:+48790387800">+48 790 387 800</a></span></div>
-        <div class="kv"><span class="kv-k" data-i18n>Partner</span><span class="kv-v"><a href="mailto:w.perz@ntl-g.com">w.perz@ntl-g.com</a><br><a href="tel:+48732872698">+48 732 872 698</a></span></div>
+        <div class="kv"><span class="kv-k"><svg class="ph-flag" role="img" aria-label="Polski"><use href="#flag-pl"/></svg></span><span class="kv-v"><a href="tel:+48790387800">+48 790 387 800</a></span></div>
+        <div class="kv"><span class="kv-k"><svg class="ph-flag" role="img" aria-label="English"><use href="#flag-us"/></svg></span><span class="kv-v"><a href="tel:+48732872698">+48 732 872 698</a></span></div>
         <div class="kv"><span class="kv-k" data-i18n>General enquiries</span><span class="kv-v"><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></span></div>
         <div class="kv"><span class="kv-k" data-i18n>Headquarters</span><span class="kv-v" data-i18n>Poznań, Poland</span></div>
         <div class="kv"><span class="kv-k" data-i18n>Languages</span><span class="kv-v">PL · EN · DE</span></div>
@@ -729,7 +732,8 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
       <div class="foot-h" data-i18n>Contact</div>
       <ul>
         <li><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></li>
-        <li><a href="tel:+48790387800">+48 790 387 800</a></li>
+        <li class="foot-tel"><svg class="ph-flag" role="img" aria-label="Polski"><use href="#flag-pl"/></svg><a href="tel:+48790387800">+48 790 387 800</a></li>
+        <li class="foot-tel"><svg class="ph-flag" role="img" aria-label="English"><use href="#flag-us"/></svg><a href="tel:+48732872698">+48 732 872 698</a></li>
         <li><a href="https://www.northstartacticallogistics.com/">northstartacticallogistics.com</a></li>
         <li data-i18n>Poznań, Poland</li>
       </ul>
@@ -788,9 +792,10 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     "Northstar coordinated and prepared a comprehensive proposal for the United States Transportation Command covering military logistics through the Port of Gdańsk. NCAGE and UEI are supplier identification codes in the NATO codification system and the U.S. System for Award Management; they identify a registered entity and are not a certification or membership.":"Northstar koordynował i przygotował kompleksową ofertę dla Dowództwa Transportowego Stanów Zjednoczonych obejmującą logistykę wojskową realizowaną przez Port Gdańsk. NCAGE i UEI to kody identyfikacyjne dostawcy w systemie kodyfikacyjnym NATO oraz w amerykańskim systemie SAM; identyfikują zarejestrowany podmiot i nie są certyfikatem ani członkostwem.",
     "About Northstar":"O Northstar","Mission first.":"Misja przede wszystkim.",
     "Northstar Tactical Logistics is a newly established company formed specifically to support the armed forces. Its management and key personnel bring extensive combined experience in the defence logistics sector — maritime port security, strategic transport, government contracting, port operations, unmanned systems and critical infrastructure.":"Northstar Tactical Logistics jest nowo powołanym podmiotem utworzonym z myślą o wsparciu wojska. Kadra zarządzająca i kluczowy personel spółki dysponują łącznie rozległym doświadczeniem w sektorze logistyki obronnej — bezpieczeństwo portów morskich, transport strategiczny, kontrakty rządowe, operacje portowe, systemy bezzałogowe i infrastruktura krytyczna.",
-    "President of the Management Board":"Prezes Zarządu","President of the Board":"Prezes Zarządu","Partner":"Wspólnik",
-    "Cdr (ret.) Dr Eng. Rajmund Smolarczyk":"kmdr w st. spocz. dr inż. Rajmund Smolarczyk","Lt Col (ret.) Zbigniew Szałaciński":"ppłk w st. spocz. Zbigniew Szałaciński","Lt Cdr (ret.) Artur Kukiełko":"kmdr ppor. w st. spocz. Artur Kukiełko",
-    "Defence advisory board":"Rada doradcza ds. obronności","Maritime security and port protection.":"Bezpieczeństwo morskie i ochrona portów.","Military logistics and operational planning.":"Logistyka wojskowa i planowanie operacyjne.","Maritime operations and security.":"Operacje morskie i bezpieczeństwo.",
+    "An interdisciplinary board of retired officers advises the company across three areas:":"Spółkę wspiera interdyscyplinarna rada oficerów w stanie spoczynku, obejmująca trzy obszary:",
+    "Maritime security and port protection":"Bezpieczeństwo morskie i ochrona portów",
+    "Military logistics and operational planning":"Logistyka wojskowa i planowanie operacyjne",
+    "Maritime operations and security":"Operacje morskie i bezpieczeństwo",
     "Ready. Anywhere. Anytime.":"Gotowi. Wszędzie. Zawsze.","We deliver. You succeed.":"My dostarczamy. Wy realizujecie cel.",
     "General enquiries":"Kontakt ogólny","Languages":"Języki",
     "Name *":"Imię i nazwisko *","Organisation":"Organizacja","Email *":"E-mail *","Message *":"Wiadomość *","Send message":"Wyślij wiadomość",
