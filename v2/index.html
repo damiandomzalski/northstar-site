@@ -241,6 +241,32 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 .svc-full{ grid-column:1/-1; min-height:300px; }
 .svc-full .svc-body{ max-width:640px; }
 
+/* 07a RO/RO RAMP ----------------------------------------------------------- */
+.sec-ramp{ border-top:1px solid var(--line); }
+.ramp-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(24px,4vw,56px); align-items:start; }
+.ramp-stack{ display:grid; gap:12px; }
+.ramp-photo{ position:relative; overflow:hidden; background:var(--panel); border:1px solid var(--line); margin:0; }
+.ramp-photo img{ width:100%; display:block; filter:saturate(.72) contrast(1.05); }
+.ramp-photo figcaption,.ramp-sheet figcaption{
+  position:absolute; left:0; right:0; bottom:0; padding:22px 16px 14px;
+  background:linear-gradient(0deg,rgba(13,16,12,.9),transparent);
+  font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--sand);
+}
+.ramp-copy .h3{ margin-bottom:10px; }
+.ramp-copy > .muted{ font-size:15px; line-height:1.65; margin-bottom:18px; }
+.ramp-copy .kv{ padding:10px 0; }
+.ramp-copy .kv-v{ font-size:17px; }
+.ramp-row{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(24px,4vw,56px); margin-top:clamp(24px,4vw,56px); align-items:start; }
+.ramp-sheet{ position:relative; overflow:hidden; background:#f3efe4; border:1px solid var(--line); padding:18px 18px 44px; margin:0; }
+.ramp-sheet img{ width:100%; display:block; }
+.ramp-sheet figcaption{ background:linear-gradient(0deg,rgba(13,16,12,.92),rgba(13,16,12,.6)); }
+.ramp-notes{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+.ramp-note{ background:var(--panel); padding:20px 22px; }
+.ramp-note-k{ font-family:var(--display); font-weight:600; font-size:12.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--khaki); }
+.ramp-note p{ font-size:14.5px; line-height:1.6; color:var(--muted); margin-top:6px; }
+.svc-link{ display:inline-block; margin-top:14px; font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--khaki); border-bottom:1px solid rgba(201,184,128,.4); }
+.svc-link:hover{ color:var(--khaki-2); border-color:var(--khaki-2); }
+
 /* 07 FIELD GALLERY --------------------------------------------------------- */
 .gal{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:220px; grid-auto-flow:dense; gap:8px; }
 .gal figure{ position:relative; overflow:hidden; background:var(--panel); }
@@ -345,6 +371,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   .nav,.top .lang{ display:none; }
   .burger{ display:flex; }
   .two,.creds,.contact-grid,.foot .wrap{ grid-template-columns:1fr; }
+  .ramp-grid,.ramp-row{ grid-template-columns:1fr; }
   .cred .wrap{ grid-template-columns:1fr 1fr; }
   .cred-item{ border-right:0; margin-right:0; padding-right:0; border-bottom:1px solid rgba(201,184,128,.14); }
   .about-photo img{ height:380px; }
@@ -546,15 +573,71 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
       </article>
 
       <article class="svc svc-full" data-reveal>
-        <div class="svc-photo"><img src="assets/img/m88.jpg" srcset="assets/img/m88-800.jpg 800w, assets/img/m88.jpg 1600w" sizes="100vw" alt="Armoured recovery vehicle chained down on a lowloader trailer" loading="lazy"></div>
+        <div class="svc-photo"><img src="assets/img/ramp-abrams.jpg" sizes="100vw" alt="Main battle tank driving off a rail flatcar over a modular Ro/Ro ramp" loading="lazy"></div>
         <span class="svc-num">08</span>
         <div class="svc-body">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18M3 17l6-6h9M9 11V7h6"/></svg></div>
           <h3 class="h3" data-i18n>Ro/Ro Ramps &amp; Heavy Cargo</h3>
           <p class="tagline" data-i18n>Roll on. Roll off. Move.</p>
           <p data-i18n>Roll-on/roll-off ramps and handling solutions for vehicles, tracked equipment and outsized cargo.</p>
+          <a class="svc-link" href="#ramp" data-i18n>Ramp specification</a>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RO/RO RAMP =============================== -->
+<section class="sec sec-ramp" id="ramp">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow" data-i18n>Equipment</p>
+      <h2 class="h2" data-i18n>Ro/Ro ramp. Rail to ground.</h2>
+      <p class="tagline" data-i18n>50 t. 90 t. Ten minutes.</p>
+    </div>
+
+    <div class="ramp-grid">
+      <div class="ramp-stack" data-reveal>
+        <figure class="ramp-photo">
+          <img src="assets/img/ramp-abrams.jpg" width="576" height="270" alt="Main battle tank driving off a rail flatcar over a modular Ro/Ro ramp" loading="lazy">
+          <figcaption data-i18n>Main battle tank — rail unloading</figcaption>
+        </figure>
+        <figure class="ramp-photo">
+          <img src="assets/img/ramp-rail.jpg" width="593" height="209" alt="Tracked armoured vehicle rolling from a rail car down the ramp" loading="lazy">
+          <figcaption data-i18n>Tracked vehicle — roll-off</figcaption>
+        </figure>
+      </div>
+      <div class="ramp-copy" data-reveal>
+        <h3 class="h3" data-i18n>Modular rail loading ramp</h3>
+        <p class="muted" data-i18n>A portable end-loading ramp for moving tracked and wheeled vehicles between rail flatcars and the ground — wherever there is no fixed ramp. Set alongside the rail car, adjusted to deck height and ready in ten minutes, it turns any siding into a military loading point.</p>
+        <div class="kv"><span class="kv-k" data-i18n>Load capacity</span><span class="kv-v">50 t / 90 t</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Adjustable height</span><span class="kv-v">1 067 – 1 473 mm</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Ramp length</span><span class="kv-v">6.91 m</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Deck width</span><span class="kv-v">965 mm</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Kit weight</span><span class="kv-v">2 830 kg</span></div>
+        <div class="kv"><span class="kv-k" data-i18n>Assembly time</span><span class="kv-v" data-i18n>10 minutes</span></div>
+      </div>
+    </div>
+
+    <div class="ramp-row">
+      <figure class="ramp-sheet" data-reveal>
+        <img src="assets/img/ramp-drawing.png" width="554" height="546" alt="Technical drawing of the modular ramp: side, top, underneath and section views with dimensions" loading="lazy">
+        <figcaption data-i18n>Technical drawing — side, plan, underside and sections</figcaption>
+      </figure>
+      <div class="ramp-notes" data-reveal>
+        <div class="ramp-note">
+          <div class="ramp-note-k" data-i18n>Beside the track, not on it</div>
+          <p data-i18n>Set up alongside the rail car, so the line stays clear. Suited to any siding, track crossings included.</p>
+        </div>
+        <div class="ramp-note">
+          <div class="ramp-note-k" data-i18n>Air-portable</div>
+          <p data-i18n>One kit per HCU-6/E 463L air pallet. Ships in a BICON or in 20-foot ISO containers.</p>
+        </div>
+        <div class="ramp-note">
+          <div class="ramp-note-k" data-i18n>Built for the field</div>
+          <p data-i18n>Minimum S355 steel (EN 10025 / ASTM A572 Gr.50), hot-dip galvanised to EN ISO 1461 / ASTM A123. Heaviest section 610 kg.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -775,6 +858,16 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     "Own fuel security arrangements and mobile fuelling stations for deployed and static operations.":"Własne zabezpieczenie dostaw paliw oraz mobilne stacje paliwowe dla operacji w terenie i stacjonarnych.",
     "Ro/Ro Ramps &amp; Heavy Cargo":"Rampy Ro/Ro i ładunki ciężkie","Roll on. Roll off. Move.":"Wjazd. Zjazd. Ruch.",
     "Roll-on/roll-off ramps and handling solutions for vehicles, tracked equipment and outsized cargo.":"Rampy roll-on/roll-off oraz rozwiązania przeładunkowe dla pojazdów, sprzętu gąsienicowego i ładunków ponadgabarytowych.",
+    "Ramp specification":"Specyfikacja rampy",
+    "Equipment":"Wyposażenie","Ro/Ro ramp. Rail to ground.":"Rampa Ro/Ro. Z wagonu na ziemię.","50 t. 90 t. Ten minutes.":"50 t. 90 t. Dziesięć minut.",
+    "Main battle tank — rail unloading":"Czołg podstawowy — rozładunek z wagonu","Tracked vehicle — roll-off":"Pojazd gąsienicowy — zjazd",
+    "Modular rail loading ramp":"Modułowa rampa załadunkowa",
+    "A portable end-loading ramp for moving tracked and wheeled vehicles between rail flatcars and the ground — wherever there is no fixed ramp. Set alongside the rail car, adjusted to deck height and ready in ten minutes, it turns any siding into a military loading point.":"Przenośna rampa czołowa do przemieszczania pojazdów gąsienicowych i kołowych między wagonem platformą a gruntem — wszędzie tam, gdzie nie ma stałej rampy. Ustawiana obok wagonu, regulowana do wysokości podłogi i gotowa w dziesięć minut, zamienia dowolną bocznicę w wojskowy punkt załadunku.",
+    "Load capacity":"Nośność","Adjustable height":"Regulacja wysokości","Ramp length":"Długość rampy","Deck width":"Szerokość pokładu","Kit weight":"Masa zestawu","Assembly time":"Czas montażu","10 minutes":"10 minut",
+    "Technical drawing — side, plan, underside and sections":"Rysunek techniczny — widok boczny, z góry, od spodu i przekroje",
+    "Beside the track, not on it":"Obok toru, nie na nim","Set up alongside the rail car, so the line stays clear. Suited to any siding, track crossings included.":"Ustawiana obok wagonu, dzięki czemu linia pozostaje przejezdna. Nadaje się na każdą bocznicę, także z przejazdem przez tory.",
+    "Air-portable":"Transport lotniczy","One kit per HCU-6/E 463L air pallet. Ships in a BICON or in 20-foot ISO containers.":"Jeden zestaw na paletę lotniczą HCU-6/E 463L. Transport w kontenerze BICON lub w kontenerach 20-stopowych ISO.",
+    "Built for the field":"Zbudowana do terenu","Minimum S355 steel (EN 10025 / ASTM A572 Gr.50), hot-dip galvanised to EN ISO 1461 / ASTM A123. Heaviest section 610 kg.":"Stal min. S355 (EN 10025 / ASTM A572 Gr.50), cynkowana ogniowo wg EN ISO 1461 / ASTM A123. Najcięższy element 610 kg.",
     "In the field":"W terenie","Heavy equipment. Moved.":"Ciężki sprzęt. W ruchu.","Tracked. Wheeled. Outsized.":"Gąsienicowy. Kołowy. Ponadgabarytowy.",
     "Engineer equipment — lowloader":"Sprzęt inżynieryjny — naczepa niskopodwoziowa",
     "Main battle tank — road move":"Czołg podstawowy — przejazd drogowy","Infantry fighting vehicle":"Bojowy wóz piechoty",
