@@ -7,3 +7,6 @@
 # editor swap files
 *.swp
 *.swo
+
+# wrangler build cache
+.wrangler/

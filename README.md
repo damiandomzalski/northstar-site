@@ -127,6 +127,31 @@ Zasoby leżą w `v2/assets/` (zdjęcia 1600 px i 800 px bez metadanych, wideo
 960 px, 9 s, bez dźwięku, łącznie ok. 6,6 MB). Strona główna pozostaje bez
 zmian do czasu zebrania opinii o v2.
 
+## Produkcja: Cloudflare Pages
+
+Od 10 września 2026 wersja v2 jest stroną produkcyjną pod adresem
+**https://northstartacticallogistics.com** (projekt Cloudflare Pages
+`northstar`, konto klienta). Adresy www, beta.northstartacticallogistics.com,
+ntl-g.com i www.ntl-g.com przekierowują na nią kodem 301 przez
+`v2/functions/_middleware.js`. GitHub Pages pozostaje podglądem.
+
+Wdrożenie po zmianach (token API z uprawnieniami Cloudflare Pages: Edit,
+Workers Scripts: Edit, DNS: Edit):
+
+```bash
+export CLOUDFLARE_API_TOKEN=...
+export CLOUDFLARE_ACCOUNT_ID=4bc45916894f21fd60fa8ab92688ce93
+cd v2 && npx wrangler@4 pages deploy . --project-name northstar --branch main
+```
+
+Polecenie trzeba uruchamiać z katalogu `v2/`, inaczej wrangler nie znajdzie
+katalogu `functions/`. Rekordy poczty na ntl-g.com (MX, SPF, DKIM, DMARC,
+mail.ntl-g.com) nie były zmieniane i nie wolno ich ruszać.
+
+Formularz kontaktowy wysyła przez FormSubmit na contact@ntl-g.com. Pierwsze
+wysłanie uruchamia mail aktywacyjny do tej skrzynki; dopóki ktoś nie kliknie
+linku, wiadomości nie są dostarczane.
+
 ## Do uzupełnienia
 
 Flagi w pierścieniu NTL Group są przygotowane pod linkowanie, ale nie mają
