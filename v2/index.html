@@ -471,14 +471,12 @@ html.intro-on{ overflow:hidden; }
 </div>
 <script>
 (function () {
-  var i = document.getElementById('intro'), seen = false;
-  try { seen = sessionStorage.getItem('ns-intro') === '1'; } catch (e) {}
-  if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { i.parentNode.removeChild(i); return; }
+  var i = document.getElementById('intro');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { i.parentNode.removeChild(i); return; }
   document.documentElement.classList.add('intro-on');
   function end() {
     if (!i.parentNode || i.classList.contains('out')) return;
     i.classList.add('out'); document.documentElement.classList.remove('intro-on');
-    try { sessionStorage.setItem('ns-intro', '1'); } catch (e) {}
     setTimeout(function () { if (i.parentNode) i.parentNode.removeChild(i); }, 1000);
   }
   setTimeout(end, 3000);
