@@ -1,0 +1,5 @@
+# Every alias resolves to the canonical host.
+https://www.northstartacticallogistics.com/* https://northstartacticallogistics.com/:splat 301
+https://ntl-g.com/* https://northstartacticallogistics.com/:splat 301
+https://www.ntl-g.com/* https://northstartacticallogistics.com/:splat 301
+https://beta.northstartacticallogistics.com/* https://northstartacticallogistics.com/:splat 301
