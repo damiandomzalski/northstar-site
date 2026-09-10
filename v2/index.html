@@ -267,6 +267,20 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 .svc-link{ display:inline-block; margin-top:14px; font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--khaki); border-bottom:1px solid rgba(201,184,128,.4); }
 .svc-link:hover{ color:var(--khaki-2); border-color:var(--khaki-2); }
 
+/* 07b NIGHT MOVE ----------------------------------------------------------- */
+.night{ background:#070907; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.night-strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.night-panel{ position:relative; overflow:hidden; background:#000; aspect-ratio:4/5; margin:0; }
+.night-panel img,.night-panel video{ position:absolute; inset:0; top:0; right:0; bottom:0; left:0; width:100%; height:100%; object-fit:cover; filter:saturate(.85) contrast(1.08); }
+.night-panel video{ opacity:0; transition:opacity .9s var(--ease); z-index:1; }
+.night-panel video.ready{ opacity:1; }
+.night-panel figcaption{
+  position:absolute; z-index:2; left:0; right:0; bottom:0; padding:22px 16px 14px;
+  background:linear-gradient(0deg,rgba(7,9,7,.9),transparent);
+  font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--sand);
+}
+.night-copy{ margin-top:28px; max-width:640px; font-size:16px; line-height:1.65; color:var(--muted); }
+
 /* 07 FIELD GALLERY --------------------------------------------------------- */
 .gal{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:220px; grid-auto-flow:dense; gap:8px; }
 .gal figure{ position:relative; overflow:hidden; background:var(--panel); }
@@ -315,6 +329,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 /* Language marker on a phone line. Not interactive — unlike the pair in the
    header, which switch the page language. */
 .ph-flag{ width:28px; height:19px; display:block; border:1px solid rgba(255,255,255,.18); }
+.ph-wa{ width:22px; height:22px; display:block; color:#25d366; }
 .foot-tel{ display:flex; align-items:center; gap:10px; }
 .cinfo .kv-v a{ color:var(--sand); }
 .cinfo .kv-v a:hover{ color:var(--khaki); }
@@ -362,6 +377,20 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   html{ scroll-behavior:auto; }
 }
 
+/* 00 INTRO ----------------------------------------------------------------- */
+html.intro-on{ overflow:hidden; }
+.intro{ position:fixed; inset:0; top:0; right:0; bottom:0; left:0; z-index:300; background:#0d100c; display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; }
+.intro img{ position:absolute; inset:0; top:0; right:0; bottom:0; left:0; width:100%; height:100%; object-fit:cover; filter:saturate(.8) contrast(1.05) brightness(.75); transform:scale(1.14); animation:intro-zoom 4s cubic-bezier(.2,.6,.2,1) forwards; }
+.intro::before{ content:''; position:absolute; inset:0; top:0; right:0; bottom:0; left:0; z-index:1; background:radial-gradient(ellipse at 50% 55%, rgba(13,16,12,.08) 0%, rgba(13,16,12,.72) 100%); }
+.intro-mark{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; opacity:0; transform:translateY(10px); animation:intro-in 1.1s .45s var(--ease) forwards; }
+.intro-star{ width:112px; height:112px; margin-bottom:18px; filter:drop-shadow(0 6px 24px rgba(0,0,0,.6)); }
+.intro-mark .brand-name{ font-size:38px; letter-spacing:10px; padding-left:10px; }
+.intro-mark .brand-sub{ font-size:13px; letter-spacing:6px; padding-left:6px; margin-top:8px; }
+.intro.out{ animation:intro-out .9s var(--ease) forwards; pointer-events:none; }
+@keyframes intro-zoom{ to{ transform:scale(1); } }
+@keyframes intro-in{ to{ opacity:1; transform:none; } }
+@keyframes intro-out{ to{ opacity:0; transform:scale(1.03); } }
+
 /* 14 RESPONSIVE ------------------------------------------------------------ */
 @media (max-width:1100px){
   .svc-grid{ grid-template-columns:repeat(2,1fr); }
@@ -369,6 +398,9 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   .gal{ grid-template-columns:repeat(3,1fr); }
 }
 @media (max-width:900px){
+  .night-strip{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; margin:0 calc(-1 * clamp(20px,4vw,48px)); padding:0 clamp(20px,4vw,48px); }
+  .night-strip::-webkit-scrollbar{ display:none; }
+  .night-panel{ flex:0 0 min(72vw,380px); scroll-snap-align:center; }
   .nav,.top .lang{ display:none; }
   .burger{ display:flex; }
   .two,.creds,.contact-grid,.foot .wrap{ grid-template-columns:1fr; }
@@ -392,7 +424,8 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   .hero-cta .btn{ width:100%; justify-content:center; }
 }
 </style>
-<noscript><style>[data-reveal]{opacity:1;transform:none} .hero-media video{display:none}</style></noscript>
+<noscript><style>[data-reveal]{opacity:1;transform:none} .hero-media video,.night-panel video,.intro{display:none}</style></noscript>
+<link rel="preload" as="image" imagesrcset="assets/img/intro-flag-800.jpg 800w, assets/img/intro-flag.jpg 1440w" imagesizes="100vw">
 </head>
 <body>
 <a class="skip" href="#main" data-i18n>Skip to content</a>
@@ -417,6 +450,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
       <path d="M2 100 L100 87 L100 100 Z"    fill="url(#st-d)"/><path d="M2 100 L100 113 L100 100 Z"   fill="url(#st-l)"/>
       <circle cx="100" cy="100" r="3.6" fill="#fff"/>
     </symbol>
+    <symbol id="ico-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
     <symbol id="flag-pl" viewBox="0 0 24 16"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#dc143c"/></symbol>
     <symbol id="flag-us" viewBox="0 0 24 16">
       <rect width="24" height="16" fill="#b22234"/>
@@ -425,6 +459,33 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     </symbol>
   </defs>
 </svg>
+
+<!-- ================================ INTRO ================================ -->
+<div class="intro" id="intro" aria-hidden="true">
+  <img src="assets/img/intro-flag.jpg" srcset="assets/img/intro-flag-800.jpg 800w, assets/img/intro-flag.jpg 1440w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
+  <div class="intro-mark">
+    <svg class="intro-star" aria-hidden="true"><use href="#star"/></svg>
+    <span class="brand-name">NORTHSTAR</span>
+    <span class="brand-sub">TACTICAL LOGISTICS</span>
+  </div>
+</div>
+<script>
+(function () {
+  var i = document.getElementById('intro'), seen = false;
+  try { seen = sessionStorage.getItem('ns-intro') === '1'; } catch (e) {}
+  if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { i.parentNode.removeChild(i); return; }
+  document.documentElement.classList.add('intro-on');
+  function end() {
+    if (!i.parentNode || i.classList.contains('out')) return;
+    i.classList.add('out'); document.documentElement.classList.remove('intro-on');
+    try { sessionStorage.setItem('ns-intro', '1'); } catch (e) {}
+    setTimeout(function () { if (i.parentNode) i.parentNode.removeChild(i); }, 1000);
+  }
+  setTimeout(end, 3000);
+  i.addEventListener('click', end);
+  document.addEventListener('keydown', end, { once: true });
+})();
+</script>
 
 <header class="top">
   <div class="wrap">
@@ -670,6 +731,35 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   </div>
 </section>
 
+<!-- ============================ NIGHT MOVE =============================== -->
+<section class="sec night" id="night">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow" data-i18n>Night move</p>
+      <h2 class="h2" data-i18n>After dark. Still moving.</h2>
+      <p class="tagline" data-i18n>Escorted. Planned. On time.</p>
+    </div>
+    <div class="night-strip" data-reveal>
+      <figure class="night-panel">
+        <img src="assets/video/night-escort.jpg" width="540" height="676" alt="Pilot vehicle with amber warning lights leading a night convoy, seen from the truck cab" loading="lazy">
+        <video muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" data-src="assets/video/night-escort.mp4"></video>
+        <figcaption data-i18n>Pilot vehicle — night escort</figcaption>
+      </figure>
+      <figure class="night-panel">
+        <img src="assets/video/night-town.jpg" width="540" height="676" alt="Convoy passing through a town under street lights at night" loading="lazy">
+        <video muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" data-src="assets/video/night-town.mp4"></video>
+        <figcaption data-i18n>Convoy — through town</figcaption>
+      </figure>
+      <figure class="night-panel">
+        <img src="assets/video/night-road.jpg" width="540" height="676" alt="Headlights of the convoy on an open road at night" loading="lazy">
+        <video muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" data-src="assets/video/night-road.mp4"></video>
+        <figcaption data-i18n>Open road — convoy ahead</figcaption>
+      </figure>
+    </div>
+    <p class="night-copy" data-reveal data-i18n>Oversized military loads move when the roads are empty. Northstar convoys run through the night with pilot vehicles ahead and a plan timed to the minute — from the depot gate to the delivery point.</p>
+  </div>
+</section>
+
 <!-- ============================ REACH & COMPASS ========================== -->
 <section class="sec reach" id="reach">
   <div class="reach-map" aria-hidden="true">
@@ -777,6 +867,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
       <div class="cinfo" data-reveal>
         <div class="kv"><span class="kv-k"><svg class="ph-flag" role="img" aria-label="Polski"><use href="#flag-pl"/></svg></span><span class="kv-v"><a href="tel:+48790387800">+48 790 387 800</a></span></div>
         <div class="kv"><span class="kv-k"><svg class="ph-flag" role="img" aria-label="English"><use href="#flag-us"/></svg></span><span class="kv-v"><a href="tel:+48732872698">+48 732 872 698</a></span></div>
+        <div class="kv"><span class="kv-k"><svg class="ph-wa" role="img" aria-label="WhatsApp"><use href="#ico-wa"/></svg></span><span class="kv-v"><a href="https://wa.me/34675959481" target="_blank" rel="noopener">+34 675 959 481</a></span></div>
         <div class="kv"><span class="kv-k" data-i18n>General enquiries</span><span class="kv-v"><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></span></div>
         <div class="kv"><span class="kv-k" data-i18n>Headquarters</span><span class="kv-v" data-i18n>Poznań, Poland</span></div>
         <div class="kv"><span class="kv-k" data-i18n>Languages</span><span class="kv-v">PL · EN · DE</span></div>
@@ -787,10 +878,11 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
           <div class="field"><label for="f-org" data-i18n>Organisation</label><input id="f-org" type="text" autocomplete="organization"></div>
         </div>
         <div class="field"><label for="f-email" data-i18n>Email *</label><input id="f-email" type="email" autocomplete="email" required><p class="err" id="e-email"></p></div>
+        <input type="text" id="f-honey" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="field"><label for="f-msg" data-i18n>Message *</label><textarea id="f-msg" required></textarea><p class="err" id="e-msg"></p></div>
         <button class="btn btn-solid" type="submit"><span data-i18n>Send message</span> <span class="arr" aria-hidden="true">→</span></button>
         <p class="form-ok" id="form-ok" role="status" hidden></p>
-        <p class="form-note" data-i18n>This form opens a pre-filled message in your email client and sends nothing to a third party.</p>
+        <p class="form-note" data-i18n>Your message is delivered to contact@ntl-g.com. If sending fails, your email client opens with the message ready.</p>
       </form>
     </div>
   </div>
@@ -823,6 +915,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
         <li><a href="mailto:contact@ntl-g.com">contact@ntl-g.com</a></li>
         <li class="foot-tel"><svg class="ph-flag" role="img" aria-label="Polski"><use href="#flag-pl"/></svg><a href="tel:+48790387800">+48 790 387 800</a></li>
         <li class="foot-tel"><svg class="ph-flag" role="img" aria-label="English"><use href="#flag-us"/></svg><a href="tel:+48732872698">+48 732 872 698</a></li>
+        <li class="foot-tel"><svg class="ph-wa" role="img" aria-label="WhatsApp"><use href="#ico-wa"/></svg><a href="https://wa.me/34675959481" target="_blank" rel="noopener">+34 675 959 481</a></li>
         <li><a href="https://www.northstartacticallogistics.com/">northstartacticallogistics.com</a></li>
         <li data-i18n>Poznań, Poland</li>
       </ul>
@@ -874,6 +967,9 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     "Beside the track, not on it":"Obok toru, nie na nim","Set up alongside the rail car, so the line stays clear. Suited to any siding, track crossings included.":"Ustawiana obok wagonu, dzięki czemu linia pozostaje przejezdna. Nadaje się na każdą bocznicę, także z przejazdem przez tory.",
     "Air-portable":"Transport lotniczy","One kit per HCU-6/E 463L air pallet. Ships in a BICON or in 20-foot ISO containers.":"Jeden zestaw na paletę lotniczą HCU-6/E 463L. Transport w kontenerze BICON lub w kontenerach 20-stopowych ISO.",
     "Built for the field":"Zbudowana do terenu","Minimum S355 steel (EN 10025 / ASTM A572 Gr.50), hot-dip galvanised to EN ISO 1461 / ASTM A123. Heaviest section 610 kg.":"Stal min. S355 (EN 10025 / ASTM A572 Gr.50), cynkowana ogniowo wg EN ISO 1461 / ASTM A123. Najcięższy element 610 kg.",
+    "Night move":"Nocny przejazd","After dark. Still moving.":"Po zmroku. Wciąż w ruchu.","Escorted. Planned. On time.":"Eskortowany. Zaplanowany. Na czas.",
+    "Pilot vehicle — night escort":"Pojazd pilotujący — eskorta nocna","Convoy — through town":"Konwój — przez miasto","Open road — convoy ahead":"Otwarta droga — konwój przed nami",
+    "Oversized military loads move when the roads are empty. Northstar convoys run through the night with pilot vehicles ahead and a plan timed to the minute — from the depot gate to the delivery point.":"Ponadgabarytowe ładunki wojskowe jadą wtedy, gdy drogi są puste. Konwoje Northstar jadą nocą z pojazdami pilotującymi na czele i planem rozpisanym co do minuty — od bramy magazynu do punktu dostawy.",
     "In the field":"W terenie","Heavy equipment. Moved.":"Ciężki sprzęt. W ruchu.","Tracked. Wheeled. Outsized.":"Gąsienicowy. Kołowy. Ponadgabarytowy.",
     "Engineer equipment — lowloader":"Sprzęt inżynieryjny — naczepa niskopodwoziowa",
     "Main battle tank — road move":"Czołg podstawowy — przejazd drogowy","Infantry fighting vehicle":"Bojowy wóz piechoty",
@@ -898,18 +994,20 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     "Ready. Anywhere. Anytime.":"Gotowi. Wszędzie. Zawsze.","We deliver. You succeed.":"My dostarczamy. Wy realizujecie cel.",
     "General enquiries":"Kontakt ogólny","Languages":"Języki",
     "Name *":"Imię i nazwisko *","Organisation":"Organizacja","Email *":"E-mail *","Message *":"Wiadomość *","Send message":"Wyślij wiadomość",
-    "This form opens a pre-filled message in your email client and sends nothing to a third party.":"Formularz otwiera gotową wiadomość w Państwa programie pocztowym i nie wysyła niczego do podmiotów trzecich.",
+    "Your message is delivered to contact@ntl-g.com. If sending fails, your email client opens with the message ready.":"Wiadomość trafia bezpośrednio na adres contact@ntl-g.com. Jeśli wysyłka się nie powiedzie, otworzy się program pocztowy z gotową wiadomością.",
     "Defence logistics and strategic mobility from Poznań, Poland. NCAGE 9CZ9H · UEI S9EYKVSLRSQ5 · Registered for U.S. and E.U. government contracting.":"Logistyka obronna i mobilność strategiczna z Poznania. NCAGE 9CZ9H · UEI S9EYKVSLRSQ5 · Rejestracja do kontraktowania rządowego w USA i UE.",
     "Navigation":"Nawigacja","Preview build — v2":"Wersja podglądowa — v2"
   };
   var UI = {
     en:{ title:'Northstar Tactical Logistics — Logistics Without Borders',
          err:{ name:'Name is required.', email:'A valid email address is required.', msg:'Please describe your requirements.' },
-         ok:'Message prepared — your email client should now be open. If nothing happened, write to contact@ntl-g.com.',
+         ok:'Message sent — thank you. We will get back to you shortly.', sending:'Sending…',
+         okMail:'Message prepared — your email client should now be open. If nothing happened, write to contact@ntl-g.com.',
          mail:{ name:'Name', org:'Organisation', email:'Email', sent:'— sent from northstartacticallogistics.com' } },
     pl:{ title:'Northstar Tactical Logistics — Logistyka bez granic',
          err:{ name:'Proszę podać imię i nazwisko.', email:'Proszę podać poprawny adres e-mail.', msg:'Proszę opisać swoje potrzeby.' },
-         ok:'Wiadomość przygotowana — program pocztowy powinien się otworzyć. Jeśli nic się nie stało, prosimy napisać na contact@ntl-g.com.',
+         ok:'Wiadomość wysłana — dziękujemy. Odpowiemy wkrótce.', sending:'Wysyłanie…',
+         okMail:'Wiadomość przygotowana — program pocztowy powinien się otworzyć. Jeśli nic się nie stało, prosimy napisać na contact@ntl-g.com.',
          mail:{ name:'Imię i nazwisko', org:'Organizacja', email:'E-mail', sent:'— wysłano ze strony northstartacticallogistics.com' } }
   };
 
@@ -1009,6 +1107,26 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     }
   })();
 
+  /* --- night convoy loops ------------------------------------------------
+     Posters are the baseline; a loop is attached only when its panel scrolls
+     into view, and only where motion and data allow. */
+  (function () {
+    var vids = [].slice.call(document.querySelectorAll('.night-panel video[data-src]'));
+    if (!vids.length || reduce || typeof IntersectionObserver !== 'function') return;
+    var c = navigator.connection || {};
+    if (c.saveData || /2g/.test(c.effectiveType || '')) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) {
+          if (!v.getAttribute('src')) { v.src = v.getAttribute('data-src'); v.load(); }
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+        } else if (v.getAttribute('src')) { v.pause(); }
+      });
+    }, { threshold: 0.2 });
+    vids.forEach(function (v) { v.addEventListener('playing', function () { v.classList.add('ready'); }); io.observe(v); });
+  })();
+
   /* --- contact form ------------------------------------------------------ */
   var form = document.getElementById('form');
   if (form) {
@@ -1023,9 +1141,25 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
       var c = check('msg', F.msg.value.trim().length > 0);
       if (!(a && b && c)) { (!a ? F.name : !b ? F.email : F.msg).focus(); return; }
       var m = UI[lang].mail;
-      var body = [m.name + ': ' + F.name.value.trim(), m.org + ': ' + (F.org.value.trim() || '—'), m.email + ': ' + F.email.value.trim(), '', F.msg.value.trim(), '', m.sent].join('\n');
-      var ok = document.getElementById('form-ok'); ok.textContent = UI[lang].ok; ok.hidden = false;
-      location.href = 'mailto:contact@ntl-g.com?subject=' + encodeURIComponent('[Northstar] ' + F.name.value.trim()) + '&body=' + encodeURIComponent(body);
+      var name = F.name.value.trim(), org = F.org.value.trim() || '—', email = F.email.value.trim(), msg = F.msg.value.trim();
+      var body = [m.name + ': ' + name, m.org + ': ' + org, m.email + ': ' + email, '', msg, '', m.sent].join('\n');
+      var ok = document.getElementById('form-ok'), btn = form.querySelector('button[type="submit"]'), honey = document.getElementById('f-honey');
+      function fallback() {
+        ok.textContent = UI[lang].okMail; ok.hidden = false;
+        location.href = 'mailto:contact@ntl-g.com?subject=' + encodeURIComponent('[Northstar] ' + name) + '&body=' + encodeURIComponent(body);
+      }
+      if (typeof fetch !== 'function') return fallback();
+      btn.disabled = true; ok.textContent = UI[lang].sending; ok.hidden = false;
+      /* Delivered by FormSubmit to contact@ntl-g.com; the first submission asks
+         that inbox to activate the address. Any failure falls back to mailto. */
+      fetch('https://formsubmit.co/ajax/contact@ntl-g.com', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: name, organisation: org, email: email, message: msg, _subject: '[Northstar] ' + name, _replyto: email, _template: 'table', _honey: honey ? honey.value : '' })
+      })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r); })
+        .then(function (d) { if (String(d.success) !== 'true') return Promise.reject(d); ok.textContent = UI[lang].ok; form.reset(); })
+        .catch(fallback)
+        .then(function () { btn.disabled = false; });
     });
   }
 
